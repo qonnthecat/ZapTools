@@ -181,3 +181,72 @@
         min-height: auto;
     }
 }
+
+/* css/utilities/responsive.css */
+/* Mobile First Approach */
+
+/* ... kode responsive yang lain ... */
+
+@media (max-width: 767px) {
+    .header .container {
+        padding: var(--space-sm) var(--space-md);
+    }
+    
+    .logo-image {
+        width: 38px;
+        height: 38px;
+        padding: 8px;
+    }
+    
+    .logo-text h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .logo-text p {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* ... kode responsive lainnya ... */
+}
+
+@media (max-width: 480px) {
+    .logo-container {
+        gap: var(--space-sm);
+    }
+    
+    .logo-image {
+        width: 32px;
+        height: 32px;
+        padding: 6px;
+    }
+    
+    .logo-text h1 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .logo-text p {
+        display: none; /* Sembunyikan tagline di mobile sangat kecil */
+    }
+    
+    .footer-logo {
+        font-size: var(--font-size-md);
+    }
+    
+    .footer-logo-image {
+        width: 24px;
+        height: 24px;
+        padding: 3px;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .logo-image {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .logo-text h1 {
+        font-size: var(--font-size-2xl);
+    }
+}
