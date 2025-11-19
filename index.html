@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuniaBercerita - Beranda</title>
+  <title>DuniaBercerita - Fakta Unik, Berita & Inovasi</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -20,18 +20,25 @@
       </div>
       
       <nav class="nav-menu" id="nav-menu">
-        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Beranda</a>
-        <a href="#artikel" class="nav-link"><i class="fas fa-book"></i> Artikel</a>
-        <a href="#galeri" class="nav-link"><i class="fas fa-images"></i> Galeri</a>
-        <a href="#tentang" class="nav-link"><i class="fas fa-info-circle"></i> Tentang</a>
-        <a href="#kontak" class="nav-link"><i class="fas fa-envelope"></i> Kontak</a>
+        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span>Beranda</span></a>
+        <a href="articles.html" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita Terkini</span></a>
+        <a href="facts.html" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
+        <a href="innovation.html" class="nav-link"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
+        <a href="tips.html" class="nav-link"><i class="fas fa-seedling"></i> <span>Tips Praktis</span></a>
+        <a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> <span>Tentang</span></a>
       </nav>
       
       <div class="action-buttons">
+        <div class="search-container">
+          <button id="search-btn" class="search-btn"><i class="fas fa-search"></i></button>
+          <div class="search-box" id="search-box">
+            <input type="text" placeholder="Cari artikel..." id="search-input">
+            <button class="search-close" id="search-close"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
         <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
           <i class="fas fa-moon"></i>
         </button>
-        <button id="search-btn"><i class="fas fa-search"></i></button>
       </div>
     </div>
   </header>
@@ -40,113 +47,213 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h2>Jelajahi Keindahan Alam Melalui Cerita</h2>
-        <p>Temukan inspirasi dari keajaiban alam dan pelajari bagaimana kita dapat melestarikannya untuk generasi mendatang.</p>
-        <a href="#artikel" class="cta-button">Mulai Membaca</a>
+        <h2>Temukan Dunia yang Penuh Keajaiban</h2>
+        <p>Jelajahi fakta menarik, berita terkini, inovasi terbaru, dan tips praktis untuk kehidupan sehari-hari dari seluruh penjuru dunia.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Artikel</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Kategori</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label">Pembaca</span>
+          </div>
+        </div>
       </div>
       <div class="hero-image">
-        <img src="https://via.placeholder.com/600x400/4caf50/FFFFFF?text=Alam+Indonesia" alt="Pemandangan Alam Indonesia">
+        <img src="https://via.placeholder.com/600x400/4caf50/FFFFFF?text=Dunia+Pengetahuan" alt="Ilustrasi Dunia Pengetahuan">
       </div>
     </section>
 
-    <!-- Featured Articles -->
-    <section id="artikel" class="featured-articles">
-      <h2>Artikel Terbaru</h2>
-      <div class="articles-grid">
-        <article class="article-card">
-          <div class="article-image">
-            <img src="https://via.placeholder.com/400x250/2e7d32/FFFFFF?text=Hutan+Tropis" alt="Hutan Tropis Indonesia">
-          </div>
-          <div class="article-content">
-            <h3><a href="article.html">Keanekaragaman Hayati Hutan Tropis Indonesia</a></h3>
-            <p class="article-meta">Oleh Admin • 20 November 2025</p>
-            <p>Jelajahi kekayaan flora dan fauna yang membuat hutan tropis Indonesia menjadi salah satu yang terkaya di dunia.</p>
-            <a href="article.html" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <div class="article-image">
-            <img src="https://via.placeholder.com/400x250/4caf50/FFFFFF?text=Pantai+Eksotis" alt="Pantai Eksotis Indonesia">
-          </div>
-          <div class="article-content">
-            <h3><a href="#">Menelusuri Pesona Pantai Eksotis Nusantara</a></h3>
-            <p class="article-meta">Oleh Penulis Tamu • 18 November 2025</p>
-            <p>Dari Bali hingga Raja Ampat, temukan keindahan pantai-pantai menakjubkan yang tersembunyi di seluruh Indonesia.</p>
-            <a href="#" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <div class="article-image">
-            <img src="https://via.placeholder.com/400x250/81c784/1a1a1a?text=Gunung+Api" alt="Gunung Berapi Indonesia">
-          </div>
-          <div class="article-content">
-            <h3><a href="#">Keindahan dan Kekuatan Gunung Api Indonesia</a></h3>
-            <p class="article-meta">Oleh Geolog • 15 November 2025</p>
-            <p>Memahami siklus kehidupan gunung api dan bagaimana mereka membentuk lanskap serta budaya masyarakat sekitar.</p>
-            <a href="#" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Categories Section -->
+    <!-- Featured Categories -->
     <section class="categories">
-      <h2>Kategori Artikel</h2>
+      <h2>Jelajahi Kategori</h2>
       <div class="categories-grid">
-        <div class="category-card">
-          <i class="fas fa-tree"></i>
-          <h3>Hutan & Flora</h3>
-          <p>Eksplorasi hutan dan tumbuhan khas Indonesia</p>
+        <a href="news.html" class="category-card">
+          <i class="fas fa-newspaper"></i>
+          <h3>Berita Terkini</h3>
+          <p>Update terbaru dari seluruh dunia</p>
+          <span class="category-badge">25 Artikel</span>
+        </a>
+        
+        <a href="science.html" class="category-card">
+          <i class="fas fa-flask"></i>
+          <h3>Sains & Teknologi</h3>
+          <p>Penemuan dan inovasi terbaru</p>
+          <span class="category-badge">42 Artikel</span>
+        </a>
+        
+        <a href="culture.html" class="category-card">
+          <i class="fas fa-globe-asia"></i>
+          <h3>Budaya Dunia</h3>
+          <p>Keunikan tradisi dan kebiasaan</p>
+          <span class="category-badge">38 Artikel</span>
+        </a>
+        
+        <a href="environment.html" class="category-card">
+          <i class="fas fa-leaf"></i>
+          <h3>Lingkungan</h3>
+          <p>Isu lingkungan dan solusi</p>
+          <span class="category-badge">31 Artikel</span>
+        </a>
+        
+        <a href="health.html" class="category-card">
+          <i class="fas fa-heartbeat"></i>
+          <h3>Kesehatan</h3>
+          <p>Tips hidup sehat dan penelitian</p>
+          <span class="category-badge">29 Artikel</span>
+        </a>
+        
+        <a href="lifestyle.html" class="category-card">
+          <i class="fas fa-home"></i>
+          <h3>Gaya Hidup</h3>
+          <p>Ide praktis sehari-hari</p>
+          <span class="category-badge">45 Artikel</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Trending Articles -->
+    <section class="trending-articles">
+      <div class="section-header">
+        <h2>Trending Minggu Ini</h2>
+        <a href="trending.html" class="view-all">Lihat Semua <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="articles-grid">
+        <article class="article-card trending">
+          <div class="article-badge">Trending</div>
+          <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/2e7d32/FFFFFF?text=AI+Revolusi" alt="Revolusi AI dalam Kehidupan">
+          </div>
+          <div class="article-content">
+            <h3><a href="article.html">Revolusi AI: Bagaimana Kecerdasan Buatan Mengubah Dunia Kita</a></h3>
+            <p class="article-meta"><i class="far fa-clock"></i> 8 menit membaca • <i class="far fa-eye"></i> 2.5K views</p>
+            <p>Eksplorasi dampak AI dalam berbagai sektor dan prediksi masa depan teknologi ini.</p>
+            <div class="article-tags">
+              <span class="tag">Teknologi</span>
+              <span class="tag">AI</span>
+              <span class="tag">Inovasi</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card trending">
+          <div class="article-badge">Populer</div>
+          <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/4caf50/FFFFFF?text=Energi+Terbarukan" alt="Energi Terbarukan Masa Depan">
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Masa Depan Energi Terbarukan: Inovasi yang Mengubah Dunia</a></h3>
+            <p class="article-meta"><i class="far fa-clock"></i> 6 menit membaca • <i class="far fa-eye"></i> 1.8K views</p>
+            <p>Teknologi energi bersih terbaru yang berpotensi mengatasi krisis iklim global.</p>
+            <div class="article-tags">
+              <span class="tag">Energi</span>
+              <span class="tag">Lingkungan</span>
+              <span class="tag">Teknologi</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card trending">
+          <div class="article-badge">Baru</div>
+          <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/81c784/1a1a1a?text=Budaya+Digital" alt="Budaya Digital Global">
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Budaya Digital: Bagaimana Internet Menyatukan Dunia</a></h3>
+            <p class="article-meta"><i class="far fa-clock"></i> 5 menit membaca • <i class="far fa-eye"></i> 1.2K views</p>
+            <p>Analisis perubahan budaya global di era digital dan dampaknya pada masyarakat.</p>
+            <div class="article-tags">
+              <span class="tag">Budaya</span>
+              <span class="tag">Digital</span>
+              <span class="tag">Sosial</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Quick Tips Section -->
+    <section class="quick-tips">
+      <h2>Tips Praktis Hari Ini</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <i class="fas fa-recycle"></i>
+          <h3>Hidup Berkelanjutan</h3>
+          <p>5 cara mudah mengurangi sampah plastik di rumah</p>
         </div>
-        <div class="category-card">
-          <i class="fas fa-paw"></i>
-          <h3>Fauna</h3>
-          <p>Keanekaragaman satwa liar nusantara</p>
+        <div class="tip-card">
+          <i class="fas fa-brain"></i>
+          <h3>Produktivitas</h3>
+          <p>Teknik Pomodoro untuk meningkatkan fokus kerja</p>
         </div>
-        <div class="category-card">
-          <i class="fas fa-mountain"></i>
-          <h3>Pegunungan</h3>
-          <p>Petualangan dan keindahan alam pegunungan</p>
+        <div class="tip-card">
+          <i class="fas fa-wallet"></i>
+          <h3>Keuangan</h3>
+          <p>Cara sederhana menabung untuk masa depan</p>
         </div>
-        <div class="category-card">
-          <i class="fas fa-water"></i>
-          <h3>Laut & Pantai</h3>
-          <p>Keindahan bawah laut dan pantai Indonesia</p>
+        <div class="tip-card">
+          <i class="fas fa-heart"></i>
+          <h3>Kesehatan</h3>
+          <p>Kebiasaan pagi untuk meningkatkan energi seharian</p>
         </div>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section id="tentang" class="about">
-      <div class="about-content">
-        <h2>Tentang DuniaBercerita</h2>
-        <p>DuniaBercerita adalah platform yang didedikasikan untuk berbagi kisah inspiratif tentang keindahan alam Indonesia. Kami percaya bahwa setiap sudut alam memiliki cerita yang layak untuk diceritakan.</p>
-        <p>Melalui artikel, foto, dan cerita perjalanan, kami mengajak pembaca untuk lebih mengenal dan mencintai kekayaan alam nusantara.</p>
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+      <div class="newsletter-content">
+        <h2>Tetap Terinformasi</h2>
+        <p>Dapatkan update terbaru tentang fakta menarik, berita, dan inovasi langsung di inbox Anda.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Alamat email Anda" required>
+          <button type="submit">Berlangganan <i class="fas fa-paper-plane"></i></button>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer id="kontak">
+  <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h3>DuniaBercerita</h3>
-        <p>Berbagi cerita tentang keindahan alam Indonesia.</p>
+        <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis dari seluruh dunia.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Kategori</h3>
+        <ul>
+          <li><a href="news.html">Berita Terkini</a></li>
+          <li><a href="science.html">Sains & Teknologi</a></li>
+          <li><a href="culture.html">Budaya Dunia</a></li>
+          <li><a href="environment.html">Lingkungan</a></li>
+          <li><a href="health.html">Kesehatan</a></li>
+        </ul>
       </div>
       <div class="footer-section">
         <h3>Tautan Cepat</h3>
         <ul>
           <li><a href="index.html">Beranda</a></li>
-          <li><a href="#artikel">Artikel</a></li>
-          <li><a href="#tentang">Tentang Kami</a></li>
-          <li><a href="#kontak">Kontak</a></li>
+          <li><a href="about.html">Tentang Kami</a></li>
+          <li><a href="contact.html">Kontak</a></li>
+          <li><a href="privacy.html">Kebijakan Privasi</a></li>
+          <li><a href="terms.html">Syarat Layanan</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h3>Kontak</h3>
         <p><i class="fas fa-envelope"></i> info@duniabercerita.com</p>
         <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
+        <p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p>
       </div>
     </div>
     <div class="footer-bottom">
