@@ -1,172 +1,64 @@
 // MAIN JAVASCRIPT - DuniaBercerita
+// Final version with complete functionality
 
-// Theme Management
-class ThemeManager {
-    constructor() {
-        this.toggleBtn = document.getElementById('theme-toggle');
-        this.body = document.body;
-        this.init();
-    }
+// Global configuration
+const CONFIG = {
+    debug: true,
+    animationEnabled: true,
+    lazyLoadingEnabled: true
+};
 
-    init() {
-        this.loadTheme();
-        this.bindEvents();
-    }
+// Utility functions
+const DomUtils = {
+    // Check if element is in viewport
+    isInViewport: (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    },
 
-    loadTheme() {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        if (savedTheme === 'dark' || (savedTheme === 'auto' && systemPrefersDark)) {
-            this.body.classList.add('dark');
-            this.updateToggleButton('dark');
-        } else {
-            this.body.classList.remove('dark');
-            this.updateToggleButton('light');
-        }
-    }
+    // Add loading animation to elements
+    addLoadingAnimation: (elements) => {
+        if (!CONFIG.animationEnabled) return;
 
-    bindEvents() {
-        if (this.toggleBtn) {
-            this.toggleBtn.addEventListener('click', () => this.toggleTheme());
-        }
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (localStorage.getItem('theme') === 'auto') {
-                this.body.classList.toggle('dark', e.matches);
-                this.updateToggleButton(e.matches ? 'dark' : 'light');
+        elements.forEach(el => {
+            if (el && !el.hasAttribute('data-animated')) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                el.setAttribute('data-animated', 'true');
             }
         });
-    }
+    },
 
-    toggleTheme() {
-        const isDark = this.body.classList.contains('dark');
-        
-        if (isDark) {
-            this.body.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-            this.updateToggleButton('light');
-        } else {
-            this.body.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-            this.updateToggleButton('dark');
-        }
-    }
+    // Animate elements when they come into view
+    setupScrollAnimations: () => {
+        if (!CONFIG.animationEnabled) return;
 
-    updateToggleButton(theme) {
-        if (this.toggleBtn) {
-            this.toggleBtn.innerHTML = theme === 'dark' 
-                ? '<i class="fas fa-sun"></i>'
-                : '<i class="fas fa-moon"></i>';
-            this.toggleBtn.setAttribute('title', theme === 'dark' ? 'Mode Terang' : 'Mode Gelap');
-        }
-    }
-}
-
-// Mobile Navigation
-class MobileNavigation {
-    constructor() {
-        this.menuBtn = document.getElementById('mobile-menu-btn');
-        this.navMenu = document.getElementById('nav-menu');
-        this.init();
-    }
-
-    init() {
-        this.bindEvents();
-        this.handleResize();
-    }
-
-    bindEvents() {
-        if (this.menuBtn && this.navMenu) {
-            this.menuBtn.addEventListener('click', (e) => this.toggleMenu(e));
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => this.handleClickOutside(e));
-            
-            // Prevent menu close when clicking inside
-            this.navMenu.addEventListener('click', (e) => e.stopPropagation());
-        }
-    }
-
-    toggleMenu(e) {
-        e.stopPropagation();
-        this.navMenu.classList.toggle('active');
-        
-        if (this.navMenu.classList.contains('active')) {
-            this.menuBtn.innerHTML = '<i class="fas fa-times"></i>';
-            this.menuBtn.style.backgroundColor = 'var(--accent-color)';
-            this.menuBtn.style.color = 'white';
-        } else {
-            this.menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            this.menuBtn.style.backgroundColor = '';
-            this.menuBtn.style.color = '';
-        }
-    }
-
-    handleClickOutside(e) {
-        if (!this.navMenu.contains(e.target) && !this.menuBtn.contains(e.target)) {
-            this.closeMenu();
-        }
-    }
-
-    closeMenu() {
-        if (this.navMenu.classList.contains('active')) {
-            this.navMenu.classList.remove('active');
-            this.menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            this.menuBtn.style.backgroundColor = '';
-            this.menuBtn.style.color = '';
-        }
-    }
-
-    handleResize() {
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                this.closeMenu();
-            }
-        });
-    }
-}
-
-// Smooth Scrolling
-class SmoothScroller {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        this.bindAnchorLinks();
-    }
-
-    bindAnchorLinks() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    this.scrollToElement(targetElement);
+        const animatedElements = document.querySelectorAll('[data-animated]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
                 }
             });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
+
+        animatedElements.forEach(el => observer.observe(el));
     }
+};
 
-    scrollToElement(element) {
-        const headerHeight = document.querySelector('header').offsetHeight;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-    }
-}
-
-// Newsletter Form
-class NewsletterForm {
+// Newsletter functionality
+class NewsletterManager {
     constructor() {
         this.form = document.getElementById('newsletter-form');
         this.init();
@@ -175,13 +67,15 @@ class NewsletterForm {
     init() {
         if (this.form) {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+            if (CONFIG.debug) console.log('Newsletter manager initialized');
         }
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const email = this.form.querySelector('input[type="email"]').value;
-        
+        const emailInput = this.form.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+
         if (this.validateEmail(email)) {
             this.subscribe(email);
         } else {
@@ -195,48 +89,47 @@ class NewsletterForm {
     }
 
     subscribe(email) {
+        // Show loading state
+        this.showLoadingState(true);
+
         // Simulate API call
         setTimeout(() => {
+            this.showLoadingState(false);
             this.showMessage('Thank you for subscribing to our newsletter!', 'success');
             this.form.reset();
             
-            // In a real application, you would send this to your backend
-            console.log('Subscribed email:', email);
-        }, 1000);
+            // Log for analytics
+            if (CONFIG.debug) {
+                console.log('New newsletter subscription:', email);
+            }
+        }, 1500);
+    }
+
+    showLoadingState(show) {
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            if (show) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Subscribe';
+            }
+        }
     }
 
     showMessage(message, type) {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            z-index: 10000;
-            animation: slideIn 0.3s ease;
-        `;
-
-        if (type === 'success') {
-            notification.style.background = '#4caf50';
+        // Use Utils if available, otherwise create basic notification
+        if (window.Utils && typeof window.Utils.showNotification === 'function') {
+            window.Utils.showNotification(message, type);
         } else {
-            notification.style.background = '#f44336';
+            // Fallback notification
+            alert(`${type.toUpperCase()}: ${message}`);
         }
-
-        document.body.appendChild(notification);
-
-        // Remove notification after 5 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 5000);
     }
 }
 
-// Image Lazy Loading
+// Image lazy loading with Intersection Observer
 class LazyLoader {
     constructor() {
         this.observer = null;
@@ -244,10 +137,12 @@ class LazyLoader {
     }
 
     init() {
+        if (!CONFIG.lazyLoadingEnabled) return;
+
         if ('IntersectionObserver' in window) {
             this.setupObserver();
         } else {
-            this.loadAllImages();
+            this.loadAllImages(); // Fallback for older browsers
         }
     }
 
@@ -272,10 +167,13 @@ class LazyLoader {
         images.forEach(img => {
             this.observer.observe(img);
         });
+
+        if (CONFIG.debug) {
+            console.log(`Observing ${images.length} lazy images`);
+        }
     }
 
     loadImage(img) {
-        // Image is already loading or loaded
         if (img.getAttribute('data-loaded')) return;
 
         img.setAttribute('data-loaded', 'true');
@@ -284,7 +182,6 @@ class LazyLoader {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.3s ease';
 
-        // Simulate loading for demo purposes
         setTimeout(() => {
             img.style.opacity = '1';
             
@@ -304,7 +201,7 @@ class LazyLoader {
     }
 }
 
-// Category Filter
+// Category filter functionality
 class CategoryFilter {
     constructor() {
         this.categoryCards = document.querySelectorAll('.category-card');
@@ -312,7 +209,10 @@ class CategoryFilter {
     }
 
     init() {
-        this.bindEvents();
+        if (this.categoryCards.length > 0) {
+            this.bindEvents();
+            if (CONFIG.debug) console.log('Category filter initialized');
+        }
     }
 
     bindEvents() {
@@ -335,8 +235,9 @@ class CategoryFilter {
         const container = document.getElementById('articles-container');
         if (container) {
             container.innerHTML = `
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i> Memuat artikel ${category}...
+                <div class="loading" style="grid-column: 1 / -1;">
+                    <i class="fas fa-spinner fa-spin"></i> 
+                    Memuat artikel ${category ? `dalam kategori: ${this.formatCategoryName(category)}` : ''}...
                 </div>
             `;
         }
@@ -348,110 +249,377 @@ class CategoryFilter {
     }
 
     displayFilteredArticles(category) {
-        // This would be replaced with actual filtered data from CMS
         const message = category ? 
-            `Menampilkan artikel dalam kategori: ${category}` :
+            `Menampilkan artikel dalam kategori: ${this.formatCategoryName(category)}` :
             'Menampilkan semua artikel';
         
-        // Show message (in real app, show actual filtered articles)
         const container = document.getElementById('articles-container');
         if (container) {
             container.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
                     <h3>${message}</h3>
                     <p>Fitur filter kategori akan tersedia segera!</p>
-                    <button onclick="loadArticles()" class="cta-button" style="margin-top: 20px;">
+                    <button onclick="window.mainApp.loadArticles()" class="cta-button" style="margin-top: 20px;">
                         Tampilkan Semua Artikel
                     </button>
                 </div>
             `;
         }
     }
+
+    formatCategoryName(category) {
+        const categoryMap = {
+            'berita': 'Berita',
+            'fakta-unik': 'Fakta Unik',
+            'inovasi': 'Inovasi',
+            'tips': 'Tips Praktis',
+            'teknologi': 'Teknologi',
+            'sains': 'Sains'
+        };
+        return categoryMap[category] || category;
+    }
 }
 
-// Initialize all functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme manager
-    new ThemeManager();
-    
-    // Initialize mobile navigation
-    new MobileNavigation();
-    
-    // Initialize smooth scrolling
-    new SmoothScroller();
-    
-    // Initialize newsletter form
-    new NewsletterForm();
-    
-    // Initialize lazy loading
-    new LazyLoader();
-    
-    // Initialize category filter
-    new CategoryFilter();
+// Main application controller
+class MainApp {
+    constructor() {
+        this.components = {};
+        this.init();
+    }
 
-    // Add loading animation to elements
-    const animatedElements = document.querySelectorAll('.article-card, .category-card, .hero-content, .hero-image');
-    
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
+    init() {
+        this.initializeComponents();
+        this.setupEventListeners();
+        this.setupErrorHandling();
+        
+        if (CONFIG.debug) {
+            console.log('🏠 DuniaBercerita main app initialized');
+            console.log('Active components:', Object.keys(this.components));
+        }
+    }
 
-    // Observe elements for animation
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+    initializeComponents() {
+        // Initialize DOM animations
+        this.initializeAnimations();
+
+        // Initialize newsletter if available
+        if (document.getElementById('newsletter-form')) {
+            this.components.newsletter = new NewsletterManager();
+        }
+
+        // Initialize lazy loading
+        this.components.lazyLoader = new LazyLoader();
+
+        // Initialize category filter
+        this.components.categoryFilter = new CategoryFilter();
+
+        // Load articles if on homepage
+        if (document.getElementById('articles-container')) {
+            this.loadArticles();
+        }
+
+        // Initialize article content if on article page
+        if (document.getElementById('article-content')) {
+            this.loadArticleContent();
+        }
+    }
+
+    initializeAnimations() {
+        // Add loading animation to key elements
+        const elementsToAnimate = [
+            '.hero-content', '.hero-image',
+            '.article-card', '.category-card',
+            '.featured-articles', '.categories'
+        ];
+
+        elementsToAnimate.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            DomUtils.addLoadingAnimation(elements);
+        });
+
+        // Setup scroll animations
+        DomUtils.setupScrollAnimations();
+    }
+
+    setupEventListeners() {
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                this.onPageVisible();
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
 
-    animatedElements.forEach(el => observer.observe(el));
+        // Handle window resize with debounce
+        window.addEventListener('resize', Utils.debounce(() => {
+            this.onWindowResize();
+        }, 250));
 
-    // Add stagger animation to category cards
-    const categoryCards = document.querySelectorAll('.category-card');
-    categoryCards.forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.1}s`;
-    });
-
-    // Handle page load completion
-    window.addEventListener('load', function() {
-        document.body.classList.add('loaded');
-        
-        // Remove loading indicators
-        const loadingIndicators = document.querySelectorAll('.image-loading');
-        loadingIndicators.forEach(indicator => {
-            indicator.style.display = 'none';
+        // Handle beforeunload for cleanup
+        window.addEventListener('beforeunload', () => {
+            this.cleanup();
         });
-    });
-});
+    }
 
-// Utility function for external scripts
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+    setupErrorHandling() {
+        // Global error handler
+        window.addEventListener('error', (e) => {
+            console.error('Global error:', e.error);
+            this.showErrorNotification('A system error occurred');
+        });
+
+        // Unhandled promise rejection
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('Unhandled promise rejection:', e.reason);
+            this.showErrorNotification('A network error occurred');
+        });
+    }
+
+    async loadArticles() {
+        const container = document.getElementById('articles-container');
+        if (!container) return;
+
+        try {
+            // Show loading state
+            container.innerHTML = `
+                <div class="loading" style="grid-column: 1 / -1;">
+                    <i class="fas fa-spinner fa-spin"></i> Memuat artikel...
+                </div>
+            `;
+
+            // Use CMS if available, otherwise load from JSON directly
+            if (window.cmsCore && typeof window.cmsCore.loadArticles === 'function') {
+                const articles = await window.cmsCore.loadArticles();
+                this.displayArticles(articles);
+            } else {
+                // Fallback: load directly from JSON
+                const response = await fetch('data/articles.json');
+                const articles = await response.json();
+                this.displayArticles(articles);
+            }
+        } catch (error) {
+            console.error('Error loading articles:', error);
+            this.showErrorState(container, 'Gagal memuat artikel');
+        }
+    }
+
+    displayArticles(articles) {
+        const container = document.getElementById('articles-container');
+        if (!container) return;
+
+        if (!articles || articles.length === 0) {
+            this.showEmptyState(container);
+            return;
+        }
+
+        const articlesHTML = articles.map(article => `
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="${article.image}" alt="${article.title}" loading="lazy">
+                </div>
+                <div class="article-content">
+                    <h3><a href="article.html?id=${article.id}">${article.title}</a></h3>
+                    <p class="article-meta">
+                        <i class="fas fa-user"></i> ${article.author} 
+                        • <i class="fas fa-calendar"></i> ${Utils.formatDate(article.date)}
+                    </p>
+                    <p>${article.excerpt}</p>
+                    <div class="article-tags">
+                        ${article.tags ? article.tags.map(tag => 
+                            `<span class="tag">${tag}</span>`
+                        ).join('') : ''}
+                    </div>
+                    <a href="article.html?id=${article.id}" class="read-more">
+                        Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+        `).join('');
+
+        container.innerHTML = articlesHTML;
+
+        // Re-initialize animations for new articles
+        const newArticleCards = container.querySelectorAll('.article-card');
+        DomUtils.addLoadingAnimation(newArticleCards);
+        DomUtils.setupScrollAnimations();
+    }
+
+    loadArticleContent() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+        
+        if (!articleId) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        this.fetchAndDisplayArticle(articleId);
+    }
+
+    async fetchAndDisplayArticle(articleId) {
+        const container = document.getElementById('article-content');
+        if (!container) return;
+
+        try {
+            let article;
+            
+            // Try to get article from CMS first
+            if (window.cmsCore && typeof window.cmsCore.getArticle === 'function') {
+                article = window.cmsCore.getArticle(articleId);
+            }
+
+            // Fallback: load from JSON
+            if (!article) {
+                const response = await fetch('data/articles.json');
+                const articles = await response.json();
+                article = articles.find(a => a.id === articleId);
+            }
+
+            if (!article) {
+                this.showArticleNotFound(container);
+                return;
+            }
+
+            this.displayArticleContent(container, article);
+            this.loadRelatedArticles(article);
+
+        } catch (error) {
+            console.error('Error loading article:', error);
+            this.showErrorState(container, 'Gagal memuat artikel');
+        }
+    }
+
+    displayArticleContent(container, article) {
+        container.innerHTML = `
+            <h1 class="article-title">${article.title}</h1>
+            <p class="meta-info">
+                Oleh <span class="author">${article.author}</span> | 
+                <time datetime="${article.date}">${Utils.formatDate(article.date)}</time> | 
+                <span class="reading-time">${article.readTime || 5} menit membaca</span>
+            </p>
+            
+            ${article.image ? `
+                <div class="featured-image">
+                    <img src="${article.image}" alt="${article.title}" loading="lazy">
+                </div>
+            ` : ''}
+            
+            <div class="article-content">
+                ${article.content.split('\n').map(paragraph => 
+                    paragraph.trim() ? `<p>${paragraph}</p>` : ''
+                ).join('')}
+                
+                ${article.tags && article.tags.length > 0 ? `
+                    <div class="article-tags">
+                        ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }
+
+    loadRelatedArticles(currentArticle) {
+        // Implementation for related articles
+        const container = document.getElementById('related-articles');
+        if (!container) return;
+
+        // This would typically fetch related articles based on category/tags
+        container.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+                <p>Fitur artikel terkait akan segera tersedia</p>
+            </div>
+        `;
+    }
+
+    showEmptyState(container) {
+        container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <i class="fas fa-newspaper"></i>
+                <h3>Belum ada artikel</h3>
+                <p>Artikel akan muncul di sini setelah dibuat.</p>
+            </div>
+        `;
+    }
+
+    showErrorState(container, message) {
+        container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Terjadi Kesalahan</h3>
+                <p>${message}</p>
+                <button onclick="window.mainApp.loadArticles()" class="cta-button">
+                    Coba Lagi
+                </button>
+            </div>
+        `;
+    }
+
+    showArticleNotFound(container) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-search"></i>
+                <h3>Artikel Tidak Ditemukan</h3>
+                <p>Artikel yang Anda cari tidak ditemukan atau telah dihapus.</p>
+                <a href="index.html" class="cta-button">Kembali ke Beranda</a>
+            </div>
+        `;
+    }
+
+    showErrorNotification(message) {
+        if (window.Utils && typeof window.Utils.showNotification === 'function') {
+            window.Utils.showNotification(message, 'error');
+        } else {
+            console.error('Error:', message);
+        }
+    }
+
+    onPageVisible() {
+        // Refresh data when page becomes visible again
+        if (CONFIG.debug) console.log('Page became visible');
+    }
+
+    onWindowResize() {
+        // Handle responsive behavior
+        if (CONFIG.debug) console.log('Window resized');
+    }
+
+    cleanup() {
+        // Cleanup resources
+        if (this.components.lazyLoader && this.components.lazyLoader.observer) {
+            this.components.lazyLoader.observer.disconnect();
+        }
+    }
+
+    // Public method to reload articles
+    reloadArticles() {
+        this.loadArticles();
+    }
+
+    // Public method to refresh the app
+    refresh() {
+        this.cleanup();
+        this.init();
+    }
 }
 
-// Export for use in other modules
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for other components to initialize
+    setTimeout(() => {
+        window.mainApp = new MainApp();
+    }, 100);
+});
+
+// Make main app available globally
+window.MainApp = MainApp;
+
+// Export untuk penggunaan modular
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        ThemeManager,
-        MobileNavigation,
-        SmoothScroller,
-        NewsletterForm,
+        MainApp,
+        NewsletterManager,
         LazyLoader,
-        CategoryFilter
+        CategoryFilter,
+        DomUtils,
+        CONFIG
     };
 }
