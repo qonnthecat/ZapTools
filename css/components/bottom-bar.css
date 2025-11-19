@@ -1,0 +1,68 @@
+/* css/components/bottom-bar.css */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+    padding: var(--space-sm) 0;
+    z-index: var(--z-fixed);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.bottom-nav-item {
+    flex: 1;
+    text-align: center;
+}
+
+.bottom-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    transition: 
+        color var(--transition-fast),
+        background-color var(--transition-fast),
+        transform var(--transition-fast);
+    font-size: var(--font-size-xs);
+}
+
+.bottom-nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.bottom-nav-link.active {
+    color: var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.bottom-nav-icon {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-xs);
+    transition: transform var(--transition-fast);
+}
+
+.bottom-nav-link:hover .bottom-nav-icon {
+    transform: scale(1.1);
+}
+
+.bottom-nav-text {
+    font-weight: 500;
+    font-size: var(--font-size-xs);
+}
