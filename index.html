@@ -16,23 +16,25 @@
     }
 
     :root {
-      --primary-color: #2a6496;
-      --secondary-color: #8ab4f8;
-      --bg-color: #f7f7f7;
-      --text-color: #333;
-      --header-bg: #fff;
-      --border-color: #eee;
-      --meta-color: #777;
+      --primary-color: #2e7d32; /* Hijau gelap */
+      --secondary-color: #4caf50; /* Hijau medium */
+      --accent-color: #81c784; /* Hijau muda */
+      --bg-color: #f8fdf8; /* Putih dengan nuansa hijau sangat muda */
+      --text-color: #1b5e20; /* Hijau sangat gelap untuk teks */
+      --header-bg: #ffffff;
+      --border-color: #e8f5e9; /* Hijau sangat muda untuk border */
+      --meta-color: #558b2f; /* Hijau zaitun untuk meta info */
     }
 
     .dark {
-      --primary-color: #8ab4f8;
-      --secondary-color: #2a6496;
-      --bg-color: #1a1a1a;
-      --text-color: #f0f0f0;
-      --header-bg: #2a2a2a;
-      --border-color: #333;
-      --meta-color: #bbb;
+      --primary-color: #81c784; /* Hijau muda */
+      --secondary-color: #4caf50; /* Hijau medium */
+      --accent-color: #2e7d32; /* Hijau gelap */
+      --bg-color: #1a231a; /* Hijau gelap untuk background */
+      --text-color: #e8f5e9; /* Putih kehijauan untuk teks */
+      --header-bg: #263228; /* Hijau gelap untuk header */
+      --border-color: #37474f; /* Abu-abu kehijauan untuk border */
+      --meta-color: #a5d6a7; /* Hijau muda untuk meta info */
     }
 
     body {
@@ -41,6 +43,7 @@
       color: var(--text-color);
       transition: background-color 0.3s, color 0.3s;
       padding-bottom: 50px;
+      line-height: 1.7;
     }
 
     /* --- HEADER & NAVIGATION --- */
@@ -72,25 +75,17 @@
     button {
       padding: 8px 15px;
       cursor: pointer;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border-color);
       border-radius: 20px;
       background-color: var(--header-bg);
+      color: var(--text-color);
       transition: all 0.2s;
       font-family: 'Poppins', sans-serif;
     }
 
     button:hover {
-      background-color: #e5e5e5;
-    }
-
-    .dark button {
-      background-color: #333;
-      color: #f0f0f0;
-      border-color: #444;
-    }
-
-    .dark button:hover {
-      background-color: #444;
+      background-color: var(--accent-color);
+      color: white;
     }
 
     .action-buttons {
@@ -114,6 +109,7 @@
       font-size: 2.5rem;
       margin-bottom: 5px;
       line-height: 1.2;
+      color: var(--primary-color);
     }
 
     .meta-info {
@@ -165,6 +161,7 @@
     .gallery-item {
       position: relative;
       overflow: hidden;
+      border-radius: 8px;
     }
 
     .gallery-item img {
@@ -190,6 +187,7 @@
       justify-content: center;
       align-items: center;
       background-color: rgba(0, 0, 0, 0.1);
+      color: var(--text-color);
     }
 
     .image-modal {
@@ -277,11 +275,11 @@
 
   <main>
     <article>
-      <h1 class="article-title">Judul Artikel yang Penuh Inspirasi</h1>
+      <h1 class="article-title">Keindahan Alam dan Tipografi Modern</h1>
       <p class="meta-info">Dipublikasikan oleh <span class="author">Admin</span> | <time datetime="2025-11-20">20 November 2025</time></p>
       
       <p>
-        Selamat datang! Artikel ini adalah demonstrasi bagaimana menggabungkan tipografi modern dari Google Fonts dan galeri gambar responsif untuk meningkatkan daya tarik visual.
+        Selamat datang! Artikel ini adalah demonstrasi bagaimana menggabungkan tipografi modern dari Google Fonts dan galeri gambar responsif untuk meningkatkan daya tarik visual, dengan tema warna yang terinspirasi dari keindahan alam.
       </p>
       
       <h2>Tentang Font Poppins dan Lora</h2>
@@ -292,20 +290,20 @@
       <div class="image-gallery">
         <div class="gallery-item">
           <div class="image-loading">Memuat gambar...</div>
-          <img src="https://via.placeholder.com/400x300/2a6496/FFFFFF?text=Gambar+1" 
-               alt="Ilustrasi Konsep 1 - Desain tipografi modern dengan kombinasi font Poppins dan Lora" 
+          <img src="https://via.placeholder.com/400x300/2e7d32/FFFFFF?text=Hutan+Hijau" 
+               alt="Ilustrasi Konsep 1 - Hutan hijau yang rimbun dengan pepohonan tinggi" 
                loading="lazy">
         </div>
         <div class="gallery-item">
           <div class="image-loading">Memuat gambar...</div>
-          <img src="https://via.placeholder.com/400x300/8ab4f8/1a1a1a?text=Gambar+2" 
-               alt="Ilustrasi Konsep 2 - Contoh tata letak grid responsif untuk galeri gambar" 
+          <img src="https://via.placeholder.com/400x300/4caf50/FFFFFF?text=Pegunungan" 
+               alt="Ilustrasi Konsep 2 - Pegunungan hijau dengan pemandangan yang menakjubkan" 
                loading="lazy">
         </div>
         <div class="gallery-item">
           <div class="image-loading">Memuat gambar...</div>
-          <img src="https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=Gambar+3" 
-               alt="Ilustrasi Konsep 3 - Implementasi dark mode yang kompatibel dengan semua elemen" 
+          <img src="https://via.placeholder.com/400x300/81c784/1a1a1a?text=Danau+Alam" 
+               alt="Ilustrasi Konsep 3 - Danau alam yang jernih dikelilingi pepohonan hijau" 
                loading="lazy">
         </div>
       </div>
@@ -319,10 +317,11 @@
         <li><strong>Tipografi Lebih Baik:</strong> Membedakan judul dan konten dengan font yang berbeda.</li>
         <li><strong>Tata Letak Grid:</strong> Galeri gambar diatur dengan rapi.</li>
         <li><strong>Dark Mode Kompatibel:</strong> Semua elemen baru disesuaikan warnanya di mode gelap.</li>
+        <li><strong>Tema Alam:</strong> Warna hijau yang digunakan mencerminkan keindahan dunia dan alam.</li>
       </ul>
 
       <p>
-        Template ini sekarang lebih kuat dan visual. Selanjutnya, Anda bisa menambahkan lebih banyak konten ke dalam <code>&lt;article&gt;</code>!
+        Template ini sekarang lebih kuat dan visual dengan tema alam yang menenangkan. Selanjutnya, Anda bisa menambahkan lebih banyak konten ke dalam <code>&lt;article&gt;</code>!
       </p>
 
       <div class="share-section">
