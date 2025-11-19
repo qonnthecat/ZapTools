@@ -1,0 +1,25 @@
+/* css/pages/home.css */
+.hero {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.hero h2 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-lg);
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: var(--font-size-xl);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--space-2xl);
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+}
