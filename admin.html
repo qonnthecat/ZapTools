@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - DuniaBercerita</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .admin-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .admin-header h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .form-container {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Lora', serif;
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--border-color);
+      color: var(--text-color);
+    }
+
+    .articles-list {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .article-item {
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .article-info h3 {
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+
+    .article-meta {
+      color: var(--meta-color);
+      font-size: 0.9rem;
+    }
+
+    .article-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    .btn-danger {
+      background: #f44336;
+      color: white;
+    }
+
+    .notification {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .notification.success {
+      background: #4caf50;
+      color: white;
+    }
+
+    .notification.error {
+      background: #f44336;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1><a href="index.html">DuniaBercerita</a></h1>
+      </div>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Beranda</span></a>
+        <a href="admin.html" class="nav-link active"><i class="fas fa-edit"></i> <span>Admin Panel</span></a>
+      </nav>
+      
+      <div class="action-buttons">
+        <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1>Admin Panel</h1>
+        <p>Kelola konten artikel DuniaBercerita</p>
+      </div>
+
+      <!-- Notification -->
+      <div id="notification" class="notification"></div>
+
+      <!-- Form Buat Artikel -->
+      <div class="form-container">
+        <h2>Tambah Artikel Baru</h2>
+        <form id="article-form">
+          <div class="form-group">
+            <label for="title">Judul Artikel</label>
+            <input type="text" id="title" name="title" required>
+          </div>
+
+          <div class="form-group">
+            <label for="author">Penulis</label>
+            <input type="text" id="author" name="author" required>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Kategori</label>
+            <select id="category" name="category" required>
+              <option value="">Pilih Kategori</option>
+              <option value="berita">Berita</option>
+              <option value="fakta-unik">Fakta Unik</option>
+              <option value="inovasi">Inovasi</option>
+              <option value="tips">Tips Praktis</option>
+              <option value="teknologi">Teknologi</option>
+              <option value="sains">Sains</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="image">URL Gambar</label>
+            <input type="url" id="image" name="image" placeholder="https://example.com/image.jpg">
+          </div>
+
+          <div class="form-group">
+            <label for="content">Konten Artikel</label>
+            <textarea id="content" name="content" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags (pisahkan dengan koma)</label>
+            <input type="text" id="tags" name="tags" placeholder="teknologi, AI, masa depan">
+          </div>
+
+          <div class="form-actions">
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="submit" class="btn btn-primary">Simpan Artikel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Daftar Artikel -->
+      <div class="articles-list">
+        <h2>Artikel Terpublikasi</h2>
+        <div id="articles-list">
+          <!-- Daftar artikel akan dimuat di sini -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/cms.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadArticlesList();
+      setupFormHandler();
+    });
+  </script>
+</body>
+</html>
