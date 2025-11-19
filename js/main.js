@@ -1,145 +1,123 @@
-// Kode JavaScript Dark Mode
-const toggleBtn = document.getElementById('theme-toggle');
-const body = document.body;
+// Fungsi Pencarian
+const searchBtn = document.getElementById('search-btn');
+const searchBox = document.getElementById('search-box');
+const searchInput = document.getElementById('search-input');
+const searchClose = document.getElementById('search-close');
 
-// Cek localStorage
-if (localStorage.getItem('theme') === 'dark') {
-  body.classList.add('dark');
-  if (toggleBtn) {
-    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+if (searchBtn && searchBox) {
+  searchBtn.addEventListener('click', () => {
+    searchBox.classList.toggle('active');
+    if (searchBox.classList.contains('active')) {
+      searchInput.focus();
+    }
+  });
+
+  if (searchClose) {
+    searchClose.addEventListener('click', () => {
+      searchBox.classList.remove('active');
+      searchInput.value = '';
+    });
+  }
+
+  // Tutup search box ketika klik di luar
+  document.addEventListener('click', (e) => {
+    if (!searchBox.contains(e.target) && !searchBtn.contains(e.target)) {
+      searchBox.classList.remove('active');
+    }
+  });
+
+  // Handle search input
+  if (searchInput) {
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performSearch(searchInput.value);
+      }
+    });
   }
 }
 
-if (toggleBtn) {
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    if(body.classList.contains('dark')){
-      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-      localStorage.setItem('theme', 'light');
-    }
-  });
+function performSearch(query) {
+  if (query.trim()) {
+    // Simulasi pencarian - bisa diganti dengan API call
+    alert(`Mencari: "${query}"\n\nFitur pencarian lengkap akan segera tersedia!`);
+    searchBox.classList.remove('active');
+    searchInput.value = '';
+  }
 }
 
-// Menu mobile toggle
+// Improved Mobile Menu
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const navMenu = document.getElementById('nav-menu');
 
 if (mobileMenuBtn && navMenu) {
-  mobileMenuBtn.addEventListener('click', () => {
+  mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     navMenu.classList.toggle('active');
+    
     if (navMenu.classList.contains('active')) {
       mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+      mobileMenuBtn.style.backgroundColor = 'var(--accent-color)';
+      mobileMenuBtn.style.color = 'white';
     } else {
       mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      mobileMenuBtn.style.backgroundColor = '';
+      mobileMenuBtn.style.color = '';
     }
+  });
+
+  // Tutup menu mobile ketika klik di luar
+  document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+      navMenu.classList.remove('active');
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      mobileMenuBtn.style.backgroundColor = '';
+      mobileMenuBtn.style.color = '';
+    }
+  });
+
+  // Prevent menu close when clicking inside
+  navMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 }
 
-// Aktifkan menu navigasi
+// Enhanced Navigation
 const navLinks = document.querySelectorAll('.nav-link');
 navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
-    // Jika link adalah anchor link, biarkan default behavior
-    if (link.getAttribute('href').startsWith('#')) {
-      return;
-    }
-    
-    // Hapus kelas active dari semua link
+    // Update active state
     navLinks.forEach(l => l.classList.remove('active'));
-    // Tambahkan kelas active ke link yang diklik
-    e.target.classList.add('active');
+    link.classList.add('active');
     
-    // Tutup menu mobile jika terbuka
+    // Close mobile menu if open
     if (window.innerWidth <= 768 && navMenu) {
       navMenu.classList.remove('active');
       if (mobileMenuBtn) {
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileMenuBtn.style.backgroundColor = '';
+        mobileMenuBtn.style.color = '';
       }
     }
   });
 });
 
-// Smooth scrolling untuk anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+// Newsletter Form
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    const email = newsletterForm.querySelector('input[type="email"]').value;
     
-    const targetId = this.getAttribute('href');
-    if (targetId === '#') return;
-    
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  });
-});
-
-// Fungsi untuk berbagi
-const shareBtn = document.getElementById('share-btn');
-const shareTwitter = document.getElementById('share-twitter');
-const shareFacebook = document.getElementById('share-facebook');
-const shareLinkedin = document.getElementById('share-linkedin');
-const shareWhatsapp = document.getElementById('share-whatsapp');
-
-const shareUrl = encodeURIComponent(window.location.href);
-const shareTitle = encodeURIComponent(document.title);
-
-if (shareBtn) {
-  shareBtn.addEventListener('click', () => {
-    if (navigator.share) {
-      navigator.share({
-        title: document.title,
-        url: window.location.href
-      });
-    } else {
-      alert('Fungsi berbagi tidak didukung di browser ini. Gunakan tombol berbagi spesifik platform.');
+    // Simulasi berlangganan
+    if (email) {
+      alert(`Terima kasih! Email ${email} telah berhasil didaftarkan untuk newsletter.`);
+      newsletterForm.reset();
     }
   });
 }
 
-if (shareTwitter) {
-  shareTwitter.addEventListener('click', () => {
-    window.open(`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`, '_blank');
-  });
-}
-
-if (shareFacebook) {
-  shareFacebook.addEventListener('click', () => {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank');
-  });
-}
-
-if (shareLinkedin) {
-  shareLinkedin.addEventListener('click', () => {
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank');
-  });
-}
-
-if (shareWhatsapp) {
-  shareWhatsapp.addEventListener('click', () => {
-    window.open(`https://wa.me/?text=${shareTitle}%20${shareUrl}`, '_blank');
-  });
-}
-
-// Search functionality
-const searchBtn = document.getElementById('search-btn');
-if (searchBtn) {
-  searchBtn.addEventListener('click', () => {
-    const searchQuery = prompt('Masukkan kata kunci pencarian:');
-    if (searchQuery) {
-      alert(`Fitur pencarian untuk "${searchQuery}" akan segera tersedia!`);
-      // Di sini bisa diimplementasikan fungsi pencarian sebenarnya
-    }
-  });
-}
-
-// Animasi scroll untuk elements
+// Intersection Observer untuk animasi
 const observerOptions = {
   threshold: 0.1,
   rootMargin: '0px 0px -50px 0px'
@@ -154,27 +132,22 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Terapkan animasi pada elements saat dimuat
+// Terapkan animasi pada elements
 document.addEventListener('DOMContentLoaded', () => {
-  const animatedElements = document.querySelectorAll('.article-card, .category-card, .hero-content, .hero-image');
+  const animatedElements = document.querySelectorAll(
+    '.article-card, .category-card, .tip-card, .hero-content, .hero-image'
+  );
   
   animatedElements.forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
+    el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
-});
-
-// Loading indicator untuk gambar
-window.addEventListener('load', () => {
-  const images = document.querySelectorAll('img');
-  images.forEach(img => {
-    if (img.complete) {
-      const loadingIndicator = img.previousElementSibling;
-      if (loadingIndicator && loadingIndicator.classList.contains('image-loading')) {
-        loadingIndicator.style.display = 'none';
-      }
-    }
+  
+  // Stagger animation untuk category cards
+  const categoryCards = document.querySelectorAll('.category-card');
+  categoryCards.forEach((card, index) => {
+    card.style.transitionDelay = `${index * 0.1}s`;
   });
 });
