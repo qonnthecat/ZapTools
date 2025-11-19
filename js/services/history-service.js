@@ -124,18 +124,22 @@ class HistoryService {
         const now = Date.now();
         const diff = now - timestamp;
         
+        const seconds = Math.floor(diff / 1000);
         const minutes = Math.floor(diff / 60000);
         const hours = Math.floor(diff / 3600000);
         const days = Math.floor(diff / 86400000);
         
-        if (minutes < 1) {
+        if (seconds < 60) {
             return translationService.get('history.timeAgo', 'Just now');
         } else if (minutes < 60) {
             return `${minutes}m ${translationService.get('history.timeAgo', 'ago')}`;
         } else if (hours < 24) {
             return `${hours}h ${translationService.get('history.timeAgo', 'ago')}`;
-        } else {
+        } else if (days < 7) {
             return `${days}d ${translationService.get('history.timeAgo', 'ago')}`;
+        } else {
+            // Format as date for older items
+            return new Date(timestamp).toLocaleDateString();
         }
     }
 
@@ -165,6 +169,57 @@ class HistoryService {
         };
         
         return iconMap[type] || '📄';
+    }
+
+    /**
+     * Get history items by type
+     */
+    getHistoryByType(type, limit = 10) {
+        const history = this.getHistory();
+        return history.filter(item => item.type === type).slice(0, limit);
+    }
+
+    /**
+     * Search history items
+     */
+    searchHistory(query) {
+        const history = this.getHistory();
+        const lowerQuery = query.toLowerCase();
+        
+        return history.filter(item => {
+            return (
+                item.type?.toLowerCase().includes(lowerQuery) ||
+                item.operation?.toLowerCase().includes(lowerQuery) ||
+                item.fileName?.toLowerCase().includes(lowerQuery) ||
+                item.input?.toLowerCase().includes(lowerQuery) ||
+                item.output?.toLowerCase().includes(lowerQuery)
+            );
+        });
+    }
+
+    /**
+     * Export history as JSON
+     */
+    exportHistory() {
+        const history = this.getHistory();
+        return JSON.stringify(history, null, 2);
+    }
+
+    /**
+     * Import history from JSON
+     */
+    importHistory(jsonData) {
+        try {
+            const importedHistory = JSON.parse(jsonData);
+            if (Array.isArray(importedHistory)) {
+                localStorage.setItem(this.storageKey, jsonData);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error importing history:', error);
+            return false;
+        }
     }
 }
 
