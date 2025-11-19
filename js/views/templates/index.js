@@ -8,6 +8,7 @@ import { ImageConverterTemplate } from './image-converter.js';
 import { TextConverterTemplate } from './text-converter.js';
 import { ColorToolsTemplate } from './color-tools.js';
 import { PasswordGeneratorTemplate } from './password-generator.js';
+import { HistoryTemplate } from './history.js'; // NEW
 import { SettingsTemplate } from './settings.js';
 
 export const MainTemplate = () => {
@@ -21,6 +22,7 @@ export const MainTemplate = () => {
             ${TextConverterTemplate()}
             ${ColorToolsTemplate()}
             ${PasswordGeneratorTemplate()}
+            ${HistoryTemplate()} <!-- NEW -->
             ${SettingsTemplate()}
         </main>
 
@@ -29,7 +31,6 @@ export const MainTemplate = () => {
     `;
 };
 
-// Export individual templates for dynamic loading if needed
 export {
     HeaderTemplate,
     FooterTemplate,
@@ -40,5 +41,6 @@ export {
     TextConverterTemplate,
     ColorToolsTemplate,
     PasswordGeneratorTemplate,
+    HistoryTemplate, // NEW
     SettingsTemplate
 };
