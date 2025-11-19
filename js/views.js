@@ -1,5 +1,24 @@
 // js/views.js
 export class ViewManager {
+  // js/views.js
+    initializeLogoHandler() {
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            logo.style.cursor = 'pointer';
+            
+            logo.addEventListener('click', () => {
+                window.dispatchEvent(new CustomEvent('navigate', { detail: 'home' }));
+            });
+
+            logo.addEventListener('mouseenter', () => {
+                logo.style.opacity = '0.8';
+            });
+
+            logo.addEventListener('mouseleave', () => {
+                logo.style.opacity = '1';
+            });
+        }
+    }
     constructor() {
         this.app = document.getElementById('app');
         this.currentView = null;
@@ -126,8 +145,13 @@ export const Templates = {
             <header class="header">
                 <div class="container">
                     <div class="logo">
-                        <h1>ZapTools</h1>
-                        <p>Alat bantu online yang praktis</p>
+                        <div class="logo-container">
+                            <img src="images/logos/transparent.png" alt="ZapTools Logo" class="logo-image">
+                            <div class="logo-text">
+                                <h1>ZapTools</h1>
+                                <p>Alat bantu online yang praktis</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -146,7 +170,13 @@ export const Templates = {
 
             <footer class="footer">
                 <div class="container">
-                    <p>&copy; 2023 ZapTools. Semua hak dilindungi.</p>
+                    <div class="footer-content">
+                        <div class="footer-logo">
+                            <img src="images/logos/transparent.png" alt="ZapTools" class="footer-logo-image">
+                            <span>ZapTools</span>
+                        </div>
+                        <p>&copy; 2023 ZapTools. Semua hak dilindungi.</p>
+                    </div>
                 </div>
             </footer>
         `;
