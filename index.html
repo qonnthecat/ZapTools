@@ -1,44 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZapTools</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZapTools - Alat Bantu Online</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>ZapTools</h1>
-    <button id="theme-toggle">🌙</button>
-  </header>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>ZapTools</h1>
+                <p>Alat bantu online yang praktis</p>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Beranda</a></li>
+                    <li><a href="#converter" class="nav-link">Konversi File</a></li>
+                    <li><a href="#calculator" class="nav-link">Kalkulator</a></li>
+                    <li><a href="#tools" class="nav-link">Alat Lainnya</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <button id="theme-switcher" class="theme-btn" aria-label="Toggle dark mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <nav>
-    <button class="nav-btn" data-target="home">Home</button>
-    <button class="nav-btn" data-target="converter">File Converter</button>
-    <button class="nav-btn" data-target="calculator">Calculator</button>
-  </nav>
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <h2>Selamat Datang di ZapTools</h2>
+                    <p>Kumpulan alat bantu online yang praktis untuk kebutuhan sehari-hari</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📄</div>
+                            <h3>Konversi File</h3>
+                            <p>Konversi berbagai format file dengan mudah</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🧮</div>
+                            <h3>Kalkulator</h3>
+                            <p>Kalkulator lengkap untuk perhitungan sehari-hari</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔧</div>
+                            <h3>Alat Lainnya</h3>
+                            <p>Berbagai alat bantu lainnya yang berguna</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <main id="content">
-    <section id="home" class="page active">
-      <h2>Welcome to ZapTools</h2>
-      <p>Your all-in-one utility toolkit.</p>
-    </section>
+        <!-- Converter Section -->
+        <section id="converter" class="section">
+            <div class="container">
+                <h2>Konversi File</h2>
+                <div class="converter-container">
+                    <div class="converter-card">
+                        <h3>Konversi Gambar</h3>
+                        <div class="file-drop-area" id="image-drop-area">
+                            <span class="file-msg">Seret gambar di sini atau klik untuk memilih</span>
+                            <input type="file" id="image-input" class="file-input" accept="image/*">
+                        </div>
+                        <div class="format-selector">
+                            <label for="image-format">Konversi ke:</label>
+                            <select id="image-format">
+                                <option value="jpg">JPG</option>
+                                <option value="png">PNG</option>
+                                <option value="webp">WebP</option>
+                            </select>
+                        </div>
+                        <button id="convert-image" class="btn primary">Konversi Gambar</button>
+                        <div id="image-result" class="result-area"></div>
+                    </div>
 
-    <section id="converter" class="page">
-      <h2>File Converter</h2>
-      <input type="file" id="file-input">
-      <button id="convert-btn">Convert</button>
-      <p id="convert-result"></p>
-    </section>
+                    <div class="converter-card">
+                        <h3>Konversi Teks</h3>
+                        <textarea id="text-input" placeholder="Masukkan teks di sini..."></textarea>
+                        <div class="format-selector">
+                            <label for="text-format">Konversi ke:</label>
+                            <select id="text-format">
+                                <option value="uppercase">Huruf Besar</option>
+                                <option value="lowercase">Huruf Kecil</option>
+                                <option value="titlecase">Judul Kasus</option>
+                            </select>
+                        </div>
+                        <button id="convert-text" class="btn primary">Konversi Teks</button>
+                        <div id="text-result" class="result-area"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="calculator" class="page">
-      <h2>Calculator</h2>
-      <input type="text" id="calc-input" placeholder="Enter expression">
-      <button id="calc-btn">Calculate</button>
-      <p id="calc-result"></p>
-    </section>
-  </main>
+        <!-- Calculator Section -->
+        <section id="calculator" class="section">
+            <div class="container">
+                <h2>Kalkulator</h2>
+                <div class="calculator-container">
+                    <div class="calculator">
+                        <div class="calculator-display">
+                            <input type="text" id="calc-display" readonly>
+                        </div>
+                        <div class="calculator-buttons">
+                            <button class="calc-btn clear" data-action="clear">C</button>
+                            <button class="calc-btn operator" data-action="backspace">⌫</button>
+                            <button class="calc-btn operator" data-action="divide">/</button>
+                            <button class="calc-btn operator" data-action="multiply">×</button>
+                            
+                            <button class="calc-btn number" data-value="7">7</button>
+                            <button class="calc-btn number" data-value="8">8</button>
+                            <button class="calc-btn number" data-value="9">9</button>
+                            <button class="calc-btn operator" data-action="subtract">-</button>
+                            
+                            <button class="calc-btn number" data-value="4">4</button>
+                            <button class="calc-btn number" data-value="5">5</button>
+                            <button class="calc-btn number" data-value="6">6</button>
+                            <button class="calc-btn operator" data-action="add">+</button>
+                            
+                            <button class="calc-btn number" data-value="1">1</button>
+                            <button class="calc-btn number" data-value="2">2</button>
+                            <button class="calc-btn number" data-value="3">3</button>
+                            <button class="calc-btn equals" data-action="calculate" rowspan="2">=</button>
+                            
+                            <button class="calc-btn number zero" data-value="0">0</button>
+                            <button class="calc-btn decimal" data-value=".">.</button>
+                        </div>
+                    </div>
+                    <div class="calculator-history">
+                        <h3>Riwayat Perhitungan</h3>
+                        <ul id="history-list"></ul>
+                        <button id="clear-history" class="btn secondary">Hapus Riwayat</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script src="app.js"></script>
+        <!-- Tools Section -->
+        <section id="tools" class="section">
+            <div class="container">
+                <h2>Alat Lainnya</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>Generator Warna</h3>
+                        <div class="color-picker-container">
+                            <input type="color" id="color-picker" value="#3498db">
+                            <div class="color-info">
+                                <p>HEX: <span id="hex-value">#3498db</span></p>
+                                <p>RGB: <span id="rgb-value">rgb(52, 152, 219)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Pembuat Kata Sandi</h3>
+                        <div class="password-generator">
+                            <div class="password-display">
+                                <input type="text" id="password-output" readonly>
+                                <button id="copy-password" class="btn icon">📋</button>
+                            </div>
+                            <div class="password-options">
+                                <label>
+                                    <input type="number" id="password-length" min="6" max="32" value="12">
+                                    Panjang
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="include-uppercase" checked>
+                                    Huruf Besar
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="include-numbers" checked>
+                                    Angka
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="include-symbols">
+                                    Simbol
+                                </label>
+                            </div>
+                            <button id="generate-password" class="btn primary">Buat Kata Sandi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 ZapTools. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
