@@ -7,8 +7,12 @@ class ZapToolsApp {
         this.viewManager = new ViewManager();
         this.router = new Router([
             { path: 'home', handler: () => this.showHome() },
-            { path: 'converter', handler: () => this.showConverter() },
-            { path: 'tools', handler: () => this.showTools() }
+            { path: 'features', handler: () => this.showFeatures() },
+            { path: 'image-converter', handler: () => this.showImageConverter() },
+            { path: 'text-converter', handler: () => this.showTextConverter() },
+            { path: 'color-tools', handler: () => this.showColorTools() },
+            { path: 'password-generator', handler: () => this.showPasswordGenerator() },
+            { path: 'settings', handler: () => this.showSettings() }
         ]);
 
         this.init();
@@ -29,43 +33,36 @@ class ZapToolsApp {
 
     async initializeServices() {
         const currentRoute = this.router.getCurrentRoute() || 'home';
-        
-        // Load services based on current route
-        switch(currentRoute) {
-            case 'converter':
-                await this.loadConverterServices();
-                break;
-            case 'tools':
-                await this.loadToolsServices();
-                break;
-        }
+        await this.loadRouteServices(currentRoute);
     }
 
-    async loadConverterServices() {
+    async loadRouteServices(route) {
         try {
-            const { ImageConverter } = await import('./services/image-converter.js');
-            const { TextConverter } = await import('./services/text-converter.js');
-            
-            new ImageConverter().init();
-            new TextConverter().init();
-            
-            console.log('Converter services loaded');
+            switch(route) {
+                case 'image-converter':
+                    const { ImageConverter } = await import('./services/image-converter.js');
+                    new ImageConverter().init();
+                    break;
+                case 'text-converter':
+                    const { TextConverter } = await import('./services/text-converter.js');
+                    new TextConverter().init();
+                    break;
+                case 'color-tools':
+                    const { ColorTools } = await import('./services/color-tools.js');
+                    new ColorTools().init();
+                    break;
+                case 'password-generator':
+                    const { PasswordGenerator } = await import('./services/password-generator.js');
+                    new PasswordGenerator().init();
+                    break;
+                case 'settings':
+                    const { SettingsManager } = await import('./services/settings-manager.js');
+                    new SettingsManager().init();
+                    break;
+            }
+            console.log(`${route} services loaded`);
         } catch (error) {
-            console.error('Error loading converter services:', error);
-        }
-    }
-
-    async loadToolsServices() {
-        try {
-            const { ColorTools } = await import('./services/color-tools.js');
-            const { PasswordGenerator } = await import('./services/password-generator.js');
-            
-            new ColorTools().init();
-            new PasswordGenerator().init();
-            
-            console.log('Tools services loaded');
-        } catch (error) {
-            console.error('Error loading tools services:', error);
+            console.error(`Error loading ${route} services:`, error);
         }
     }
 
@@ -73,14 +70,33 @@ class ZapToolsApp {
         this.viewManager.initializeCurrentSection();
     }
 
-    async showConverter() {
+    showFeatures() {
         this.viewManager.initializeCurrentSection();
-        await this.loadConverterServices();
     }
 
-    async showTools() {
+    async showImageConverter() {
         this.viewManager.initializeCurrentSection();
-        await this.loadToolsServices();
+        await this.loadRouteServices('image-converter');
+    }
+
+    async showTextConverter() {
+        this.viewManager.initializeCurrentSection();
+        await this.loadRouteServices('text-converter');
+    }
+
+    async showColorTools() {
+        this.viewManager.initializeCurrentSection();
+        await this.loadRouteServices('color-tools');
+    }
+
+    async showPasswordGenerator() {
+        this.viewManager.initializeCurrentSection();
+        await this.loadRouteServices('password-generator');
+    }
+
+    async showSettings() {
+        this.viewManager.initializeCurrentSection();
+        await this.loadRouteServices('settings');
     }
 }
 
