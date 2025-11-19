@@ -1,0 +1,32 @@
+/* css/style.css */
+/* Import semua file CSS */
+@import url('variables.css');
+@import url('base.css');
+@import url('layout.css');
+
+/* Components */
+@import url('components/header.css');
+@import url('components/bottom-bar.css');
+@import url('components/cards.css');
+@import url('components/buttons.css');
+@import url('components/forms.css');
+
+/* Pages */
+@import url('pages/home.css');
+@import url('pages/features.css');
+@import url('pages/converter.css');
+@import url('pages/tools.css');
+@import url('pages/settings.css');
+
+/* Utilities */
+@import url('utilities/animations.css');
+@import url('utilities/responsive.css');
+
+/* Footer Styles */
+.footer {
+    background-color: var(--surface-color);
+    padding: var(--space-xl) 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-2xl);
+}
