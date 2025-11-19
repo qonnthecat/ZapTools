@@ -5,7 +5,10 @@
     box-sizing: border-box;
 }
 
+/* Tambahkan di bagian :root di css/style.css */
+
 :root {
+    /* Light theme (default) */
     --primary-color: #2e7d32;
     --secondary-color: #4caf50;
     --accent-color: #81c784;
@@ -17,8 +20,11 @@
     --card-bg: #ffffff;
     --footer-bg: #2e7d32;
     --footer-text: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --overlay-color: rgba(0, 0, 0, 0.05);
 }
 
+/* Dark theme */
 .dark {
     --primary-color: #81c784;
     --secondary-color: #4caf50;
@@ -31,17 +37,117 @@
     --card-bg: #263228;
     --footer-bg: #1a231a;
     --footer-text: #e8f5e9;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --overlay-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Pastikan body memiliki transisi yang smooth */
 body {
     font-family: 'Lora', serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease, color 0.3s ease;
     line-height: 1.7;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+/* Pastikan semua elemen utama memiliki transisi */
+header, 
+main, 
+footer, 
+.article-card, 
+.category-card, 
+.nav-link, 
+button, 
+input, 
+textarea, 
+select {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
+}
+
+/* Style untuk tombol theme toggle */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background-color: var(--border-color);
+    transform: rotate(15deg);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Animation for theme transition */
+@keyframes themeSwitch {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.theme-transition {
+    animation: themeSwitch 0.3s ease;
+}
+
+/* High contrast support for accessibility */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #1b5e20;
+    }
+    
+    .dark {
+        --border-color: #81c784;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    body, 
+    header, 
+    main, 
+    footer, 
+    .article-card, 
+    .category-card, 
+    .nav-link, 
+    button, 
+    input, 
+    textarea, 
+    select {
+        transition: none;
+    }
+    
+    .theme-toggle:hover {
+        transform: none;
+    }
 }
 
 main {
