@@ -547,3 +547,43 @@ textarea {
         grid-template-columns: 1fr;
     }
 }
+
+/* Tambahkan di bagian Header Styles atau dimana pun yang sesuai */
+
+/* Logo Styles */
+.logo {
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.logo:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.logo:active {
+    transform: scale(0.98);
+}
+
+/* Logo text styles */
+.logo h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    transition: var(--transition);
+}
+
+.logo:hover h1 {
+    color: var(--secondary-color);
+}
+
+.logo p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.logo:hover p {
+    color: var(--text-color);
+}
