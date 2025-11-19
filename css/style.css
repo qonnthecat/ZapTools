@@ -5,6 +5,7 @@
 @import url('layout.css');
 
 /* Components */
+@import url('components/logo.css');        /* File logo baru */
 @import url('components/header.css');
 @import url('components/bottom-bar.css');
 @import url('components/cards.css');
@@ -29,4 +30,17 @@
     text-align: center;
     border-top: 1px solid var(--border-color);
     margin-top: var(--space-2xl);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.footer p {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
 }
