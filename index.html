@@ -19,12 +19,23 @@
         <h1><a href="index.html">DuniaBercerita</a></h1>
       </div>
       
+      <!-- SEARCH BAR RESPONSIVE -->
+      <div class="search-container">
+        <div class="search-box" id="search-box">
+          <input type="text" placeholder="Cari artikel..." id="search-input">
+          <button class="search-btn" id="search-submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="search-results" id="search-results"></div>
+      </div>
+      
       <nav class="nav-menu" id="nav-menu">
         <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span>Beranda</span></a>
         <a href="#berita" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita</span></a>
         <a href="#fakta" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
         <a href="#inovasi" class="nav-link"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
-        <a href="#tips" class="nav-link"><i class="fas fa-seedling"></i> <span>Tips</span></a>
+        <a href="admin.html" class="nav-link admin-link"><i class="fas fa-edit"></i> <span>Admin</span></a>
       </nav>
       
       <div class="action-buttons">
@@ -40,92 +51,19 @@
     <section class="hero">
       <div class="hero-content">
         <h2>Jelajahi Dunia Penuh Keajaiban</h2>
-        <p>Temukan fakta menarik, berita terkini, inovasi terbaru, dan ide praktis dari seluruh penjuru dunia untuk kehidupan sehari-hari Anda.</p>
+        <p>Temukan fakta menarik, berita terkini, inovasi terbaru, dan ide praktis dari seluruh penjuru dunia.</p>
         <a href="#artikel" class="cta-button">Mulai Menjelajahi</a>
       </div>
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Dunia Pengetahuan" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Dunia Pengetahuan" loading="lazy">
       </div>
     </section>
 
-    <!-- Featured Articles -->
+    <!-- Artikel akan dimuat secara dinamis -->
     <section id="artikel" class="featured-articles">
-      <h2>Artikel Terpopuler</h2>
-      <div class="articles-grid">
-        <article class="article-card">
-          <div class="article-image">
-            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Revolusi Teknologi" loading="lazy">
-          </div>
-          <div class="article-content">
-            <h3><a href="article.html">10 Teknologi yang Akan Mengubah Dunia dalam 5 Tahun Mendatang</a></h3>
-            <p class="article-meta">Oleh Tech Explorer • 20 November 2025</p>
-            <p>Dari AI hingga quantum computing, temukan inovasi teknologi yang akan membentuk masa depan kita.</p>
-            <a href="article.html" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <div class="article-image">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fakta Sains" loading="lazy">
-          </div>
-          <div class="article-content">
-            <h3><a href="#">7 Fakta Sains Menakjubkan yang Jarang Diketahui Orang</a></h3>
-            <p class="article-meta">Oleh Science Enthusiast • 18 November 2025</p>
-            <p>Jelajahi keajaiban sains yang akan membuat Anda terkagum-kagum dan melihat dunia dengan cara baru.</p>
-            <a href="#" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <div class="article-image">
-            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Produktivitas" loading="lazy">
-          </div>
-          <div class="article-content">
-            <h3><a href="#">5 Kebiasaan Pagi Orang Sukses yang Bisa Anda Terapkan Hari Ini</a></h3>
-            <p class="article-meta">Oleh Life Coach • 15 November 2025</p>
-            <p>Mulai hari dengan benar dapat mengubah produktivitas dan kualitas hidup Anda secara signifikan.</p>
-            <a href="#" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section class="categories">
-      <h2>Jelajahi Kategori</h2>
-      <div class="categories-grid">
-        <div class="category-card">
-          <i class="fas fa-newspaper"></i>
-          <h3>Berita Terkini</h3>
-          <p>Update terbaru dari seluruh dunia</p>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-lightbulb"></i>
-          <h3>Fakta Unik</h3>
-          <p>Informasi menarik yang jarang diketahui</p>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-rocket"></i>
-          <h3>Inovasi</h3>
-          <p>Teknologi dan penemuan terbaru</p>
-        </div>
-        <div class="category-card">
-          <i class="fas fa-seedling"></i>
-          <h3>Tips Praktis</h3>
-          <p>Ide untuk kehidupan sehari-hari</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-      <div class="newsletter-content">
-        <h2>Tetap Terupdate</h2>
-        <p>Dapatkan artikel terbaru tentang fakta menarik, berita, dan inovasi langsung di email Anda.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Alamat email Anda" required>
-          <button type="submit">Berlangganan</button>
-        </form>
+      <h2>Artikel Terbaru</h2>
+      <div class="articles-grid" id="articles-container">
+        <!-- Artikel akan dimuat di sini oleh JavaScript -->
       </div>
     </section>
   </main>
@@ -134,21 +72,14 @@
     <div class="footer-content">
       <div class="footer-section">
         <h3>DuniaBercerita</h3>
-        <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis dari seluruh dunia.</p>
+        <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis.</p>
       </div>
       <div class="footer-section">
         <h3>Tautan Cepat</h3>
         <ul>
           <li><a href="index.html">Beranda</a></li>
-          <li><a href="#berita">Berita</a></li>
-          <li><a href="#fakta">Fakta Unik</a></li>
-          <li><a href="#inovasi">Inovasi</a></li>
+          <li><a href="admin.html">Admin Panel</a></li>
         </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Kontak</h3>
-        <p><i class="fas fa-envelope"></i> info@duniabercerita.com</p>
-        <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -157,5 +88,12 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/cms.js"></script>
+  <script>
+    // Load articles when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      loadArticles();
+    });
+  </script>
 </body>
 </html>
