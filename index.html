@@ -3,138 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DuniaBercerita - Fakta Unik, Berita & Inovasi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <script src="js/utils.js"></script>
-    <script src="js/theme.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/cms-core.js"></script>
-    <script src="js/cms-editor.js"></script>
-    <script src="js/cms-articles.js"></script>
+    <title>DuniaBercerita - Mengungkap Rahasia Dunia</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components/header.css">
+    <link rel="stylesheet" href="styles/components/footer.css">
+    <link rel="stylesheet" href="styles/pages/home.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo-section">
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h1><a href="index.html">DuniaBercerita</a></h1>
-            </div>
-            
-            <div class="search-container">
-                <div class="search-box" id="search-box">
-                    <input type="text" placeholder="Cari artikel..." id="search-input">
-                    <button class="search-btn" id="search-submit">
-                        <i class="fas fa-search"></i>
-                    </button>
+    <div id="app">
+        <!-- Header akan di-load via JS -->
+        <div id="header"></div>
+        
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Selamat Datang di DuniaBercerita</h1>
+                    <p>Temukan artikel menarik tentang segala hal di dunia</p>
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Cari artikel...">
+                        <button onclick="searchArticles()">Cari</button>
+                    </div>
                 </div>
-                <div class="search-results" id="search-results"></div>
-            </div>
-            
-            <nav class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span>Beranda</span></a>
-                <a href="#berita" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita</span></a>
-                <a href="#fakta" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
-                <a href="#inovasi" class="nav-link"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
-                <a href="admin.html" class="nav-link admin-link"><i class="fas fa-edit"></i> <span>Admin</span></a>
-            </nav>
-            
-            <div class="action-buttons">
-                <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+            </section>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Jelajahi Dunia Penuh Keajaiban</h2>
-                <p>Temukan fakta menarik, berita terkini, inovasi terbaru, dan ide praktis dari seluruh penjuru dunia untuk kehidupan sehari-hari Anda.</p>
-                <a href="#artikel" class="cta-button">Mulai Menjelajahi</a>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Dunia Pengetahuan" loading="lazy">
-            </div>
-        </section>
-
-        <section id="artikel" class="featured-articles">
-            <h2>Artikel Terpopuler</h2>
-            <div class="articles-grid" id="articles-container">
-                <!-- Artikel akan dimuat secara dinamis -->
-            </div>
-        </section>
-
-        <section class="categories">
-            <h2>Jelajahi Kategori</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-category="berita">
-                    <i class="fas fa-newspaper"></i>
-                    <h3>Berita Terkini</h3>
-                    <p>Update terbaru dari seluruh dunia</p>
+            <!-- Featured Articles -->
+            <section class="featured-articles">
+                <h2>Artikel Terpopuler</h2>
+                <div id="featuredArticles" class="articles-grid">
+                    <!-- Articles will be loaded via JS -->
                 </div>
-                <div class="category-card" data-category="fakta">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Fakta Unik</h3>
-                    <p>Informasi menarik yang jarang diketahui</p>
-                </div>
-                <div class="category-card" data-category="inovasi">
-                    <i class="fas fa-rocket"></i>
-                    <h3>Inovasi</h3>
-                    <p>Teknologi dan penemuan terbaru</p>
-                </div>
-                <div class="category-card" data-category="tips">
-                    <i class="fas fa-seedling"></i>
-                    <h3>Tips Praktis</h3>
-                    <p>Ide untuk kehidupan sehari-hari</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="newsletter">
-            <div class="newsletter-content">
-                <h2>Tetap Terupdate</h2>
-                <p>Dapatkan artikel terbaru tentang fakta menarik, berita, dan inovasi langsung di email Anda.</p>
-                <form class="newsletter-form" id="newsletter-form">
-                    <input type="email" placeholder="Alamat email Anda" required>
-                    <button type="submit">Berlangganan</button>
-                </form>
-            </div>
-        </section>
-    </main>
+            <!-- Categories -->
+            <section class="categories">
+                <h2>Kategori</h2>
+                <div id="categoriesList" class="categories-grid">
+                    <!-- Categories will be loaded via JS -->
+                </div>
+            </section>
+        </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>DuniaBercerita</h3>
-                <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis dari seluruh dunia.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Tautan Cepat</h3>
-                <ul>
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="admin.html">Admin Panel</a></li>
-                    <li><a href="#tentang">Tentang Kami</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Kontak</h3>
-                <p><i class="fas fa-envelope"></i> info@duniabercerita.com</p>
-                <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 DuniaBercerita. All rights reserved.</p>
-        </div>
-    </footer>
+        <!-- Footer -->
+        <div id="footer"></div>
+    </div>
 
-    <script src="js/main.js"></script>
+    <script src="scripts/utils/helpers.js"></script>
+    <script src="scripts/config/database.js"></script>
+    <script src="scripts/modules/articles.js"></script>
+    <script src="scripts/modules/categories.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
