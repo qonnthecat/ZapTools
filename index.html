@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuniaBercerita - Artikel Modern</title>
+  <title>DuniaBercerita - Beranda</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   
@@ -12,51 +12,60 @@
 <body>
   <header>
     <div class="header-content">
-      <h1>DuniaBercerita</h1>
+      <a href="index.html" class="logo-link"> <h1>DuniaBercerita</h1>
+      </a>
       <button id="theme-toggle">🌙 Mode Gelap</button>
     </div>
   </header>
 
-  <article>
-    <h2 class="article-title">Judul Artikel yang Penuh Inspirasi</h2>
-    <p class="meta-info">Dipublikasikan oleh Admin | 20 November 2025</p>
-    
-    <p>
-      Selamat datang! Artikel ini adalah demonstrasi bagaimana menggabungkan tipografi modern dari Google Fonts dan galeri gambar responsif untuk meningkatkan daya tarik visual.
-    </p>
-    
-    <h3>Tentang Font Poppins dan Lora</h3>
-    <p>
-      Kami menggunakan **Poppins** (font Sans-Serif yang geometris) untuk semua judul (`h1`, `h2`, `h3`) karena ia kuat dan modern. Sementara itu, **Lora** (font Serif yang elegan) digunakan untuk teks paragraf, memberikan kenyamanan membaca yang klasik.
-    </p>
+  <main>
+    <section class="hero-section">
+      <div class="hero-content">
+        <p class="tagline">Tempatmu Menemukan Inspirasi Baru</p>
+        <h2>Jelajahi Dunia dengan Ribuan Kisah Menarik</h2>
+        <a href="artikel-contoh.html" class="cta-button">Baca Artikel Unggulan</a>
+      </div>
+    </section>
 
-    <div class="image-gallery">
-        <div class="gallery-item">
-            <img src="https://via.placeholder.com/400x300/2a6496/FFFFFF?text=Gambar+1" alt="Ilustrasi Konsep 1">
-        </div>
-        <div class="gallery-item">
-            <img src="https://via.placeholder.com/400x300/8ab4f8/1a1a1a?text=Gambar+2" alt="Ilustrasi Konsep 2">
-        </div>
-        <div class="gallery-item">
-            <img src="https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=Gambar+3" alt="Ilustrasi Konsep 3">
-        </div>
-    </div>
-    
-    <h3>Responsivitas Grid Gambar</h3>
-    <p>
-      Galeri di atas menggunakan **CSS Grid** dengan fungsi `repeat(auto-fit, minmax(250px, 1fr))`. Ini berarti, *browser* akan mencoba membuat kolom gambar sebanyak mungkin, asalkan setiap kolom memiliki lebar minimum 250px. Jika layarnya terlalu sempit (misalnya di HP), semua gambar akan menyusun diri menjadi satu kolom.
-    </p>
+    <section class="articles-section">
+      <div class="container">
+        <h2 class="section-title">✨ Artikel Terbaru</h2>
+        
+        <div class="article-grid">
+          <div class="article-card">
+            <img src="https://via.placeholder.com/600x400/2a6496/FFFFFF?text=Coding+Tips" alt="Tips Coding Cepat">
+            <div class="card-body">
+              <span class="category">TEKNOLOGI</span>
+              <h3><a href="artikel-contoh.html">10 Tips Cepat Menulis Kode yang Rapi dan Efisien</a></h3>
+              <p>Pelajari trik-trik penting untuk meningkatkan kecepatan dan kualitas kode Anda...</p>
+              <a href="artikel-contoh.html" class="read-more">Baca Selengkapnya</a>
+            </div>
+          </div>
 
-    <ul>
-      <li>**Tipografi Lebih Baik:** Membedakan judul dan konten dengan font yang berbeda.</li>
-      <li>**Tata Letak Grid:** Galeri gambar diatur dengan rapi.</li>
-      <li>**Dark Mode Kompatibel:** Semua elemen baru disesuaikan warnanya di mode gelap.</li>
-    </ul>
+          <div class="article-card">
+            <img src="https://via.placeholder.com/600x400/4CAF50/FFFFFF?text=Gaya+Hidup" alt="Gaya Hidup Sehat">
+            <div class="card-body">
+              <span class="category">GAYA HIDUP</span>
+              <h3><a href="artikel-contoh.html">5 Kebiasaan Pagi yang Mengubah Hidup Anda</a></h3>
+              <p>Mulai hari Anda dengan energi penuh dan pikiran yang jernih. Simak rahasianya...</p>
+              <a href="artikel-contoh.html" class="read-more">Baca Selengkapnya</a>
+            </div>
+          </div>
 
-    <p>
-        Template ini sekarang lebih kuat dan visual. Selanjutnya, Anda bisa menambahkan lebih banyak konten ke dalam `<article>`!
-    </p>
-  </article>
+          <div class="article-card">
+            <img src="https://via.placeholder.com/600x400/8ab4f8/1a1a1a?text=Inspirasi" alt="Inspirasi Karir">
+            <div class="card-body">
+              <span class="category">KARIR</span>
+              <h3><a href="artikel-contoh.html">Menemukan Tujuan Karir di Tengah Ketidakpastian</a></h3>
+              <p>Langkah-langkah praktis untuk merancang jalur karir yang Anda impikan...</p>
+              <a href="artikel-contoh.html" class="read-more">Baca Selengkapnya</a>
+            </div>
+          </div>
+          </div>
+      </div>
+    </section>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
