@@ -1,35 +1,50 @@
 [
   {
-    "id": "article_1",
+    "id": "article_1700000000001",
     "title": "10 Teknologi yang Akan Mengubah Dunia dalam 5 Tahun Mendatang",
     "author": "Tech Explorer",
     "category": "teknologi",
-    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "content": "Dunia teknologi berkembang dengan kecepatan yang luar biasa. Dalam lima tahun ke depan, kita akan menyaksikan revolusi teknologi yang akan mengubah cara kita hidup, bekerja, dan berinteraksi...",
-    "excerpt": "Dari AI hingga quantum computing, temukan inovasi teknologi yang akan membentuk masa depan kita.",
-    "tags": ["teknologi", "AI", "inovasi", "masa depan"],
-    "date": "2025-11-20"
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "content": "Dunia teknologi berkembang dengan kecepatan yang luar biasa. Dalam lima tahun ke depan, kita akan menyaksikan revolusi teknologi yang akan mengubah cara kita hidup, bekerja, dan berinteraksi.\n\n## 1. Kecerdasan Buatan Generasi Berikutnya\n\nAI tidak hanya akan menjadi lebih cerdas, tetapi juga lebih intuitif dan kontekstual. Dengan kemampuan memahami nuansa bahasa dan emosi manusia, AI akan menjadi asisten yang lebih efektif dalam kehidupan sehari-hari.\n\n## 2. Komputasi Kuantum Praktis\n\nMeskipun masih dalam tahap awal, komputasi kuantum akan mulai memberikan solusi untuk masalah kompleks yang tidak dapat dipecahkan komputer tradisional, dari penemuan obat hingga optimasi logistik global.\n\n## 3. Internet untuk Semua\n\nProyek satelit internet seperti Starlink dan OneWeb akan menyediakan akses internet berkecepatan tinggi ke daerah terpencil, membuka peluang pendidikan dan ekonomi bagi miliaran orang.\n\n## Dampak pada Masyarakat\n\nPerubahan teknologi ini akan membawa tantangan dan peluang. Penting bagi kita untuk mempersiapkan diri dengan mengembangkan keterampilan baru dan memahami implikasi etis dari setiap kemajuan teknologi.\n\n> Teknologi terbaik adalah teknologi yang tidak terlihat - teknologi yang begitu terintegrasi dalam kehidupan kita sehingga kita bahkan tidak menyadari kehadirannya.",
+    "excerpt": "Dari AI hingga quantum computing, temukan inovasi teknologi yang akan membentuk masa depan kita dalam 5 tahun ke depan.",
+    "tags": ["teknologi", "AI", "inovasi", "masa depan", "komputasi kuantum"],
+    "date": "2025-11-20",
+    "readTime": 8
   },
   {
-    "id": "article_2",
+    "id": "article_1700000000002",
     "title": "7 Fakta Sains Menakjubkan yang Jarang Diketahui Orang",
     "author": "Science Enthusiast",
     "category": "sains",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "content": "Jelajahi keajaiban sains yang akan membuat Anda terkagum-kagum dan melihat dunia dengan cara baru...",
-    "excerpt": "Temukan fakta-fakta sains menakjubkan yang akan mengubah cara pandang Anda tentang dunia.",
-    "tags": ["sains", "fakta", "pengetahuan"],
-    "date": "2025-11-18"
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "content": "Jelajahi keajaiban sains yang akan membuat Anda terkagum-kagum dan melihat dunia dengan cara baru.\n\n## 1. Otak Manusia Lebih Powerful dari Superkomputer\n\nOtak manusia memiliki sekitar 86 miliar neuron yang dapat membuat koneksi lebih banyak daripada jumlah bintang di galaksi Bima Sakti. Kapasitas penyimpanannya diperkirakan mencapai 2,5 petabyte - setara dengan 3 juta jam video YouTube.\n\n## 2. Air Memiliki Memori Molekuler\n\nPenelitian menunjukkan bahwa air dapat menyimpan informasi dari zat yang sebelumnya larut di dalamnya. Fenomena ini, meskipun kontroversial, membuka wawasan baru tentang sifat unik air.\n\n## 3. Bumi Sebenarnya Berbentuk Kentang\n\nBertentangan dengan kepercayaan populer, Bumi bukanlah bola sempurna. Planet kita sebenarnya berbentuk geoid - menyerupai kentang yang sedikit pipih di kutub dan mengembung di khatulistiwa.\n\n## Fakta Lainnya yang Menakjubkan\n\n- **Cahaya Butuh Waktu**: Cahaya dari Matahari membutuhkan 8 menit 20 detik untuk mencapai Bumi\n- **DNA Manusia**: Jika direntangkan, DNA dalam satu sel manusia akan mencapai panjang 2 meter\n- **Quantum Entanglement**: Dua partikel dapat terhubung secara instan meskipun terpisah jarak yang sangat jauh\n\nSains terus mengungkap keajaiban dunia kita, mengingatkan kita bahwa alam semesta penuh dengan misteri yang menunggu untuk dipecahkan.",
+    "excerpt": "Temukan fakta-fakta sains menakjubkan yang akan mengubah cara pandang Anda tentang dunia dan alam semesta.",
+    "tags": ["sains", "fakta", "pengetahuan", "ilmu pengetahuan", "alam semesta"],
+    "date": "2025-11-18",
+    "readTime": 6
   },
   {
-    "id": "article_3",
+    "id": "article_1700000000003",
     "title": "5 Kebiasaan Pagi Orang Sukses yang Bisa Anda Terapkan Hari Ini",
     "author": "Life Coach",
     "category": "tips",
-    "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "content": "Mulai hari dengan benar dapat mengubah produktivitas dan kualitas hidup Anda secara signifikan...",
-    "excerpt": "Pelajari kebiasaan pagi yang dapat meningkatkan produktivitas dan kesuksesan Anda.",
-    "tags": ["produktivitas", "tips", "kesuksesan"],
-    "date": "2025-11-15"
+    "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "content": "Mulai hari dengan benar dapat mengubah produktivitas dan kualitas hidup Anda secara signifikan. Berikut adalah 5 kebiasaan pagi yang konsisten dilakukan oleh orang-orang sukses:\n\n## 1. Bangun Lebih Awal\n\nOrang sukses memahami nilai waktu. Dengan bangun lebih awal, Anda memberikan diri Anda waktu yang tenang untuk merencanakan hari tanpa gangguan.\n\n**Manfaat:**\n- Waktu untuk meditasi atau perencanaan\n- Menghindari rush hour mental\n- Memulai hari dengan tenang dan terorganisir\n\n## 2. Olahraga Ringan\n\nTidak perlu latihan intensif - bahkan peregangan 10 menit atau jalan cepat dapat meningkatkan energi dan fokus sepanjang hari.\n\n## 3. Membaca atau Belajar\n\nMengisi pikiran dengan konten yang bermakna di pagi hari menetapkan nada positif untuk sisa hari. Bisa berupa berita industri, buku pengembangan diri, atau artikel inspiratif.\n\n## 4. Merencanakan Hari\n\nLuangkan 5-10 menit untuk menulis 3-5 prioritas utama hari ini. Fokus pada penyelesaian tugas-tugas ini sebelum beralih ke hal lain.\n\n## 5. Sarapan Sehat\n\nBahan bakar tubuh dengan nutrisi yang tepat. Sarapan seimbang memberikan energi yang konsisten tanpa crash di siang hari.\n\n> Kesuksesan dibangun dari kebiasaan kecil yang dilakukan secara konsisten, bukan dari tindakan besar yang dilakukan sekali-sekali.\n\nMulailah dengan menerapkan satu atau dua kebiasaan ini, dan secara bertahap bangun rutinitas pagi yang bekerja untuk Anda.",
+    "excerpt": "Pelajari kebiasaan pagi sederhana yang dapat meningkatkan produktivitas, energi, dan kesuksesan Anda dalam kehidupan sehari-hari.",
+    "tags": ["produktivitas", "tips", "kesuksesan", "kebiasaan", "pengembangan diri"],
+    "date": "2025-11-15",
+    "readTime": 5
+  },
+  {
+    "id": "article_1700000000004",
+    "title": "Revolusi Energi Terbarukan: Masa Depan yang Lebih Hijau",
+    "author": "Environmental Analyst",
+    "category": "inovasi",
+    "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "content": "Dunia sedang mengalami transformasi besar dalam cara kita memproduksi dan mengonsumsi energi. Energi terbarukan tidak lagi menjadi alternatif, tetapi menjadi solusi utama untuk masa depan yang berkelanjutan.\n\n## Solar Power yang Terjangkau\n\nBiaya panel surya telah turun lebih dari 80% dalam dekade terakhir. Teknologi baru seperti perovskite solar cells menjanjikan efisiensi yang lebih tinggi dengan biaya yang lebih rendah.\n\n## Energi Angin Lepas Pantai\n\nTurbin angin lepas pantai sekarang dapat menghasilkan listrik yang cukup untuk memasok ratusan ribu rumah. Teknologi floating wind farms membuka area baru untuk pengembangan energi angin.\n\n## Penyimpanan Energi\n\nKemajuan dalam teknologi baterai, dari lithium-ion hingga flow batteries, membuat energi terbarukan lebih dapat diandalkan dengan menyimpan kelebihan energi untuk digunakan saat dibutuhkan.\n\n## Dampak Global\n\nTransisi ke energi terbarukan tidak hanya baik untuk lingkungan, tetapi juga menciptakan jutaan pekerjaan baru dan mendorong inovasi teknologi.\n\nMasa depan energi adalah terbarukan, dan revolusi ini sudah berlangsung di sekitar kita.",
+    "excerpt": "Jelajahi bagaimana energi terbarukan mengubah landscape energi global dan menciptakan masa depan yang lebih berkelanjutan untuk semua.",
+    "tags": ["energi", "lingkungan", "inovasi", "sustainability", "teknologi hijau"],
+    "date": "2025-11-12",
+    "readTime": 4
   }
 ]
