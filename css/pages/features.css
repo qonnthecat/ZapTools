@@ -1,0 +1,52 @@
+/* css/pages/features.css */
+.features-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.feature-category {
+    margin-bottom: var(--space-2xl);
+}
+
+.feature-category h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid var(--border-color);
+    font-size: var(--font-size-2xl);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+}
+
+.category-item {
+    background-color: var(--surface-color);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: 
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal);
+    cursor: pointer;
+    border-left: 4px solid var(--primary-color);
+}
+
+.category-item:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.category-item h4 {
+    color: var(--text-color);
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-lg);
+}
+
+.category-item p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+}
