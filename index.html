@@ -75,6 +75,7 @@
                             <span class="file-msg">Seret gambar di sini atau klik untuk memilih</span>
                             <input type="file" id="image-input" class="file-input" accept="image/*">
                         </div>
+                        <div class="image-preview" id="image-preview"></div>
                         <div class="format-selector">
                             <label for="image-format">Konversi ke:</label>
                             <select id="image-format">
@@ -82,6 +83,11 @@
                                 <option value="png">PNG</option>
                                 <option value="webp">WebP</option>
                             </select>
+                        </div>
+                        <div class="quality-selector">
+                            <label for="image-quality">Kualitas (0-100):</label>
+                            <input type="range" id="image-quality" min="0" max="100" value="80">
+                            <span id="quality-value">80%</span>
                         </div>
                         <button id="convert-image" class="btn primary">Konversi Gambar</button>
                         <div id="image-result" class="result-area"></div>
@@ -96,10 +102,15 @@
                                 <option value="uppercase">Huruf Besar</option>
                                 <option value="lowercase">Huruf Kecil</option>
                                 <option value="titlecase">Judul Kasus</option>
+                                <option value="camelcase">Camel Case</option>
+                                <option value="snakecase">Snake Case</option>
+                                <option value="reverse">Balik Teks</option>
+                                <option value="remove-spaces">Hapus Spasi</option>
                             </select>
                         </div>
                         <button id="convert-text" class="btn primary">Konversi Teks</button>
                         <div id="text-result" class="result-area"></div>
+                        <button id="copy-text" class="btn secondary" style="display:none;">Salin Teks</button>
                     </div>
                 </div>
             </div>
@@ -117,26 +128,27 @@
                         <div class="calculator-buttons">
                             <button class="calc-btn clear" data-action="clear">C</button>
                             <button class="calc-btn operator" data-action="backspace">⌫</button>
+                            <button class="calc-btn operator" data-action="percentage">%</button>
                             <button class="calc-btn operator" data-action="divide">/</button>
-                            <button class="calc-btn operator" data-action="multiply">×</button>
                             
                             <button class="calc-btn number" data-value="7">7</button>
                             <button class="calc-btn number" data-value="8">8</button>
                             <button class="calc-btn number" data-value="9">9</button>
-                            <button class="calc-btn operator" data-action="subtract">-</button>
+                            <button class="calc-btn operator" data-action="multiply">×</button>
                             
                             <button class="calc-btn number" data-value="4">4</button>
                             <button class="calc-btn number" data-value="5">5</button>
                             <button class="calc-btn number" data-value="6">6</button>
-                            <button class="calc-btn operator" data-action="add">+</button>
+                            <button class="calc-btn operator" data-action="subtract">-</button>
                             
                             <button class="calc-btn number" data-value="1">1</button>
                             <button class="calc-btn number" data-value="2">2</button>
                             <button class="calc-btn number" data-value="3">3</button>
-                            <button class="calc-btn equals" data-action="calculate" rowspan="2">=</button>
+                            <button class="calc-btn operator" data-action="add">+</button>
                             
                             <button class="calc-btn number zero" data-value="0">0</button>
                             <button class="calc-btn decimal" data-value=".">.</button>
+                            <button class="calc-btn equals" data-action="calculate">=</button>
                         </div>
                     </div>
                     <div class="calculator-history">
@@ -160,7 +172,9 @@
                             <div class="color-info">
                                 <p>HEX: <span id="hex-value">#3498db</span></p>
                                 <p>RGB: <span id="rgb-value">rgb(52, 152, 219)</span></p>
+                                <p>HSL: <span id="hsl-value">hsl(204, 70%, 53%)</span></p>
                             </div>
+                            <div class="color-palette" id="color-palette"></div>
                         </div>
                     </div>
                     <div class="tool-card">
@@ -169,6 +183,12 @@
                             <div class="password-display">
                                 <input type="text" id="password-output" readonly>
                                 <button id="copy-password" class="btn icon">📋</button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-meter">
+                                    <div class="strength-bar" id="strength-bar"></div>
+                                </div>
+                                <span id="strength-text">Kekuatan</span>
                             </div>
                             <div class="password-options">
                                 <label>
@@ -189,6 +209,56 @@
                                 </label>
                             </div>
                             <button id="generate-password" class="btn primary">Buat Kata Sandi</button>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Konverter Satuan</h3>
+                        <div class="unit-converter">
+                            <div class="converter-row">
+                                <input type="number" id="unit-value" value="1" step="any">
+                                <select id="unit-from">
+                                    <option value="meter">Meter</option>
+                                    <option value="kilometer">Kilometer</option>
+                                    <option value="centimeter">Centimeter</option>
+                                    <option value="millimeter">Milimeter</option>
+                                    <option value="mile">Mil</option>
+                                    <option value="yard">Yard</option>
+                                    <option value="foot">Kaki</option>
+                                    <option value="inch">Inci</option>
+                                </select>
+                            </div>
+                            <div class="converter-row">
+                                <input type="number" id="unit-result" readonly>
+                                <select id="unit-to">
+                                    <option value="kilometer">Kilometer</option>
+                                    <option value="meter">Meter</option>
+                                    <option value="centimeter">Centimeter</option>
+                                    <option value="millimeter">Milimeter</option>
+                                    <option value="mile">Mil</option>
+                                    <option value="yard">Yard</option>
+                                    <option value="foot">Kaki</option>
+                                    <option value="inch">Inci</option>
+                                </select>
+                            </div>
+                            <button id="convert-units" class="btn primary">Konversi</button>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Timer & Stopwatch</h3>
+                        <div class="timer-container">
+                            <div class="timer-display">
+                                <span id="timer-time">00:00:00</span>
+                            </div>
+                            <div class="timer-controls">
+                                <button id="timer-start" class="btn primary">Mulai</button>
+                                <button id="timer-pause" class="btn secondary">Jeda</button>
+                                <button id="timer-reset" class="btn secondary">Reset</button>
+                            </div>
+                            <div class="timer-input">
+                                <input type="number" id="timer-minutes" min="0" max="60" value="5" placeholder="Menit">
+                                <span>:</span>
+                                <input type="number" id="timer-seconds" min="0" max="59" value="0" placeholder="Detik">
+                            </div>
                         </div>
                     </div>
                 </div>
