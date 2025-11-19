@@ -1,76 +1,29 @@
 /* css/utilities/responsive.css */
 /* Mobile First Approach */
 
+/* Base body padding for bottom bar */
+body {
+    padding-bottom: 60px; /* Reduced from 70px */
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-    .container {
-        padding: 0 var(--space-xl);
-    }
-    
-    .feature-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    
-    .category-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    body {
+        padding-bottom: 65px;
     }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    .header .container {
-        padding: var(--space-md) var(--space-xl);
-    }
-    
-    .logo h1 {
-        font-size: var(--font-size-3xl);
-    }
-    
-    .hero h2 {
-        font-size: var(--font-size-4xl);
-    }
-    
-    .bottom-nav-text {
-        font-size: var(--font-size-sm);
-    }
-    
-    .bottom-nav-icon {
-        font-size: 1.6rem;
-    }
-    
-    .converter-container {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    body {
+        padding-bottom: 70px;
     }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .container {
-        max-width: var(--container-max-width);
-    }
-    
-    .hero h2 {
-        font-size: 3rem;
-    }
-    
-    .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-xl);
-    }
-    
-    .tools-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .feature-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .category-grid {
-        grid-template-columns: repeat(2, 1fr);
+    body {
+        padding-bottom: 75px;
     }
 }
 
@@ -80,20 +33,18 @@
         padding: var(--space-sm) var(--space-md);
     }
     
-    .logo h1 {
+    .logo-image {
+        width: 32px;
+        height: 32px;
+        padding: 6px;
+    }
+    
+    .logo-text h1 {
         font-size: var(--font-size-xl);
     }
     
-    .logo p {
+    .logo-text p {
         font-size: var(--font-size-xs);
-    }
-    
-    .hero h2 {
-        font-size: var(--font-size-2xl);
-    }
-    
-    .hero p {
-        font-size: var(--font-size-md);
     }
     
     .bottom-nav-text {
@@ -104,120 +55,39 @@
         font-size: 1.2rem;
     }
     
-    .feature-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
+    /* History page mobile optimizations */
+    .history-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
     
-    .converter-card,
-    .tool-card {
-        padding: var(--space-lg);
+    .stat-card {
+        padding: 12px;
     }
     
-    .password-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .category-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .setting-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-md);
-    }
-    
-    .setting-item .toggle-switch {
-        align-self: flex-end;
-    }
-    
-    .color-palette {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .password-display {
-        flex-direction: column;
+    .history-item {
+        padding: 12px;
     }
 }
 
 /* Very small devices (phones, 480px and down) */
 @media (max-width: 480px) {
+    body {
+        padding-bottom: 55px;
+    }
+    
     .container {
         padding: 0 var(--space-md);
     }
     
-    .hero h2 {
-        font-size: var(--font-size-xl);
-    }
-    
-    .color-picker {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .calculator-buttons {
-        gap: var(--space-xs);
-    }
-    
-    .calc-btn {
-        padding: var(--space-md);
-        font-size: var(--font-size-lg);
-    }
-}
-
-/* Print styles */
-@media print {
-    .bottom-bar,
-    .header {
-        display: none;
-    }
-    
-    body {
-        padding-bottom: 0;
-    }
-    
-    .main {
-        min-height: auto;
-    }
-}
-
-/* css/utilities/responsive.css */
-/* Mobile First Approach */
-
-/* ... kode responsive yang lain ... */
-
-@media (max-width: 767px) {
-    .header .container {
-        padding: var(--space-sm) var(--space-md);
-    }
-    
-    .logo-image {
-        width: 38px;
-        height: 38px;
-        padding: 8px;
-    }
-    
-    .logo-text h1 {
-        font-size: var(--font-size-xl);
-    }
-    
-    .logo-text p {
-        font-size: var(--font-size-xs);
-    }
-    
-    /* ... kode responsive lainnya ... */
-}
-
-@media (max-width: 480px) {
     .logo-container {
         gap: var(--space-sm);
     }
     
     .logo-image {
-        width: 32px;
-        height: 32px;
-        padding: 6px;
+        width: 28px;
+        height: 28px;
+        padding: 5px;
     }
     
     .logo-text h1 {
@@ -225,7 +95,7 @@
     }
     
     .logo-text p {
-        display: none; /* Sembunyikan tagline di mobile sangat kecil */
+        display: none;
     }
     
     .footer-logo {
@@ -233,20 +103,51 @@
     }
     
     .footer-logo-image {
-        width: 24px;
-        height: 24px;
-        padding: 3px;
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+    }
+    
+    /* History page very small screens */
+    .history-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .history-actions {
+        justify-content: center;
+    }
+    
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .history-item-delete {
+        align-self: flex-end;
+        margin-top: -35px;
     }
 }
 
 /* Tablet adjustments */
 @media (min-width: 768px) and (max-width: 1024px) {
     .logo-image {
-        width: 42px;
-        height: 42px;
+        width: 38px;
+        height: 38px;
     }
     
     .logo-text h1 {
         font-size: var(--font-size-2xl);
+    }
+}
+
+/* Print styles */
+@media print {
+    .bottom-bar {
+        display: none;
+    }
+    
+    body {
+        padding-bottom: 0;
     }
 }
