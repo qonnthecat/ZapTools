@@ -6,6 +6,7 @@
   <title>DuniaBercerita - Artikel Modern</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     /* Reset & base */
@@ -65,6 +66,12 @@
       align-items: center;
     }
 
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     h1 {
       font-family: 'Poppins', sans-serif;
       font-size: 1.8rem;
@@ -72,6 +79,69 @@
       color: var(--primary-color);
     }
 
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .nav-link.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* Tombol Mode Minimalis */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      color: var(--text-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--border-color);
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover i {
+      transform: rotate(30deg);
+    }
+
+    /* Tombol lainnya */
     button {
       padding: 8px 15px;
       cursor: pointer;
@@ -88,9 +158,14 @@
       color: white;
     }
 
-    .action-buttons {
-      display: flex;
-      gap: 10px;
+    /* Menu mobile */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-color);
+      cursor: pointer;
     }
 
     /* --- ARTIKEL & KONTEN --- */
@@ -244,6 +319,22 @@
       }
       .header-content {
         padding: 0 10px;
+        flex-wrap: wrap;
+      }
+      .nav-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid var(--border-color);
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: block;
       }
       main {
         margin: 20px auto;
@@ -257,7 +348,7 @@
         grid-template-columns: 1fr;
       }
       .action-buttons {
-        flex-direction: column;
+        gap: 5px;
       }
     }
   </style>
@@ -265,10 +356,26 @@
 <body>
   <header>
     <div class="header-content">
-      <h1>DuniaBercerita</h1>
+      <div class="logo-section">
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>DuniaBercerita</h1>
+      </div>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#" class="nav-link active"><i class="fas fa-home"></i> Beranda</a>
+        <a href="#" class="nav-link"><i class="fas fa-book"></i> Artikel</a>
+        <a href="#" class="nav-link"><i class="fas fa-images"></i> Galeri</a>
+        <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> Tentang</a>
+        <a href="#" class="nav-link"><i class="fas fa-envelope"></i> Kontak</a>
+      </nav>
+      
       <div class="action-buttons">
-        <button id="theme-toggle">🌙 Mode Gelap</button>
-        <button id="share-btn">📤 Bagikan</button>
+        <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="share-btn"><i class="fas fa-share-alt"></i> Bagikan</button>
       </div>
     </div>
   </header>
@@ -327,9 +434,9 @@
       <div class="share-section">
         <h3>Bagikan Artikel Ini</h3>
         <div class="share-buttons">
-          <button id="share-twitter">Twitter</button>
-          <button id="share-facebook">Facebook</button>
-          <button id="share-linkedin">LinkedIn</button>
+          <button id="share-twitter"><i class="fab fa-twitter"></i> Twitter</button>
+          <button id="share-facebook"><i class="fab fa-facebook"></i> Facebook</button>
+          <button id="share-linkedin"><i class="fab fa-linkedin"></i> LinkedIn</button>
         </div>
       </div>
     </article>
@@ -348,18 +455,48 @@
     // Cek localStorage
     if (localStorage.getItem('theme') === 'dark') {
       body.classList.add('dark');
-      toggleBtn.textContent = '☀️ Mode Terang';
+      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
     }
 
     toggleBtn.addEventListener('click', () => {
       body.classList.toggle('dark');
       if(body.classList.contains('dark')){
-        toggleBtn.textContent = '☀️ Mode Terang';
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem('theme', 'dark');
       } else {
-        toggleBtn.textContent = '🌙 Mode Gelap';
+        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
         localStorage.setItem('theme', 'light');
       }
+    });
+
+    // Menu mobile toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      if (navMenu.classList.contains('active')) {
+        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+      } else {
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+
+    // Aktifkan menu navigasi
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Hapus kelas active dari semua link
+        navLinks.forEach(l => l.classList.remove('active'));
+        // Tambahkan kelas active ke link yang diklik
+        e.target.classList.add('active');
+        
+        // Tutup menu mobile jika terbuka
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      });
     });
 
     // Fungsi untuk modal gambar
