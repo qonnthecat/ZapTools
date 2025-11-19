@@ -21,21 +21,13 @@
       
       <nav class="nav-menu" id="nav-menu">
         <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span>Beranda</span></a>
-        <a href="articles.html" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita Terkini</span></a>
-        <a href="facts.html" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
-        <a href="innovation.html" class="nav-link"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
-        <a href="tips.html" class="nav-link"><i class="fas fa-seedling"></i> <span>Tips Praktis</span></a>
-        <a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> <span>Tentang</span></a>
+        <a href="#berita" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita</span></a>
+        <a href="#fakta" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
+        <a href="#inovasi" class="nav-link"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
+        <a href="#tips" class="nav-link"><i class="fas fa-seedling"></i> <span>Tips</span></a>
       </nav>
       
       <div class="action-buttons">
-        <div class="search-container">
-          <button id="search-btn" class="search-btn"><i class="fas fa-search"></i></button>
-          <div class="search-box" id="search-box">
-            <input type="text" placeholder="Cari artikel..." id="search-input">
-            <button class="search-close" id="search-close"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
         <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
           <i class="fas fa-moon"></i>
         </button>
@@ -47,159 +39,80 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h2>Temukan Dunia yang Penuh Keajaiban</h2>
-        <p>Jelajahi fakta menarik, berita terkini, inovasi terbaru, dan tips praktis untuk kehidupan sehari-hari dari seluruh penjuru dunia.</p>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-number">500+</span>
-            <span class="stat-label">Artikel</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">50+</span>
-            <span class="stat-label">Kategori</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">10K+</span>
-            <span class="stat-label">Pembaca</span>
-          </div>
-        </div>
+        <h2>Jelajahi Dunia Penuh Keajaiban</h2>
+        <p>Temukan fakta menarik, berita terkini, inovasi terbaru, dan ide praktis dari seluruh penjuru dunia untuk kehidupan sehari-hari Anda.</p>
+        <a href="#artikel" class="cta-button">Mulai Menjelajahi</a>
       </div>
       <div class="hero-image">
-        <img src="https://via.placeholder.com/600x400/4caf50/FFFFFF?text=Dunia+Pengetahuan" alt="Ilustrasi Dunia Pengetahuan">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Dunia Pengetahuan" loading="lazy">
       </div>
     </section>
 
-    <!-- Featured Categories -->
+    <!-- Featured Articles -->
+    <section id="artikel" class="featured-articles">
+      <h2>Artikel Terpopuler</h2>
+      <div class="articles-grid">
+        <article class="article-card">
+          <div class="article-image">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Revolusi Teknologi" loading="lazy">
+          </div>
+          <div class="article-content">
+            <h3><a href="article.html">10 Teknologi yang Akan Mengubah Dunia dalam 5 Tahun Mendatang</a></h3>
+            <p class="article-meta">Oleh Tech Explorer • 20 November 2025</p>
+            <p>Dari AI hingga quantum computing, temukan inovasi teknologi yang akan membentuk masa depan kita.</p>
+            <a href="article.html" class="read-more">Baca Selengkapnya</a>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fakta Sains" loading="lazy">
+          </div>
+          <div class="article-content">
+            <h3><a href="#">7 Fakta Sains Menakjubkan yang Jarang Diketahui Orang</a></h3>
+            <p class="article-meta">Oleh Science Enthusiast • 18 November 2025</p>
+            <p>Jelajahi keajaiban sains yang akan membuat Anda terkagum-kagum dan melihat dunia dengan cara baru.</p>
+            <a href="#" class="read-more">Baca Selengkapnya</a>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-image">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Produktivitas" loading="lazy">
+          </div>
+          <div class="article-content">
+            <h3><a href="#">5 Kebiasaan Pagi Orang Sukses yang Bisa Anda Terapkan Hari Ini</a></h3>
+            <p class="article-meta">Oleh Life Coach • 15 November 2025</p>
+            <p>Mulai hari dengan benar dapat mengubah produktivitas dan kualitas hidup Anda secara signifikan.</p>
+            <a href="#" class="read-more">Baca Selengkapnya</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
     <section class="categories">
       <h2>Jelajahi Kategori</h2>
       <div class="categories-grid">
-        <a href="news.html" class="category-card">
+        <div class="category-card">
           <i class="fas fa-newspaper"></i>
           <h3>Berita Terkini</h3>
           <p>Update terbaru dari seluruh dunia</p>
-          <span class="category-badge">25 Artikel</span>
-        </a>
-        
-        <a href="science.html" class="category-card">
-          <i class="fas fa-flask"></i>
-          <h3>Sains & Teknologi</h3>
-          <p>Penemuan dan inovasi terbaru</p>
-          <span class="category-badge">42 Artikel</span>
-        </a>
-        
-        <a href="culture.html" class="category-card">
-          <i class="fas fa-globe-asia"></i>
-          <h3>Budaya Dunia</h3>
-          <p>Keunikan tradisi dan kebiasaan</p>
-          <span class="category-badge">38 Artikel</span>
-        </a>
-        
-        <a href="environment.html" class="category-card">
-          <i class="fas fa-leaf"></i>
-          <h3>Lingkungan</h3>
-          <p>Isu lingkungan dan solusi</p>
-          <span class="category-badge">31 Artikel</span>
-        </a>
-        
-        <a href="health.html" class="category-card">
-          <i class="fas fa-heartbeat"></i>
-          <h3>Kesehatan</h3>
-          <p>Tips hidup sehat dan penelitian</p>
-          <span class="category-badge">29 Artikel</span>
-        </a>
-        
-        <a href="lifestyle.html" class="category-card">
-          <i class="fas fa-home"></i>
-          <h3>Gaya Hidup</h3>
-          <p>Ide praktis sehari-hari</p>
-          <span class="category-badge">45 Artikel</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Trending Articles -->
-    <section class="trending-articles">
-      <div class="section-header">
-        <h2>Trending Minggu Ini</h2>
-        <a href="trending.html" class="view-all">Lihat Semua <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="articles-grid">
-        <article class="article-card trending">
-          <div class="article-badge">Trending</div>
-          <div class="article-image">
-            <img src="https://via.placeholder.com/400x250/2e7d32/FFFFFF?text=AI+Revolusi" alt="Revolusi AI dalam Kehidupan">
-          </div>
-          <div class="article-content">
-            <h3><a href="article.html">Revolusi AI: Bagaimana Kecerdasan Buatan Mengubah Dunia Kita</a></h3>
-            <p class="article-meta"><i class="far fa-clock"></i> 8 menit membaca • <i class="far fa-eye"></i> 2.5K views</p>
-            <p>Eksplorasi dampak AI dalam berbagai sektor dan prediksi masa depan teknologi ini.</p>
-            <div class="article-tags">
-              <span class="tag">Teknologi</span>
-              <span class="tag">AI</span>
-              <span class="tag">Inovasi</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="article-card trending">
-          <div class="article-badge">Populer</div>
-          <div class="article-image">
-            <img src="https://via.placeholder.com/400x250/4caf50/FFFFFF?text=Energi+Terbarukan" alt="Energi Terbarukan Masa Depan">
-          </div>
-          <div class="article-content">
-            <h3><a href="#">Masa Depan Energi Terbarukan: Inovasi yang Mengubah Dunia</a></h3>
-            <p class="article-meta"><i class="far fa-clock"></i> 6 menit membaca • <i class="far fa-eye"></i> 1.8K views</p>
-            <p>Teknologi energi bersih terbaru yang berpotensi mengatasi krisis iklim global.</p>
-            <div class="article-tags">
-              <span class="tag">Energi</span>
-              <span class="tag">Lingkungan</span>
-              <span class="tag">Teknologi</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="article-card trending">
-          <div class="article-badge">Baru</div>
-          <div class="article-image">
-            <img src="https://via.placeholder.com/400x250/81c784/1a1a1a?text=Budaya+Digital" alt="Budaya Digital Global">
-          </div>
-          <div class="article-content">
-            <h3><a href="#">Budaya Digital: Bagaimana Internet Menyatukan Dunia</a></h3>
-            <p class="article-meta"><i class="far fa-clock"></i> 5 menit membaca • <i class="far fa-eye"></i> 1.2K views</p>
-            <p>Analisis perubahan budaya global di era digital dan dampaknya pada masyarakat.</p>
-            <div class="article-tags">
-              <span class="tag">Budaya</span>
-              <span class="tag">Digital</span>
-              <span class="tag">Sosial</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Quick Tips Section -->
-    <section class="quick-tips">
-      <h2>Tips Praktis Hari Ini</h2>
-      <div class="tips-grid">
-        <div class="tip-card">
-          <i class="fas fa-recycle"></i>
-          <h3>Hidup Berkelanjutan</h3>
-          <p>5 cara mudah mengurangi sampah plastik di rumah</p>
         </div>
-        <div class="tip-card">
-          <i class="fas fa-brain"></i>
-          <h3>Produktivitas</h3>
-          <p>Teknik Pomodoro untuk meningkatkan fokus kerja</p>
+        <div class="category-card">
+          <i class="fas fa-lightbulb"></i>
+          <h3>Fakta Unik</h3>
+          <p>Informasi menarik yang jarang diketahui</p>
         </div>
-        <div class="tip-card">
-          <i class="fas fa-wallet"></i>
-          <h3>Keuangan</h3>
-          <p>Cara sederhana menabung untuk masa depan</p>
+        <div class="category-card">
+          <i class="fas fa-rocket"></i>
+          <h3>Inovasi</h3>
+          <p>Teknologi dan penemuan terbaru</p>
         </div>
-        <div class="tip-card">
-          <i class="fas fa-heart"></i>
-          <h3>Kesehatan</h3>
-          <p>Kebiasaan pagi untuk meningkatkan energi seharian</p>
+        <div class="category-card">
+          <i class="fas fa-seedling"></i>
+          <h3>Tips Praktis</h3>
+          <p>Ide untuk kehidupan sehari-hari</p>
         </div>
       </div>
     </section>
@@ -207,11 +120,11 @@
     <!-- Newsletter Section -->
     <section class="newsletter">
       <div class="newsletter-content">
-        <h2>Tetap Terinformasi</h2>
-        <p>Dapatkan update terbaru tentang fakta menarik, berita, dan inovasi langsung di inbox Anda.</p>
+        <h2>Tetap Terupdate</h2>
+        <p>Dapatkan artikel terbaru tentang fakta menarik, berita, dan inovasi langsung di email Anda.</p>
         <form class="newsletter-form">
           <input type="email" placeholder="Alamat email Anda" required>
-          <button type="submit">Berlangganan <i class="fas fa-paper-plane"></i></button>
+          <button type="submit">Berlangganan</button>
         </form>
       </div>
     </section>
@@ -222,38 +135,20 @@
       <div class="footer-section">
         <h3>DuniaBercerita</h3>
         <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis dari seluruh dunia.</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-        </div>
-      </div>
-      <div class="footer-section">
-        <h3>Kategori</h3>
-        <ul>
-          <li><a href="news.html">Berita Terkini</a></li>
-          <li><a href="science.html">Sains & Teknologi</a></li>
-          <li><a href="culture.html">Budaya Dunia</a></li>
-          <li><a href="environment.html">Lingkungan</a></li>
-          <li><a href="health.html">Kesehatan</a></li>
-        </ul>
       </div>
       <div class="footer-section">
         <h3>Tautan Cepat</h3>
         <ul>
           <li><a href="index.html">Beranda</a></li>
-          <li><a href="about.html">Tentang Kami</a></li>
-          <li><a href="contact.html">Kontak</a></li>
-          <li><a href="privacy.html">Kebijakan Privasi</a></li>
-          <li><a href="terms.html">Syarat Layanan</a></li>
+          <li><a href="#berita">Berita</a></li>
+          <li><a href="#fakta">Fakta Unik</a></li>
+          <li><a href="#inovasi">Inovasi</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h3>Kontak</h3>
         <p><i class="fas fa-envelope"></i> info@duniabercerita.com</p>
         <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
-        <p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p>
       </div>
     </div>
     <div class="footer-bottom">
