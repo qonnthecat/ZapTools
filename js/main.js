@@ -1,52 +1,29 @@
-// Fungsi Pencarian
-const searchBtn = document.getElementById('search-btn');
-const searchBox = document.getElementById('search-box');
-const searchInput = document.getElementById('search-input');
-const searchClose = document.getElementById('search-close');
+// Kode JavaScript Dark Mode
+const toggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
 
-if (searchBtn && searchBox) {
-  searchBtn.addEventListener('click', () => {
-    searchBox.classList.toggle('active');
-    if (searchBox.classList.contains('active')) {
-      searchInput.focus();
-    }
-  });
-
-  if (searchClose) {
-    searchClose.addEventListener('click', () => {
-      searchBox.classList.remove('active');
-      searchInput.value = '';
-    });
-  }
-
-  // Tutup search box ketika klik di luar
-  document.addEventListener('click', (e) => {
-    if (!searchBox.contains(e.target) && !searchBtn.contains(e.target)) {
-      searchBox.classList.remove('active');
-    }
-  });
-
-  // Handle search input
-  if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        performSearch(searchInput.value);
-      }
-    });
+// Cek localStorage
+if (localStorage.getItem('theme') === 'dark') {
+  body.classList.add('dark');
+  if (toggleBtn) {
+    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
   }
 }
 
-function performSearch(query) {
-  if (query.trim()) {
-    // Simulasi pencarian - bisa diganti dengan API call
-    alert(`Mencari: "${query}"\n\nFitur pencarian lengkap akan segera tersedia!`);
-    searchBox.classList.remove('active');
-    searchInput.value = '';
-  }
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    if(body.classList.contains('dark')){
+      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', 'light');
+    }
+  });
 }
 
-// Improved Mobile Menu
+// Menu mobile toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const navMenu = document.getElementById('nav-menu');
 
@@ -102,6 +79,24 @@ navLinks.forEach(link => {
   });
 });
 
+// Smooth scrolling untuk anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
 // Newsletter Form
 const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
@@ -117,7 +112,7 @@ if (newsletterForm) {
   });
 }
 
-// Intersection Observer untuk animasi
+// Animasi scroll untuk elements
 const observerOptions = {
   threshold: 0.1,
   rootMargin: '0px 0px -50px 0px'
@@ -132,22 +127,14 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Terapkan animasi pada elements
+// Terapkan animasi pada elements saat dimuat
 document.addEventListener('DOMContentLoaded', () => {
-  const animatedElements = document.querySelectorAll(
-    '.article-card, .category-card, .tip-card, .hero-content, .hero-image'
-  );
+  const animatedElements = document.querySelectorAll('.article-card, .category-card, .hero-content, .hero-image');
   
   animatedElements.forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
+    el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
-  });
-  
-  // Stagger animation untuk category cards
-  const categoryCards = document.querySelectorAll('.category-card');
-  categoryCards.forEach((card, index) => {
-    card.style.transitionDelay = `${index * 0.1}s`;
   });
 });
