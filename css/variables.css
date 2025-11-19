@@ -1,0 +1,118 @@
+/* css/variables.css */
+:root {
+    /* Colors - Primary */
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --primary-light: #5dade2;
+    
+    /* Colors - Secondary */
+    --secondary-color: #2ecc71;
+    --secondary-dark: #27ae60;
+    --secondary-light: #58d68d;
+    
+    /* Colors - Accent */
+    --accent-color: #e74c3c;
+    --accent-dark: #c0392b;
+    --accent-light: #ec7063;
+    
+    /* Colors - Warning */
+    --warning-color: #f39c12;
+    --warning-dark: #e67e22;
+    --warning-light: #f7dc6f;
+    
+    /* Colors - Neutral */
+    --background-color: #f8f9fa;
+    --surface-color: #ffffff;
+    --text-color: #333333;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --border-color: #e0e0e0;
+    --divider-color: #f0f0f0;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 50%;
+    
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    
+    /* Typography */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    
+    /* Line Height */
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Z-index */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal: 1040;
+    --z-popover: 1050;
+    --z-tooltip: 1060;
+    
+    /* Layout */
+    --container-max-width: 1200px;
+    --bottom-bar-height: 70px;
+    --header-height: 80px;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --primary-color: #5dade2;
+    --primary-dark: #3498db;
+    --primary-light: #85c1e9;
+    
+    --secondary-color: #58d68d;
+    --secondary-dark: #2ecc71;
+    --secondary-light: #7dcea0;
+    
+    --accent-color: #ec7063;
+    --accent-dark: #e74c3c;
+    --accent-light: #f1948a;
+    
+    --warning-color: #f7dc6f;
+    --warning-dark: #f39c12;
+    --warning-light: #f9e79f;
+    
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --text-muted: #808080;
+    --border-color: #333333;
+    --divider-color: #2a2a2a;
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
