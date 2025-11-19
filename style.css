@@ -1,193 +1,162 @@
-/* style.css */
+/* style.css (Tambahan untuk Beranda) */
 
-/* Reset & base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* --- TATA LETAK UTAMA BERANDA --- */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
-
-body {
-  /* Menggunakan Lora untuk Teks Konten */
-  font-family: 'Lora', serif;
-  background-color: #f7f7f7;
-  color: #333;
-  transition: background-color 0.3s, color 0.3s;
-  padding-bottom: 50px;
-}
-
-/* --- HEADER & NAVIGATION --- */
-header {
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 15px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Bayangan halus */
-}
-
-.header-content {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1 {
-  /* Menggunakan Poppins untuk Judul Utama */
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #2a6496;
-}
-
-button#theme-toggle {
-  padding: 8px 15px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #fff;
-  transition: all 0.2s;
-}
-
-button#theme-toggle:hover {
-  background-color: #e5e5e5;
-}
-
-/* --- ARTIKEL & KONTEN --- */
-article {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 0 20px;
-  line-height: 1.7;
-}
-
-.article-title {
-    /* Menggunakan Poppins untuk Judul Artikel */
+.section-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    line-height: 1.2;
-}
-
-.meta-info {
-    color: #777;
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 15px;
-    font-family: sans-serif; /* Font Meta yang lebih sederhana */
-}
-
-h3 {
-    /* Menggunakan Poppins untuk Subjudul */
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.4rem;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    font-size: 2rem;
     color: #2a6496;
+    text-align: center;
+    margin: 40px 0 30px;
 }
 
-p {
+/* --- HERO SECTION --- */
+.hero-section {
+    background-color: #e3f2fd; /* Warna latar yang lembut */
+    padding: 60px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-content h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    line-height: 1.1;
     margin-bottom: 20px;
+    color: #0d47a1;
 }
 
-ul {
-    margin: 20px 0 20px 20px;
-    list-style-type: disc;
+.tagline {
+    font-size: 1.1rem;
+    color: #1565c0;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
-/* STYLE UNTUK GALERI GAMBAR */
-.image-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsif grid */
-  gap: 15px;
-  margin: 30px 0;
-  padding: 10px;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  background-color: #fff;
+.cta-button {
+    display: inline-block;
+    background-color: #2a6496;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    transition: background-color 0.3s;
 }
 
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+.cta-button:hover {
+    background-color: #1e4b6e;
 }
 
-.gallery-item img:hover {
-    transform: scale(1.02); /* Efek zoom saat dihover */
+/* --- ARTICLE GRID (Daftar Artikel) --- */
+.article-grid {
+    display: grid;
+    /* Membuat minimal 2 kolom di layar besar */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
-
-/* --- Dark mode --- */
-body.dark {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
+.article-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-body.dark header {
-    background-color: #2a2a2a;
-    border-bottom: 1px solid #333;
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+.article-card:hover {
+    transform: translateY(-5px); /* Efek angkat saat dihover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-body.dark h1 {
-    color: #8ab4f8;
+.article-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
-body.dark button#theme-toggle {
-    background-color: #333;
+.card-body {
+    padding: 20px;
+}
+
+.card-body .category {
+    font-size: 0.8rem;
+    color: #2a6496;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-body h3 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.card-body h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.read-more {
+    display: inline-block;
+    color: #2a6496;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 10px;
+    font-family: sans-serif;
+}
+
+/* --- DARK MODE UNTUK BERANDA --- */
+body.dark .hero-section {
+    background-color: #2e3b4d;
+}
+body.dark .hero-content h2 {
     color: #f0f0f0;
-    border-color: #444;
 }
-body.dark button#theme-toggle:hover {
-    background-color: #444;
+body.dark .tagline {
+    color: #90caf9;
 }
-
-body.dark .meta-info {
-    color: #bbb;
-    border-bottom: 1px solid #444;
+body.dark .cta-button {
+    background-color: #8ab4f8;
+    color: #1a1a1a;
 }
-
-body.dark h3 {
+body.dark .cta-button:hover {
+    background-color: #6a9bd6;
+}
+body.dark .section-title {
     color: #8ab4f8;
 }
-
-body.dark .image-gallery {
+body.dark .article-card {
     background-color: #2a2a2a;
-    border: 1px solid #333;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+}
+body.dark .article-card:hover {
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+}
+body.dark .category, body.dark .read-more {
+    color: #90caf9;
 }
 
-/* --- Responsive (Mobile) --- */
+/* --- Responsif Hero (Mobile) --- */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 1.5rem;
+    .hero-content h2 {
+        font-size: 2.2rem;
     }
-    .article-title {
-        font-size: 2rem;
-    }
-    header {
-        padding: 10px;
-    }
-    .header-content {
-        padding: 0 10px;
-    }
-    article {
-        margin: 20px auto;
-        padding: 0 10px;
-    }
-    button#theme-toggle {
-        padding: 6px 10px;
-        font-size: 0.9rem;
-    }
-    /* Di mobile, grid gambar akan menjadi 1 kolom saja */
-    .image-gallery {
+    .article-grid {
+        /* Di mobile, cukup 1 kolom saja */
         grid-template-columns: 1fr;
     }
 }
