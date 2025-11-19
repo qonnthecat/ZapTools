@@ -1,0 +1,35 @@
+[
+  {
+    "id": "article_1",
+    "title": "10 Teknologi yang Akan Mengubah Dunia dalam 5 Tahun Mendatang",
+    "author": "Tech Explorer",
+    "category": "teknologi",
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "content": "Dunia teknologi berkembang dengan kecepatan yang luar biasa. Dalam lima tahun ke depan, kita akan menyaksikan revolusi teknologi yang akan mengubah cara kita hidup, bekerja, dan berinteraksi...",
+    "excerpt": "Dari AI hingga quantum computing, temukan inovasi teknologi yang akan membentuk masa depan kita.",
+    "tags": ["teknologi", "AI", "inovasi", "masa depan"],
+    "date": "2025-11-20"
+  },
+  {
+    "id": "article_2",
+    "title": "7 Fakta Sains Menakjubkan yang Jarang Diketahui Orang",
+    "author": "Science Enthusiast",
+    "category": "sains",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "content": "Jelajahi keajaiban sains yang akan membuat Anda terkagum-kagum dan melihat dunia dengan cara baru...",
+    "excerpt": "Temukan fakta-fakta sains menakjubkan yang akan mengubah cara pandang Anda tentang dunia.",
+    "tags": ["sains", "fakta", "pengetahuan"],
+    "date": "2025-11-18"
+  },
+  {
+    "id": "article_3",
+    "title": "5 Kebiasaan Pagi Orang Sukses yang Bisa Anda Terapkan Hari Ini",
+    "author": "Life Coach",
+    "category": "tips",
+    "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "content": "Mulai hari dengan benar dapat mengubah produktivitas dan kualitas hidup Anda secara signifikan...",
+    "excerpt": "Pelajari kebiasaan pagi yang dapat meningkatkan produktivitas dan kesuksesan Anda.",
+    "tags": ["produktivitas", "tips", "kesuksesan"],
+    "date": "2025-11-15"
+  }
+]
