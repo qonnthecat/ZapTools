@@ -3,70 +3,431 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuniaBercerita - Beranda</title>
+  <title>DuniaBercerita - Artikel Modern</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2a6496;
+      --secondary-color: #8ab4f8;
+      --bg-color: #f7f7f7;
+      --text-color: #333;
+      --header-bg: #fff;
+      --border-color: #eee;
+      --meta-color: #777;
+    }
+
+    .dark {
+      --primary-color: #8ab4f8;
+      --secondary-color: #2a6496;
+      --bg-color: #1a1a1a;
+      --text-color: #f0f0f0;
+      --header-bg: #2a2a2a;
+      --border-color: #333;
+      --meta-color: #bbb;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+      padding-bottom: 50px;
+    }
+
+    /* --- HEADER & NAVIGATION --- */
+    header {
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    button {
+      padding: 8px 15px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background-color: var(--header-bg);
+      transition: all 0.2s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      background-color: #e5e5e5;
+    }
+
+    .dark button {
+      background-color: #333;
+      color: #f0f0f0;
+      border-color: #444;
+    }
+
+    .dark button:hover {
+      background-color: #444;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* --- ARTIKEL & KONTEN --- */
+    main {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    article {
+      line-height: 1.7;
+    }
+
+    .article-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+      line-height: 1.2;
+    }
+
+    .meta-info {
+      color: var(--meta-color);
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      font-family: sans-serif;
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    
+    p {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      margin: 20px 0 20px 20px;
+      list-style-type: disc;
+    }
+
+    /* 2. STYLE UNTUK GALERI GAMBAR */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 30px 0;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--header-bg);
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.02);
+    }
+
+    .image-loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .share-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* --- Responsive (Mobile) --- */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      .article-title {
+        font-size: 2rem;
+      }
+      header {
+        padding: 10px;
+      }
+      .header-content {
+        padding: 0 10px;
+      }
+      main {
+        margin: 20px auto;
+        padding: 0 10px;
+      }
+      button {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="header-content">
-      <a href="index.html" class="logo-link"> <h1>DuniaBercerita</h1>
-      </a>
-      <button id="theme-toggle">🌙 Mode Gelap</button>
+      <h1>DuniaBercerita</h1>
+      <div class="action-buttons">
+        <button id="theme-toggle">🌙 Mode Gelap</button>
+        <button id="share-btn">📤 Bagikan</button>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero-section">
-      <div class="hero-content">
-        <p class="tagline">Tempatmu Menemukan Inspirasi Baru</p>
-        <h2>Jelajahi Dunia dengan Ribuan Kisah Menarik</h2>
-        <a href="artikel-contoh.html" class="cta-button">Baca Artikel Unggulan</a>
+    <article>
+      <h1 class="article-title">Judul Artikel yang Penuh Inspirasi</h1>
+      <p class="meta-info">Dipublikasikan oleh <span class="author">Admin</span> | <time datetime="2025-11-20">20 November 2025</time></p>
+      
+      <p>
+        Selamat datang! Artikel ini adalah demonstrasi bagaimana menggabungkan tipografi modern dari Google Fonts dan galeri gambar responsif untuk meningkatkan daya tarik visual.
+      </p>
+      
+      <h2>Tentang Font Poppins dan Lora</h2>
+      <p>
+        Kami menggunakan <strong>Poppins</strong> (font Sans-Serif yang geometris) untuk semua judul (<code>h1</code>, <code>h2</code>, <code>h3</code>) karena ia kuat dan modern. Sementara itu, <strong>Lora</strong> (font Serif yang elegan) digunakan untuk teks paragraf, memberikan kenyamanan membaca yang klasik.
+      </p>
+
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <div class="image-loading">Memuat gambar...</div>
+          <img src="https://via.placeholder.com/400x300/2a6496/FFFFFF?text=Gambar+1" 
+               alt="Ilustrasi Konsep 1 - Desain tipografi modern dengan kombinasi font Poppins dan Lora" 
+               loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <div class="image-loading">Memuat gambar...</div>
+          <img src="https://via.placeholder.com/400x300/8ab4f8/1a1a1a?text=Gambar+2" 
+               alt="Ilustrasi Konsep 2 - Contoh tata letak grid responsif untuk galeri gambar" 
+               loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <div class="image-loading">Memuat gambar...</div>
+          <img src="https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=Gambar+3" 
+               alt="Ilustrasi Konsep 3 - Implementasi dark mode yang kompatibel dengan semua elemen" 
+               loading="lazy">
+        </div>
       </div>
-    </section>
+      
+      <h2>Responsivitas Grid Gambar</h2>
+      <p>
+        Galeri di atas menggunakan <strong>CSS Grid</strong> dengan fungsi <code>repeat(auto-fit, minmax(250px, 1fr))</code>. Ini berarti, <em>browser</em> akan mencoba membuat kolom gambar sebanyak mungkin, asalkan setiap kolom memiliki lebar minimum 250px. Jika layarnya terlalu sempit (misalnya di HP), semua gambar akan menyusun diri menjadi satu kolom.
+      </p>
 
-    <section class="articles-section">
-      <div class="container">
-        <h2 class="section-title">✨ Artikel Terbaru</h2>
-        
-        <div class="article-grid">
-          <div class="article-card">
-            <img src="https://via.placeholder.com/600x400/2a6496/FFFFFF?text=Coding+Tips" alt="Tips Coding Cepat">
-            <div class="card-body">
-              <span class="category">TEKNOLOGI</span>
-              <h3><a href="artikel-contoh.html">10 Tips Cepat Menulis Kode yang Rapi dan Efisien</a></h3>
-              <p>Pelajari trik-trik penting untuk meningkatkan kecepatan dan kualitas kode Anda...</p>
-              <a href="artikel-contoh.html" class="read-more">Baca Selengkapnya</a>
-            </div>
-          </div>
+      <ul>
+        <li><strong>Tipografi Lebih Baik:</strong> Membedakan judul dan konten dengan font yang berbeda.</li>
+        <li><strong>Tata Letak Grid:</strong> Galeri gambar diatur dengan rapi.</li>
+        <li><strong>Dark Mode Kompatibel:</strong> Semua elemen baru disesuaikan warnanya di mode gelap.</li>
+      </ul>
 
-          <div class="article-card">
-            <img src="https://via.placeholder.com/600x400/4CAF50/FFFFFF?text=Gaya+Hidup" alt="Gaya Hidup Sehat">
-            <div class="card-body">
-              <span class="category">GAYA HIDUP</span>
-              <h3><a href="artikel-contoh.html">5 Kebiasaan Pagi yang Mengubah Hidup Anda</a></h3>
-              <p>Mulai hari Anda dengan energi penuh dan pikiran yang jernih. Simak rahasianya...</p>
-              <a href="artikel-contoh.html" class="read-more">Baca Selengkapnya</a>
-            </div>
-          </div>
+      <p>
+        Template ini sekarang lebih kuat dan visual. Selanjutnya, Anda bisa menambahkan lebih banyak konten ke dalam <code>&lt;article&gt;</code>!
+      </p>
 
-          <div class="article-card">
-            <img src="https://via.placeholder.com/600x400/8ab4f8/1a1a1a?text=Inspirasi" alt="Inspirasi Karir">
-            <div class="card-body">
-              <span class="category">KARIR</span>
-              <h3><a href="artikel-contoh.html">Menemukan Tujuan Karir di Tengah Ketidakpastian</a></h3>
-              <p>Langkah-langkah praktis untuk merancang jalur karir yang Anda impikan...</p>
-              <a href="artikel-contoh.html" class="read-more">Baca Selengkapnya</a>
-            </div>
-          </div>
-          </div>
+      <div class="share-section">
+        <h3>Bagikan Artikel Ini</h3>
+        <div class="share-buttons">
+          <button id="share-twitter">Twitter</button>
+          <button id="share-facebook">Facebook</button>
+          <button id="share-linkedin">LinkedIn</button>
+        </div>
       </div>
-    </section>
-
+    </article>
   </main>
 
-  <script src="script.js"></script>
+  <div class="image-modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <img id="modalImage" src="" alt="">
+  </div>
+
+  <script>
+    // Kode JavaScript Dark Mode
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Cek localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark');
+      toggleBtn.textContent = '☀️ Mode Terang';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if(body.classList.contains('dark')){
+        toggleBtn.textContent = '☀️ Mode Terang';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        toggleBtn.textContent = '🌙 Mode Gelap';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Fungsi untuk modal gambar
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+
+    galleryItems.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Fungsi untuk menghilangkan indikator loading setelah gambar dimuat
+    galleryItems.forEach(img => {
+      img.addEventListener('load', () => {
+        const loadingIndicator = img.previousElementSibling;
+        if (loadingIndicator && loadingIndicator.classList.contains('image-loading')) {
+          loadingIndicator.style.display = 'none';
+        }
+      });
+    });
+
+    // Fungsi untuk berbagi
+    const shareBtn = document.getElementById('share-btn');
+    const shareTwitter = document.getElementById('share-twitter');
+    const shareFacebook = document.getElementById('share-facebook');
+    const shareLinkedin = document.getElementById('share-linkedin');
+
+    const shareUrl = encodeURIComponent(window.location.href);
+    const shareTitle = encodeURIComponent(document.title);
+
+    shareBtn.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          url: window.location.href
+        });
+      } else {
+        alert('Fungsi berbagi tidak didukung di browser ini. Gunakan tombol berbagi spesifik platform.');
+      }
+    });
+
+    shareTwitter.addEventListener('click', () => {
+      window.open(`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`, '_blank');
+    });
+
+    shareFacebook.addEventListener('click', () => {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank');
+    });
+
+    shareLinkedin.addEventListener('click', () => {
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank');
+    });
+  </script>
 </body>
 </html>
