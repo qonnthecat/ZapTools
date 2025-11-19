@@ -3,80 +3,255 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuniaBercerita - Artikel</title>
+  <title>DuniaBercerita - Artikel Modern</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
   <style>
     /* Reset & base */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
     }
 
     body {
-      background-color: #fff;
-      color: #222;
+      /* Menggunakan Lora untuk Teks Konten */
+      font-family: 'Lora', serif;
+      background-color: #f7f7f7;
+      color: #333;
       transition: background-color 0.3s, color 0.3s;
-      padding: 20px;
+      padding-bottom: 50px;
     }
 
+    /* --- HEADER & NAVIGATION --- */
     header {
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Bayangan halus */
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 2rem;
+      /* Menggunakan Poppins untuk Judul Utama */
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2a6496;
     }
 
     button#theme-toggle {
-      padding: 8px 12px;
+      padding: 8px 15px;
       cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background-color: #fff;
+      transition: all 0.2s;
     }
 
+    button#theme-toggle:hover {
+      background-color: #e5e5e5;
+    }
+
+    /* --- ARTIKEL & KONTEN --- */
     article {
       max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.6;
+      margin: 30px auto;
+      padding: 0 20px;
+      line-height: 1.7;
     }
 
-    /* Dark mode */
+    .article-title {
+        /* Menggunakan Poppins untuk Judul Artikel */
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        line-height: 1.2;
+    }
+
+    .meta-info {
+        color: #777;
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 15px;
+        font-family: sans-serif; /* Font Meta yang lebih sederhana */
+    }
+
+    h3 {
+        /* Menggunakan Poppins untuk Subjudul */
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.4rem;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #2a6496;
+    }
+    
+    p {
+        margin-bottom: 20px;
+    }
+
+    ul {
+        margin: 20px 0 20px 20px;
+        list-style-type: disc;
+    }
+
+    /* 2. STYLE UNTUK GALERI GAMBAR */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsif grid */
+      gap: 15px;
+      margin: 30px 0;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+        transform: scale(1.02); /* Efek zoom saat dihover */
+    }
+
+
+    /* --- Dark mode --- */
     body.dark {
-      background-color: #121212;
-      color: #e0e0e0;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
     }
 
-    /* Responsive */
+    body.dark header {
+        background-color: #2a2a2a;
+        border-bottom: 1px solid #333;
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark h1 {
+        color: #8ab4f8;
+    }
+
+    body.dark button#theme-toggle {
+        background-color: #333;
+        color: #f0f0f0;
+        border-color: #444;
+    }
+    body.dark button#theme-toggle:hover {
+        background-color: #444;
+    }
+    
+    body.dark .meta-info {
+        color: #bbb;
+        border-bottom: 1px solid #444;
+    }
+
+    body.dark h3 {
+        color: #8ab4f8;
+    }
+
+    body.dark .image-gallery {
+        background-color: #2a2a2a;
+        border: 1px solid #333;
+    }
+
+    /* --- Responsive (Mobile) --- */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 1.5rem;
-      }
-      body {
-        padding: 10px;
-      }
+        h1 {
+            font-size: 1.5rem;
+        }
+        .article-title {
+            font-size: 2rem;
+        }
+        header {
+            padding: 10px;
+        }
+        .header-content {
+            padding: 0 10px;
+        }
+        article {
+            margin: 20px auto;
+            padding: 0 10px;
+        }
+        button#theme-toggle {
+            padding: 6px 10px;
+            font-size: 0.9rem;
+        }
+        /* Di mobile, grid gambar akan menjadi 1 kolom saja */
+        .image-gallery {
+            grid-template-columns: 1fr;
+        }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>DuniaBercerita</h1>
-    <button id="theme-toggle">🌙 Mode Gelap</button>
+    <div class="header-content">
+      <h1>DuniaBercerita</h1>
+      <button id="theme-toggle">🌙 Mode Gelap</button>
+    </div>
   </header>
 
   <article>
-    <h2>Judul Artikel Contoh</h2>
+    <h2 class="article-title">Judul Artikel yang Penuh Inspirasi</h2>
+    <p class="meta-info">Dipublikasikan oleh Admin | 20 November 2025</p>
+    
     <p>
-      Ini adalah contoh artikel. Kontennya bisa lo ganti sesuai niche website lo. 
-      Artikel ini sudah responsif dan bisa dibaca nyaman di HP maupun desktop.
+      Selamat datang! Artikel ini adalah demonstrasi bagaimana menggabungkan tipografi modern dari Google Fonts dan galeri gambar responsif untuk meningkatkan daya tarik visual.
     </p>
+    
+    <h3>Tentang Font Poppins dan Lora</h3>
     <p>
-      Tambahin gambar, daftar, atau highlight biar lebih menarik. Lo bisa expand template ini sesuai kebutuhan.
+      Kami menggunakan **Poppins** (font Sans-Serif yang geometris) untuk semua judul (`h1`, `h2`, `h3`) karena ia kuat dan modern. Sementara itu, **Lora** (font Serif yang elegan) digunakan untuk teks paragraf, memberikan kenyamanan membaca yang klasik.
+    </p>
+
+    <div class="image-gallery">
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300/2a6496/FFFFFF?text=Gambar+1" alt="Ilustrasi Konsep 1">
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300/8ab4f8/1a1a1a?text=Gambar+2" alt="Ilustrasi Konsep 2">
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=Gambar+3" alt="Ilustrasi Konsep 3">
+        </div>
+    </div>
+    
+    <h3>Responsivitas Grid Gambar</h3>
+    <p>
+      Galeri di atas menggunakan **CSS Grid** dengan fungsi `repeat(auto-fit, minmax(250px, 1fr))`. Ini berarti, *browser* akan mencoba membuat kolom gambar sebanyak mungkin, asalkan setiap kolom memiliki lebar minimum 250px. Jika layarnya terlalu sempit (misalnya di HP), semua gambar akan menyusun diri menjadi satu kolom.
+    </p>
+
+    <ul>
+      <li>**Tipografi Lebih Baik:** Membedakan judul dan konten dengan font yang berbeda.</li>
+      <li>**Tata Letak Grid:** Galeri gambar diatur dengan rapi.</li>
+      <li>**Dark Mode Kompatibel:** Semua elemen baru disesuaikan warnanya di mode gelap.</li>
+    </ul>
+
+    <p>
+        Template ini sekarang lebih kuat dan visual. Selanjutnya, Anda bisa menambahkan lebih banyak konten ke dalam `<article>`!
     </p>
   </article>
 
   <script>
+    // Kode JavaScript Dark Mode Anda tetap sama dan berfungsi dengan baik.
     const toggleBtn = document.getElementById('theme-toggle');
     const body = document.body;
 
