@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuniaBercerita - Artikel</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #222;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    button#theme-toggle {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Dark mode */
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DuniaBercerita</h1>
+    <button id="theme-toggle">🌙 Mode Gelap</button>
+  </header>
+
+  <article>
+    <h2>Judul Artikel Contoh</h2>
+    <p>
+      Ini adalah contoh artikel. Kontennya bisa lo ganti sesuai niche website lo. 
+      Artikel ini sudah responsif dan bisa dibaca nyaman di HP maupun desktop.
+    </p>
+    <p>
+      Tambahin gambar, daftar, atau highlight biar lebih menarik. Lo bisa expand template ini sesuai kebutuhan.
+    </p>
+  </article>
+
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Cek localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark');
+      toggleBtn.textContent = '☀️ Mode Terang';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if(body.classList.contains('dark')){
+        toggleBtn.textContent = '☀️ Mode Terang';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        toggleBtn.textContent = '🌙 Mode Gelap';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
+</body>
+</html>
