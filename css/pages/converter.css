@@ -1,0 +1,30 @@
+/* css/pages/converter.css */
+.converter-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.converter-section h2 {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+}
+
+/* Image Preview */
+.image-preview {
+    margin: var(--space-lg) 0;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Format Selector */
+.format-selector {
+    margin-bottom: var(--space-lg);
+}
