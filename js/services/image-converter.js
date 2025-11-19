@@ -1,4 +1,6 @@
 // js/services/image-converter.js
+import translationService from './translation-service.js';
+
 export class ImageConverter {
     constructor() {
         this.currentImageFile = null;
@@ -83,14 +85,14 @@ export class ImageConverter {
                 };
                 reader.readAsDataURL(file);
             } else {
-                alert('Silakan pilih file gambar yang valid.');
+                this.showAlert(translationService.getAlert('invalidImage'));
             }
         }
     }
 
     convertImage() {
         if (!this.currentImageFile) {
-            alert('Silakan pilih gambar terlebih dahulu.');
+            this.showAlert(translationService.getAlert('pleaseSelectImage'));
             return;
         }
 
@@ -118,10 +120,10 @@ export class ImageConverter {
                     
                     if (imageResult) {
                         imageResult.innerHTML = `
-                            <p>Gambar berhasil dikonversi ke format ${format.toUpperCase()}!</p>
-                            <p>Ukuran asli: ${this.formatFileSize(this.currentImageFile.size)}</p>
-                            <p>Ukuran baru: ${this.formatFileSize(blob.size)}</p>
-                            <p>Download: <a href="${url}" download="${fileName}.${format}" class="download-link">${fileName}.${format}</a></p>
+                            <p>${translationService.getImageConverter('imageConverted')} ${format.toUpperCase()}!</p>
+                            <p>${translationService.getImageConverter('originalSize')} ${this.formatFileSize(this.currentImageFile.size)}</p>
+                            <p>${translationService.getImageConverter('newSize')} ${this.formatFileSize(blob.size)}</p>
+                            <p>${translationService.getImageConverter('download')} <a href="${url}" download="${fileName}.${format}" class="download-link">${fileName}.${format}</a></p>
                         `;
                     }
                 }, `image/${format}`, quality);
@@ -137,5 +139,9 @@ export class ImageConverter {
         const sizes = ['Bytes', 'KB', 'MB', 'GB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    showAlert(message) {
+        alert(message);
     }
 }
