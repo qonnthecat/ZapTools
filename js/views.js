@@ -17,6 +17,9 @@ export class ViewManager {
         // Initialize navigation
         this.initializeNavigation();
 
+        // Initialize logo click handler
+        this.initializeLogoHandler();
+
         // Initialize current section
         this.initializeCurrentSection();
     }
@@ -87,6 +90,34 @@ export class ViewManager {
                 window.dispatchEvent(new CustomEvent('navigate', { detail: route }));
             });
         });
+    }
+
+    initializeLogoHandler() {
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            // Make logo clickable with cursor pointer
+            logo.style.cursor = 'pointer';
+            
+            logo.addEventListener('click', () => {
+                console.log('Logo clicked, navigating to home');
+                window.dispatchEvent(new CustomEvent('navigate', { detail: 'home' }));
+                
+                // Close mobile menu if open
+                const navMenu = document.querySelector('.nav-menu');
+                if (navMenu && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+
+            // Add hover effect
+            logo.addEventListener('mouseenter', () => {
+                logo.style.opacity = '0.8';
+            });
+
+            logo.addEventListener('mouseleave', () => {
+                logo.style.opacity = '1';
+            });
+        }
     }
 
     initializeCurrentSection() {
