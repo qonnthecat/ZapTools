@@ -1,6 +1,7 @@
 // js/app.js
 import { Router } from './router.js';
 import { ViewManager, Templates } from './views.js';
+import translationService from './services/translation-service.js';
 
 class ZapToolsApp {
     constructor() {
@@ -18,17 +19,36 @@ class ZapToolsApp {
         this.init();
     }
 
-    init() {
-        // Render initial template
+    async init() {
+        // Initialize translation service first
+        await translationService.init();
+        
         this.viewManager.render(Templates.main());
 
-        // Set up navigation event listener
         window.addEventListener('navigate', (e) => {
             this.router.goTo(e.detail);
         });
 
-        // Initialize services for current route
+        this.initializeLanguageSelector();
         this.initializeServices();
+    }
+
+    initializeLanguageSelector() {
+        const languageSelector = document.getElementById('language-selector');
+        if (languageSelector) {
+            // Set current language
+            const currentLang = translationService.getCurrentLanguage();
+            languageSelector.value = currentLang;
+
+            // Add change event listener
+            languageSelector.addEventListener('change', async (e) => {
+                const newLang = e.target.value;
+                await this.viewManager.setLanguage(newLang);
+                
+                // Re-initialize services to update their language
+                this.initializeServices();
+            });
+        }
     }
 
     async initializeServices() {
@@ -97,6 +117,9 @@ class ZapToolsApp {
     async showSettings() {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('settings');
+        
+        // Re-initialize language selector for settings page
+        this.initializeLanguageSelector();
     }
 }
 
