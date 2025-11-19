@@ -16,6 +16,12 @@ export const NavigationTemplate = () => {
                     </a>
                 </li>
                 <li class="bottom-nav-item">
+                    <a href="#history" class="bottom-nav-link">
+                        <span class="bottom-nav-icon">🕒</span>
+                        <span class="bottom-nav-text" data-i18n="navigation.history">History</span>
+                    </a>
+                </li>
+                <li class="bottom-nav-item">
                     <a href="#settings" class="bottom-nav-link">
                         <span class="bottom-nav-icon">⚙️</span>
                         <span class="bottom-nav-text" data-i18n="navigation.settings">Settings</span>
