@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuniaBercerita - Artikel Modern</title>
+  <title>DuniaBercerita - Beranda</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,6 +25,7 @@
       --header-bg: #ffffff;
       --border-color: #e8f5e9; /* Hijau sangat muda untuk border */
       --meta-color: #558b2f; /* Hijau zaitun untuk meta info */
+      --card-bg: #ffffff;
     }
 
     .dark {
@@ -36,6 +37,7 @@
       --header-bg: #263228; /* Hijau gelap untuk header */
       --border-color: #37474f; /* Abu-abu kehijauan untuk border */
       --meta-color: #a5d6a7; /* Hijau muda untuk meta info */
+      --card-bg: #263228;
     }
 
     body {
@@ -59,7 +61,7 @@
     }
 
     .header-content {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -168,80 +170,164 @@
       cursor: pointer;
     }
 
-    /* --- ARTIKEL & KONTEN --- */
-    main {
+    /* --- HERO SECTION --- */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .hero-content {
       max-width: 800px;
-      margin: 30px auto;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: white;
+      color: var(--primary-color);
+      text-decoration: none;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* --- MAIN CONTENT --- */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 0 20px;
     }
 
-    article {
-      line-height: 1.7;
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent-color);
+      margin: 10px auto;
+    }
+
+    /* --- ARTIKEL POPULER --- */
+    .articles-section {
+      margin-bottom: 60px;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .article-card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .article-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .article-content {
+      padding: 20px;
+    }
+
+    .article-category {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      font-family: 'Poppins', sans-serif;
     }
 
     .article-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-      line-height: 1.2;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
       color: var(--primary-color);
     }
 
-    .meta-info {
+    .article-excerpt {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
       color: var(--meta-color);
-      font-size: 0.9rem;
-      margin-bottom: 30px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 15px;
-      font-family: sans-serif;
     }
 
-    h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.8rem;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      color: var(--primary-color);
+    /* --- GALERI --- */
+    .gallery-section {
+      margin-bottom: 60px;
     }
 
-    h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.4rem;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      color: var(--primary-color);
-    }
-    
-    p {
-      margin-bottom: 20px;
-    }
-
-    ul {
-      margin: 20px 0 20px 20px;
-      list-style-type: disc;
-    }
-
-    /* 2. STYLE UNTUK GALERI GAMBAR */
     .image-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 15px;
       margin: 30px 0;
-      padding: 10px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      background-color: var(--header-bg);
     }
 
     .gallery-item {
       position: relative;
       overflow: hidden;
       border-radius: 8px;
+      aspect-ratio: 4/3;
     }
 
     .gallery-item img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       border-radius: 4px;
       object-fit: cover;
@@ -249,7 +335,7 @@
     }
 
     .gallery-item img:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
     }
 
     .image-loading {
@@ -294,16 +380,153 @@
       cursor: pointer;
     }
 
-    .share-section {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border-color);
+    /* --- ABOUT SECTION --- */
+    .about-section {
+      background-color: var(--card-bg);
+      padding: 50px;
+      border-radius: 10px;
+      margin-bottom: 60px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
 
-    .share-buttons {
+    .about-content {
       display: flex;
-      gap: 10px;
-      margin-top: 10px;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-image {
+      flex: 1;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* --- NEWSLETTER --- */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 50px 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      margin-top: 20px;
+      max-width: 500px;
+      margin: 20px auto 0;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 30px 0 0 30px;
+      font-family: 'Lora', serif;
+    }
+
+    .newsletter-button {
+      padding: 12px 25px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s;
+    }
+
+    .newsletter-button:hover {
+      background-color: #66bb6a;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background-color: var(--header-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-column h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--accent-color);
+      color: white;
+      border-radius: 50%;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .social-links a:hover {
+      background-color: var(--primary-color);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--meta-color);
+      font-size: 0.9rem;
     }
 
     /* --- Responsive (Mobile) --- */
@@ -311,7 +534,7 @@
       h1 {
         font-size: 1.5rem;
       }
-      .article-title {
+      .hero h2 {
         font-size: 2rem;
       }
       header {
@@ -337,7 +560,6 @@
         display: block;
       }
       main {
-        margin: 20px auto;
         padding: 0 10px;
       }
       button {
@@ -349,6 +571,19 @@
       }
       .action-buttons {
         gap: 5px;
+      }
+      .about-content {
+        flex-direction: column;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
+      .newsletter-input {
+        border-radius: 30px;
+        margin-bottom: 10px;
+      }
+      .newsletter-button {
+        border-radius: 30px;
       }
     }
   </style>
@@ -375,72 +610,160 @@
         <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
           <i class="fas fa-moon"></i>
         </button>
-        <button id="share-btn"><i class="fas fa-share-alt"></i> Bagikan</button>
+        <button id="search-btn"><i class="fas fa-search"></i> Cari</button>
       </div>
     </div>
   </header>
 
-  <main>
-    <article>
-      <h1 class="article-title">Keindahan Alam dan Tipografi Modern</h1>
-      <p class="meta-info">Dipublikasikan oleh <span class="author">Admin</span> | <time datetime="2025-11-20">20 November 2025</time></p>
-      
-      <p>
-        Selamat datang! Artikel ini adalah demonstrasi bagaimana menggabungkan tipografi modern dari Google Fonts dan galeri gambar responsif untuk meningkatkan daya tarik visual, dengan tema warna yang terinspirasi dari keindahan alam.
-      </p>
-      
-      <h2>Tentang Font Poppins dan Lora</h2>
-      <p>
-        Kami menggunakan <strong>Poppins</strong> (font Sans-Serif yang geometris) untuk semua judul (<code>h1</code>, <code>h2</code>, <code>h3</code>) karena ia kuat dan modern. Sementara itu, <strong>Lora</strong> (font Serif yang elegan) digunakan untuk teks paragraf, memberikan kenyamanan membaca yang klasik.
-      </p>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Selamat Datang di DuniaBercerita</h2>
+      <p>Temukan cerita menarik, inspirasi, dan pengetahuan dari berbagai sudut pandang</p>
+      <a href="#" class="cta-button">Jelajahi Artikel</a>
+    </div>
+  </section>
 
+  <main>
+    <section class="articles-section">
+      <h2 class="section-title">Artikel Terbaru</h2>
+      <div class="articles-grid">
+        <div class="article-card">
+          <img src="https://via.placeholder.com/400x250/2e7d32/FFFFFF?text=Hutan+Hijau" alt="Keindahan Hutan Tropis" class="article-image">
+          <div class="article-content">
+            <span class="article-category">Alam</span>
+            <h3 class="article-title">Menelusuri Keindahan Hutan Tropis Indonesia</h3>
+            <p class="article-excerpt">Jelajahi kekayaan flora dan fauna di hutan hujan tropis Indonesia yang menjadi paru-paru dunia...</p>
+            <div class="article-meta">
+              <span>20 Nov 2025</span>
+              <span>5 min baca</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="article-card">
+          <img src="https://via.placeholder.com/400x250/4caf50/FFFFFF?text=Budaya" alt="Warisan Budaya" class="article-image">
+          <div class="article-content">
+            <span class="article-category">Budaya</span>
+            <h3 class="article-title">Melestarikan Warisan Budaya Nusantara</h3>
+            <p class="article-excerpt">Bagaimana generasi muda dapat berperan aktif dalam melestarikan kekayaan budaya Indonesia...</p>
+            <div class="article-meta">
+              <span>18 Nov 2025</span>
+              <span>7 min baca</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="article-card">
+          <img src="https://via.placeholder.com/400x250/81c784/1a1a1a?text=Teknologi" alt="Teknologi Hijau" class="article-image">
+          <div class="article-content">
+            <span class="article-category">Teknologi</span>
+            <h3 class="article-title">Inovasi Teknologi untuk Lingkungan Berkelanjutan</h3>
+            <p class="article-excerpt">Teknologi terbaru yang membantu menciptakan masa depan yang lebih hijau dan berkelanjutan...</p>
+            <div class="article-meta">
+              <span>15 Nov 2025</span>
+              <span>6 min baca</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <h2 class="section-title">Galeri DuniaBercerita</h2>
       <div class="image-gallery">
         <div class="gallery-item">
           <div class="image-loading">Memuat gambar...</div>
-          <img src="https://via.placeholder.com/400x300/2e7d32/FFFFFF?text=Hutan+Hijau" 
-               alt="Ilustrasi Konsep 1 - Hutan hijau yang rimbun dengan pepohonan tinggi" 
+          <img src="https://via.placeholder.com/400x300/2e7d32/FFFFFF?text=Pemandangan+Alam" 
+               alt="Pemandangan alam hijau dengan perbukitan" 
                loading="lazy">
         </div>
         <div class="gallery-item">
           <div class="image-loading">Memuat gambar...</div>
-          <img src="https://via.placeholder.com/400x300/4caf50/FFFFFF?text=Pegunungan" 
-               alt="Ilustrasi Konsep 2 - Pegunungan hijau dengan pemandangan yang menakjubkan" 
+          <img src="https://via.placeholder.com/400x300/4caf50/FFFFFF?text=Flora+Fauna" 
+               alt="Keanekaragaman flora dan fauna Indonesia" 
                loading="lazy">
         </div>
         <div class="gallery-item">
           <div class="image-loading">Memuat gambar...</div>
-          <img src="https://via.placeholder.com/400x300/81c784/1a1a1a?text=Danau+Alam" 
-               alt="Ilustrasi Konsep 3 - Danau alam yang jernih dikelilingi pepohonan hijau" 
+          <img src="https://via.placeholder.com/400x300/81c784/1a1a1a?text=Budaya+Lokal" 
+               alt="Kearifan lokal dan tradisi masyarakat" 
                loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <div class="image-loading">Memuat gambar...</div>
+          <img src="https://via.placeholder.com/400x300/2e7d32/FFFFFF?text=Petualangan" 
+               alt="Petualangan menjelajahi keindahan alam" 
+               loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-content">
+        <div class="about-text">
+          <h2 class="section-title">Tentang DuniaBercerita</h2>
+          <p>DuniaBercerita adalah platform yang menghadirkan berbagai kisah inspiratif, pengetahuan, dan informasi menarik dari berbagai aspek kehidupan. Kami percaya bahwa setiap cerita memiliki kekuatan untuk menginspirasi, mendidik, dan menghubungkan orang-orang.</p>
+          <p>Dengan fokus pada tema alam, budaya, teknologi, dan kehidupan, kami berkomitmen untuk menyajikan konten berkualitas yang dapat memperkaya wawasan dan perspektif pembaca.</p>
+          <a href="#" class="cta-button" style="margin-top: 20px;">Pelajari Lebih Lanjut</a>
+        </div>
+        <div class="about-image">
+          <img src="https://via.placeholder.com/500x350/4caf50/FFFFFF?text=Tentang+Kami" alt="Tentang DuniaBercerita">
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter-section">
+      <div class="newsletter-content">
+        <h2>Berlangganan Newsletter</h2>
+        <p>Dapatkan update artikel terbaru dan konten eksklusif langsung di inbox Anda</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Alamat email Anda" class="newsletter-input" required>
+          <button type="submit" class="newsletter-button">Berlangganan</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>DuniaBercerita</h3>
+        <p>Platform berbagi cerita dan pengetahuan untuk menginspirasi kehidupan yang lebih baik.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
       
-      <h2>Responsivitas Grid Gambar</h2>
-      <p>
-        Galeri di atas menggunakan <strong>CSS Grid</strong> dengan fungsi <code>repeat(auto-fit, minmax(250px, 1fr))</code>. Ini berarti, <em>browser</em> akan mencoba membuat kolom gambar sebanyak mungkin, asalkan setiap kolom memiliki lebar minimum 250px. Jika layarnya terlalu sempit (misalnya di HP), semua gambar akan menyusun diri menjadi satu kolom.
-      </p>
-
-      <ul>
-        <li><strong>Tipografi Lebih Baik:</strong> Membedakan judul dan konten dengan font yang berbeda.</li>
-        <li><strong>Tata Letak Grid:</strong> Galeri gambar diatur dengan rapi.</li>
-        <li><strong>Dark Mode Kompatibel:</strong> Semua elemen baru disesuaikan warnanya di mode gelap.</li>
-        <li><strong>Tema Alam:</strong> Warna hijau yang digunakan mencerminkan keindahan dunia dan alam.</li>
-      </ul>
-
-      <p>
-        Template ini sekarang lebih kuat dan visual dengan tema alam yang menenangkan. Selanjutnya, Anda bisa menambahkan lebih banyak konten ke dalam <code>&lt;article&gt;</code>!
-      </p>
-
-      <div class="share-section">
-        <h3>Bagikan Artikel Ini</h3>
-        <div class="share-buttons">
-          <button id="share-twitter"><i class="fab fa-twitter"></i> Twitter</button>
-          <button id="share-facebook"><i class="fab fa-facebook"></i> Facebook</button>
-          <button id="share-linkedin"><i class="fab fa-linkedin"></i> LinkedIn</button>
-        </div>
+      <div class="footer-column">
+        <h3>Kategori</h3>
+        <ul class="footer-links">
+          <li><a href="#">Alam & Lingkungan</a></li>
+          <li><a href="#">Budaya & Tradisi</a></li>
+          <li><a href="#">Teknologi & Inovasi</a></li>
+          <li><a href="#">Kesehatan & Gaya Hidup</a></li>
+          <li><a href="#">Inspirasi & Motivasi</a></li>
+        </ul>
       </div>
-    </article>
-  </main>
+      
+      <div class="footer-column">
+        <h3>Tautan Cepat</h3>
+        <ul class="footer-links">
+          <li><a href="#">Beranda</a></li>
+          <li><a href="#">Tentang Kami</a></li>
+          <li><a href="#">Kontak</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 DuniaBercerita. Semua hak dilindungi.</p>
+    </div>
+  </footer>
 
   <div class="image-modal" id="imageModal">
     <span class="close-modal">&times;</span>
@@ -524,7 +847,8 @@
     });
 
     // Fungsi untuk menghilangkan indikator loading setelah gambar dimuat
-    galleryItems.forEach(img => {
+    const allImages = document.querySelectorAll('img');
+    allImages.forEach(img => {
       img.addEventListener('load', () => {
         const loadingIndicator = img.previousElementSibling;
         if (loadingIndicator && loadingIndicator.classList.contains('image-loading')) {
@@ -533,36 +857,23 @@
       });
     });
 
-    // Fungsi untuk berbagi
-    const shareBtn = document.getElementById('share-btn');
-    const shareTwitter = document.getElementById('share-twitter');
-    const shareFacebook = document.getElementById('share-facebook');
-    const shareLinkedin = document.getElementById('share-linkedin');
+    // Fungsi untuk berlangganan newsletter
+    const newsletterForm = document.querySelector('.newsletter-form');
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = newsletterForm.querySelector('input[type="email"]').value;
+      alert(`Terima kasih! Email ${email} telah berhasil didaftarkan untuk newsletter.`);
+      newsletterForm.reset();
+    });
 
-    const shareUrl = encodeURIComponent(window.location.href);
-    const shareTitle = encodeURIComponent(document.title);
-
-    shareBtn.addEventListener('click', () => {
-      if (navigator.share) {
-        navigator.share({
-          title: document.title,
-          url: window.location.href
-        });
-      } else {
-        alert('Fungsi berbagi tidak didukung di browser ini. Gunakan tombol berbagi spesifik platform.');
+    // Fungsi untuk tombol pencarian
+    const searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', () => {
+      const searchTerm = prompt('Masukkan kata kunci pencarian:');
+      if (searchTerm) {
+        alert(`Mencari: ${searchTerm}`);
+        // Di implementasi nyata, ini akan mengarahkan ke halaman pencarian
       }
-    });
-
-    shareTwitter.addEventListener('click', () => {
-      window.open(`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`, '_blank');
-    });
-
-    shareFacebook.addEventListener('click', () => {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank');
-    });
-
-    shareLinkedin.addEventListener('click', () => {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank');
     });
   </script>
 </body>
