@@ -13,6 +13,7 @@ class ZapToolsApp {
             { path: 'text-converter', handler: () => this.showTextConverter() },
             { path: 'color-tools', handler: () => this.showColorTools() },
             { path: 'password-generator', handler: () => this.showPasswordGenerator() },
+            { path: 'history', handler: () => this.showHistory() },
             { path: 'settings', handler: () => this.showSettings() }
         ]);
 
@@ -103,6 +104,12 @@ class ZapToolsApp {
                     console.log('Password Generator service loaded');
                     break;
                     
+                case 'history':
+                    const { HistoryManager } = await import('./services/history-manager.js');
+                    new HistoryManager().init();
+                    console.log('History Manager service loaded');
+                    break;
+                    
                 case 'settings':
                     const { SettingsManager } = await import('./services/settings-manager.js');
                     new SettingsManager().init();
@@ -152,6 +159,12 @@ class ZapToolsApp {
         console.log('Navigated to Password Generator');
     }
 
+    async showHistory() {
+        this.viewManager.initializeCurrentSection();
+        await this.loadRouteServices('history');
+        console.log('Navigated to History');
+    }
+
     async showSettings() {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('settings');
@@ -164,11 +177,9 @@ class ZapToolsApp {
     // Utility method for error handling
     handleError(error, context) {
         console.error(`Error in ${context}:`, error);
-        // You can add user-facing error messages here
-        // this.showNotification(`Error: ${error.message}`, 'error');
     }
 
-    // Method to show loading state (can be used by services)
+    // Method to show loading state
     showLoading() {
         this.viewManager.showLoading();
     }
@@ -210,5 +221,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Export for testing or other modules if needed
 export default ZapToolsApp;
