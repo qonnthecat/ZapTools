@@ -1,0 +1,187 @@
+/* css/components/forms.css */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font-size: var(--font-size-md);
+    font-family: inherit;
+    transition: 
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+/* Select */
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right var(--space-md) center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: var(--space-2xl);
+}
+
+/* Textarea */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+/* File Input */
+.file-input {
+    display: none;
+}
+
+.file-drop-area {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-2xl) var(--space-lg);
+    text-align: center;
+    cursor: pointer;
+    transition: 
+        border-color var(--transition-normal),
+        background-color var(--transition-normal);
+    margin-bottom: var(--space-lg);
+}
+
+.file-drop-area:hover,
+.file-drop-area.active {
+    border-color: var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.file-msg {
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+}
+
+/* Range Input */
+.range-input {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border-color);
+    outline: none;
+    appearance: none;
+}
+
+.range-input::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+.range-input::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Checkbox and Radio */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    margin-bottom: var(--space-sm);
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-color);
+    transition: 
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Color Input */
+.color-picker {
+    width: 120px;
+    height: 120px;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    border: 4px solid var(--surface-color);
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition-fast);
+}
+
+.color-picker:hover {
+    transform: scale(1.05);
+}
+
+/* Result Area */
+.result-area {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    background-color: rgba(0, 0, 0, 0.05);
+    min-height: 60px;
+    word-break: break-all;
+    font-family: 'Courier New', monospace;
+}
+
+[data-theme="dark"] .result-area {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Quality Selector */
+.quality-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.quality-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--primary-color);
+}
