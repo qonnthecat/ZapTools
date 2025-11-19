@@ -1,6 +1,6 @@
 // js/app.js
 import { Router } from './router.js';
-import { ViewManager, Templates } from './views.js';
+import { ViewManager } from './views/index.js';
 import translationService from './services/translation-service.js';
 
 class ZapToolsApp {
@@ -20,17 +20,31 @@ class ZapToolsApp {
     }
 
     async init() {
-        // Initialize translation service first
-        await translationService.init();
-        
-        this.viewManager.render(Templates.main());
+        try {
+            // Initialize translation service first
+            await translationService.init();
+            
+            // Render the main template
+            await this.viewManager.render();
 
-        window.addEventListener('navigate', (e) => {
-            this.router.goTo(e.detail);
-        });
+            // Set up navigation event listener
+            window.addEventListener('navigate', (e) => {
+                this.router.goTo(e.detail);
+            });
 
-        this.initializeLanguageSelector();
-        this.initializeServices();
+            // Set up language change listener
+            window.addEventListener('languageChanged', () => {
+                this.initializeLanguageSelector();
+            });
+
+            // Initialize components
+            this.initializeLanguageSelector();
+            await this.initializeServices();
+
+            console.log('ZapTools app initialized successfully');
+        } catch (error) {
+            console.error('Failed to initialize ZapTools app:', error);
+        }
     }
 
     initializeLanguageSelector() {
@@ -43,10 +57,16 @@ class ZapToolsApp {
             // Add change event listener
             languageSelector.addEventListener('change', async (e) => {
                 const newLang = e.target.value;
-                await this.viewManager.setLanguage(newLang);
-                
-                // Re-initialize services to update their language
-                this.initializeServices();
+                try {
+                    await this.viewManager.setLanguage(newLang);
+                    
+                    // Re-initialize services to update their language
+                    await this.initializeServices();
+                    
+                    console.log(`Language changed to: ${newLang}`);
+                } catch (error) {
+                    console.error('Failed to change language:', error);
+                }
             });
         }
     }
@@ -62,25 +82,37 @@ class ZapToolsApp {
                 case 'image-converter':
                     const { ImageConverter } = await import('./services/image-converter.js');
                     new ImageConverter().init();
+                    console.log('Image Converter service loaded');
                     break;
+                    
                 case 'text-converter':
                     const { TextConverter } = await import('./services/text-converter.js');
                     new TextConverter().init();
+                    console.log('Text Converter service loaded');
                     break;
+                    
                 case 'color-tools':
                     const { ColorTools } = await import('./services/color-tools.js');
                     new ColorTools().init();
+                    console.log('Color Tools service loaded');
                     break;
+                    
                 case 'password-generator':
                     const { PasswordGenerator } = await import('./services/password-generator.js');
                     new PasswordGenerator().init();
+                    console.log('Password Generator service loaded');
                     break;
+                    
                 case 'settings':
                     const { SettingsManager } = await import('./services/settings-manager.js');
                     new SettingsManager().init();
+                    console.log('Settings Manager service loaded');
+                    break;
+                    
+                default:
+                    // No services needed for home and features pages
                     break;
             }
-            console.log(`${route} services loaded`);
         } catch (error) {
             console.error(`Error loading ${route} services:`, error);
         }
@@ -88,30 +120,36 @@ class ZapToolsApp {
 
     showHome() {
         this.viewManager.initializeCurrentSection();
+        console.log('Navigated to Home');
     }
 
     showFeatures() {
         this.viewManager.initializeCurrentSection();
+        console.log('Navigated to Features');
     }
 
     async showImageConverter() {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('image-converter');
+        console.log('Navigated to Image Converter');
     }
 
     async showTextConverter() {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('text-converter');
+        console.log('Navigated to Text Converter');
     }
 
     async showColorTools() {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('color-tools');
+        console.log('Navigated to Color Tools');
     }
 
     async showPasswordGenerator() {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('password-generator');
+        console.log('Navigated to Password Generator');
     }
 
     async showSettings() {
@@ -120,10 +158,57 @@ class ZapToolsApp {
         
         // Re-initialize language selector for settings page
         this.initializeLanguageSelector();
+        console.log('Navigated to Settings');
+    }
+
+    // Utility method for error handling
+    handleError(error, context) {
+        console.error(`Error in ${context}:`, error);
+        // You can add user-facing error messages here
+        // this.showNotification(`Error: ${error.message}`, 'error');
+    }
+
+    // Method to show loading state (can be used by services)
+    showLoading() {
+        this.viewManager.showLoading();
+    }
+
+    // Method to hide loading state
+    hideLoading() {
+        this.viewManager.hideLoading();
+    }
+
+    // Method to get current route
+    getCurrentRoute() {
+        return this.router.getCurrentRoute();
+    }
+
+    // Method to navigate programmatically
+    navigateTo(route) {
+        this.router.goTo(route);
+    }
+
+    // Method to get current language
+    getCurrentLanguage() {
+        return this.viewManager.getCurrentLanguage();
     }
 }
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new ZapToolsApp();
+    // Create global app instance for debugging
+    window.zapToolsApp = new ZapToolsApp();
+    
+    // Add error handling for uncaught errors
+    window.addEventListener('error', (event) => {
+        console.error('Uncaught error:', event.error);
+    });
+    
+    // Handle promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+        console.error('Unhandled promise rejection:', event.reason);
+    });
 });
+
+// Export for testing or other modules if needed
+export default ZapToolsApp;
