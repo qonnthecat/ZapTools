@@ -1,0 +1,237 @@
+/* css/components/logo.css */
+.logo {
+    cursor: pointer;
+    transition: 
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
+    user-select: none;
+}
+
+.logo:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.logo:active {
+    transform: scale(0.98);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* Logo Image dengan background gradient untuk transparansi */
+.logo-image {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    transition: 
+        transform var(--transition-normal),
+        filter var(--transition-normal);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--radius-md);
+    padding: var(--space-xs);
+    box-shadow: var(--shadow-sm);
+}
+
+.logo:hover .logo-image {
+    transform: rotate(10deg) scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+/* Logo Text dengan gradient effect */
+.logo-text h1 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.logo-text p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    transition: color var(--transition-fast);
+}
+
+.logo:hover .logo-text p {
+    color: var(--text-color);
+}
+
+/* Logo Size Variants */
+.logo-small {
+    transform: scale(0.8);
+}
+
+.logo-small .logo-image {
+    width: 35px;
+    height: 35px;
+    padding: 6px;
+}
+
+.logo-small .logo-text h1 {
+    font-size: var(--font-size-xl);
+}
+
+.logo-large {
+    transform: scale(1.2);
+}
+
+.logo-large .logo-image {
+    width: 60px;
+    height: 60px;
+    padding: var(--space-sm);
+}
+
+.logo-large .logo-text h1 {
+    font-size: var(--font-size-3xl);
+}
+
+/* Logo tanpa text */
+.logo-icon-only .logo-text {
+    display: none;
+}
+
+.logo-icon-only .logo-image {
+    width: 50px;
+    height: 50px;
+    padding: var(--space-sm);
+}
+
+/* Footer Logo */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    transition: color var(--transition-fast);
+}
+
+.footer-logo:hover {
+    color: var(--secondary-color);
+}
+
+.footer-logo-image {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 
+        transform var(--transition-fast),
+        filter var(--transition-fast);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    box-shadow: var(--shadow-sm);
+}
+
+.footer-logo:hover .footer-logo-image {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: var(--shadow-md);
+}
+
+/* Logo dengan glow effect */
+.logo-glow .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(52, 152, 219, 0.1),
+        0 0 20px rgba(52, 152, 219, 0.3);
+}
+
+.logo-glow:hover .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(52, 152, 219, 0.2),
+        0 0 30px rgba(52, 152, 219, 0.5);
+}
+
+/* Logo dengan border animation */
+.logo-border-animate .logo-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-border-animate .logo-image::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--accent-color), 
+        var(--primary-color));
+    background-size: 400% 400%;
+    border-radius: var(--radius-md);
+    z-index: -1;
+    animation: borderRotate 3s linear infinite;
+}
+
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+        transform: rotate(0deg);
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+        transform: rotate(360deg);
+    }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .logo-image,
+[data-theme="dark"] .footer-logo-image {
+    filter: brightness(1.1) contrast(1.1);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+}
+
+[data-theme="dark"] .logo-glow .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(93, 173, 226, 0.2),
+        0 0 20px rgba(93, 173, 226, 0.4);
+}
+
+[data-theme="dark"] .logo-glow:hover .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(93, 173, 226, 0.3),
+        0 0 30px rgba(93, 173, 226, 0.6);
+}
+
+/* Loading state untuk logo */
+.logo-loading .logo-image {
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
