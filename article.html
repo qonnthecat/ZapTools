@@ -1,127 +1,90 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10 Teknologi yang Akan Mengubah Dunia - DuniaBercerita</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel - DuniaBercerita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-  <header>
-    <div class="header-content">
-      <div class="logo-section">
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
-        </button>
-        <h1><a href="index.html">DuniaBercerita</a></h1>
-      </div>
-      
-      <nav class="nav-menu" id="nav-menu">
-        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Beranda</span></a>
-        <a href="#berita" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita</span></a>
-        <a href="#fakta" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
-        <a href="#inovasi" class="nav-link active"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
-        <a href="#tips" class="nav-link"><i class="fas fa-seedling"></i> <span>Tips</span></a>
-      </nav>
-      
-      <div class="action-buttons">
-        <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <article class="article-detail">
-      <h1 class="article-title">10 Teknologi yang Akan Mengubah Dunia dalam 5 Tahun Mendatang</h1>
-      <p class="meta-info">Oleh <span class="author">Tech Explorer</span> | <time datetime="2025-11-20">20 November 2025</time> | <span class="reading-time">8 menit membaca</span></p>
-      
-      <div class="featured-image">
-        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Teknologi Masa Depan" loading="lazy">
-      </div>
-      
-      <div class="article-content">
-        <p>
-          Dunia teknologi berkembang dengan kecepatan yang luar biasa. Dalam lima tahun ke depan, kita akan menyaksikan revolusi teknologi yang akan mengubah cara kita hidup, bekerja, dan berinteraksi. Berikut adalah 10 teknologi yang diprediksi akan memiliki dampak paling signifikan.
-        </p>
-        
-        <h2>1. Kecerdasan Buatan Generasi Berikutnya</h2>
-        <p>
-          AI tidak hanya akan menjadi lebih cerdas, tetapi juga lebih intuitif dan kontekstual. Dengan kemampuan memahami nuansa bahasa dan emosi manusia, AI akan menjadi asisten yang lebih efektif dalam kehidupan sehari-hari.
-        </p>
-
-        <h2>2. Komputasi Kuantum Praktis</h2>
-        <p>
-          Meskipun masih dalam tahap awal, komputasi kuantum akan mulai memberikan solusi untuk masalah kompleks yang tidak dapat dipecahkan komputer tradisional, dari penemuan obat hingga optimasi logistik global.
-        </p>
-
-        <div class="image-gallery">
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                 alt="Komputasi Kuantum" 
-                 loading="lazy">
-          </div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                 alt AI dan Robotika" 
-                 loading="lazy">
-          </div>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1><a href="index.html">DuniaBercerita</a></h1>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box" id="search-box">
+                    <input type="text" placeholder="Cari artikel..." id="search-input">
+                    <button class="search-btn" id="search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Beranda</span></a>
+                <a href="#berita" class="nav-link"><i class="fas fa-newspaper"></i> <span>Berita</span></a>
+                <a href="#fakta" class="nav-link"><i class="fas fa-lightbulb"></i> <span>Fakta Unik</span></a>
+                <a href="#inovasi" class="nav-link active"><i class="fas fa-rocket"></i> <span>Inovasi</span></a>
+                <a href="admin.html" class="nav-link admin-link"><i class="fas fa-edit"></i> <span>Admin</span></a>
+            </nav>
+            
+            <div class="action-buttons">
+                <button class="theme-toggle" id="theme-toggle" title="Ubah tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
-        
-        <h2>3. Internet untuk Semua</h2>
-        <p>
-          Proyek satelit internet seperti Starlink dan OneWeb akan menyediakan akses internet berkecepatan tinggi ke daerah terpencil, membuka peluang pendidikan dan ekonomi bagi miliaran orang.
-        </p>
+    </header>
 
-        <blockquote>
-          "Teknologi terbaik adalah teknologi yang tidak terlihat - teknologi yang begitu terintegrasi dalam kehidupan kita sehingga kita bahkan tidak menyadari kehadirannya."
-        </blockquote>
+    <main>
+        <article class="article-detail" id="article-content">
+            <!-- Konten artikel akan dimuat di sini -->
+            <div class="loading">Memuat artikel...</div>
+        </article>
 
-        <h2>Dampak pada Masyarakat</h2>
-        <p>
-          Perubahan teknologi ini akan membawa tantangan dan peluang. Penting bagi kita untuk mempersiapkan diri dengan mengembangkan keterampilan baru dan memahami implikasi etis dari setiap kemajuan teknologi.
-        </p>
+        <section class="related-articles">
+            <h2>Artikel Terkait</h2>
+            <div class="articles-grid" id="related-articles">
+                <!-- Artikel terkait akan dimuat di sini -->
+            </div>
+        </section>
+    </main>
 
-        <div class="article-tags">
-          <span class="tag">Teknologi</span>
-          <span class="tag">AI</span>
-          <span class="tag">Inovasi</span>
-          <span class="tag">Masa Depan</span>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DuniaBercerita</h3>
+                <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis dari seluruh dunia.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Tautan Cepat</h3>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-    </article>
-  </main>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DuniaBercerita. All rights reserved.</p>
+        </div>
+    </footer>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>DuniaBercerita</h3>
-        <p>Portal pengetahuan tentang fakta unik, berita terkini, inovasi, dan tips praktis dari seluruh dunia.</p>
-      </div>
-      <div class="footer-section">
-        <h3>Tautan Cepat</h3>
-        <ul>
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="#berita">Berita</a></li>
-          <li><a href="#fakta">Fakta Unik</a></li>
-          <li><a href="#inovasi">Inovasi</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Kontak</h3>
-        <p><i class="fas fa-envelope"></i> info@duniabercerita.com</p>
-        <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 DuniaBercerita. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cms.js"></script>
+    <script>
+        // Load specific article based on URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticleContent();
+        });
+    </script>
 </body>
 </html>
