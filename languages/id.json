@@ -1,0 +1,105 @@
+{
+  "app": {
+    "title": "ZapTools - Alat Bantu Online",
+    "tagline": "Alat bantu online yang praktis",
+    "copyright": "© 2023 ZapTools. Semua hak dilindungi."
+  },
+  "navigation": {
+    "home": "Beranda",
+    "features": "Fitur",
+    "settings": "Pengaturan"
+  },
+  "home": {
+    "welcomeTitle": "Selamat Datang di ZapTools",
+    "welcomeSubtitle": "Kumpulan alat bantu online yang praktis untuk kebutuhan sehari-hari",
+    "allFeatures": "Semua Fitur",
+    "imageConversion": "Konversi Gambar",
+    "imageConversionDesc": "Ubah format gambar dengan mudah",
+    "textConversion": "Konversi Teks",
+    "textConversionDesc": "Transformasi teks ke berbagai format",
+    "colorTools": "Color Tools",
+    "colorToolsDesc": "Generator warna dan alat bantu desain"
+  },
+  "features": {
+    "allFeaturesTitle": "Semua Fitur",
+    "fileConversion": "Konversi File",
+    "imageConverter": "Konverter Gambar",
+    "imageConverterDesc": "Ubah format gambar (JPG, PNG, WebP) dengan kualitas yang dapat disesuaikan",
+    "textConverter": "Konverter Teks",
+    "textConverterDesc": "Transformasi teks ke berbagai format seperti huruf besar, kecil, camel case, dll",
+    "colorToolsCategory": "Color Tools",
+    "colorGenerator": "Generator Warna",
+    "colorGeneratorDesc": "Picker warna dengan informasi HEX, RGB, HSL dan palette generator",
+    "passwordGenerator": "Pembuat Kata Sandi",
+    "passwordGeneratorDesc": "Buat kata sandi kuat dengan opsi kustomisasi"
+  },
+  "imageConverter": {
+    "title": "Konverter Gambar",
+    "changeImageFormat": "Ubah Format Gambar",
+    "dragDropImage": "Seret gambar di sini atau klik untuk memilih",
+    "convertToFormat": "Konversi ke format:",
+    "quality": "Kualitas (0-100):",
+    "convertImage": "Konversi Gambar",
+    "imageConverted": "Gambar berhasil dikonversi ke",
+    "originalSize": "Ukuran asli:",
+    "newSize": "Ukuran baru:",
+    "download": "Download:"
+  },
+  "textConverter": {
+    "title": "Konverter Teks",
+    "textTransformation": "Transformasi Teks",
+    "enterTextHere": "Masukkan teks di sini...",
+    "convertTo": "Konversi ke:",
+    "uppercase": "HURUF BESAR",
+    "lowercase": "huruf kecil",
+    "titlecase": "Judul Kasus",
+    "camelcase": "camelCase",
+    "snakecase": "snake_case",
+    "reverse": "Balik Teks",
+    "removeSpaces": "Hapus Spasi",
+    "convertText": "Konversi Teks",
+    "copyText": "Salin Teks"
+  },
+  "colorTools": {
+    "title": "Color Tools",
+    "colorGeneratorTitle": "Generator Warna"
+  },
+  "passwordGenerator": {
+    "title": "Pembuat Kata Sandi",
+    "createStrongPassword": "Buat Kata Sandi Kuat",
+    "length": "Panjang",
+    "includeUppercase": "Huruf Besar",
+    "includeNumbers": "Angka",
+    "includeSymbols": "Simbol",
+    "generatePassword": "Buat Kata Sandi Baru",
+    "strength": "Kekuatan",
+    "weak": "Lemah",
+    "medium": "Sedang",
+    "strong": "Kuat",
+    "veryStrong": "Sangat Kuat"
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "appearance": "Tampilan",
+    "darkMode": "Mode Gelap",
+    "darkModeDesc": "Aktifkan tema gelap untuk kenyamanan mata",
+    "language": "Bahasa",
+    "languageDesc": "Pilih bahasa yang diinginkan",
+    "english": "English",
+    "indonesian": "Indonesia",
+    "about": "Tentang",
+    "appVersion": "Versi Aplikasi",
+    "version": "ZapTools v1.0.0",
+    "developer": "Pengembang",
+    "developerDesc": "Dibuat dengan ❤️ untuk kemudahan Anda"
+  },
+  "alerts": {
+    "pleaseSelectImage": "Silakan pilih gambar terlebih dahulu.",
+    "pleaseEnterText": "Silakan masukkan teks terlebih dahulu.",
+    "invalidImage": "Silakan pilih file gambar yang valid.",
+    "divisionByZero": "Tidak bisa membagi dengan nol!",
+    "timeUp": "Waktu habis!",
+    "textCopied": "Teks berhasil disalin!",
+    "passwordCopied": "Kata sandi telah disalin ke clipboard!"
+  }
+}
