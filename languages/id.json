@@ -7,7 +7,22 @@
   "navigation": {
     "home": "Beranda",
     "features": "Fitur",
+    "history": "Riwayat",
     "settings": "Pengaturan"
+  },
+  "history": {
+    "title": "Riwayat Konversi",
+    "clearHistory": "Hapus Riwayat",
+    "noHistory": "Belum ada riwayat konversi",
+    "imageConversion": "Konversi Gambar",
+    "textConversion": "Konversi Teks",
+    "colorTool": "Alat Warna",
+    "passwordGeneration": "Pembuatan Kata Sandi",
+    "timeAgo": "yang lalu",
+    "delete": "Hapus",
+    "deleteAll": "Hapus Semua",
+    "confirmClear": "Apakah Anda yakin ingin menghapus semua riwayat?",
+    "recentActivities": "Aktivitas Terbaru"
   },
   "home": {
     "welcomeTitle": "Selamat Datang di ZapTools",
