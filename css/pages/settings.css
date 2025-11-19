@@ -1,0 +1,36 @@
+/* css/pages/settings.css */
+.settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.settings-container h2 {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-info h4 {
+    color: var(--text-color);
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-md);
+}
+
+.setting-info p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+}
