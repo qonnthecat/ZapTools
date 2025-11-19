@@ -1,0 +1,105 @@
+{
+  "app": {
+    "title": "ZapTools - Online Utility Tools",
+    "tagline": "Practical online utility tools",
+    "copyright": "© 2023 ZapTools. All rights reserved."
+  },
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "settings": "Settings"
+  },
+  "home": {
+    "welcomeTitle": "Welcome to ZapTools",
+    "welcomeSubtitle": "A collection of practical online tools for everyday needs",
+    "allFeatures": "All Features",
+    "imageConversion": "Image Conversion",
+    "imageConversionDesc": "Convert image formats easily",
+    "textConversion": "Text Conversion",
+    "textConversionDesc": "Transform text to various formats",
+    "colorTools": "Color Tools",
+    "colorToolsDesc": "Color generator and design tools"
+  },
+  "features": {
+    "allFeaturesTitle": "All Features",
+    "fileConversion": "File Conversion",
+    "imageConverter": "Image Converter",
+    "imageConverterDesc": "Convert image formats (JPG, PNG, WebP) with adjustable quality",
+    "textConverter": "Text Converter",
+    "textConverterDesc": "Transform text to various formats like uppercase, lowercase, camel case, etc",
+    "colorToolsCategory": "Color Tools",
+    "colorGenerator": "Color Generator",
+    "colorGeneratorDesc": "Color picker with HEX, RGB, HSL information and palette generator",
+    "passwordGenerator": "Password Generator",
+    "passwordGeneratorDesc": "Create strong passwords with customization options"
+  },
+  "imageConverter": {
+    "title": "Image Converter",
+    "changeImageFormat": "Change Image Format",
+    "dragDropImage": "Drag image here or click to select",
+    "convertToFormat": "Convert to format:",
+    "quality": "Quality (0-100):",
+    "convertImage": "Convert Image",
+    "imageConverted": "Image successfully converted to",
+    "originalSize": "Original size:",
+    "newSize": "New size:",
+    "download": "Download:"
+  },
+  "textConverter": {
+    "title": "Text Converter",
+    "textTransformation": "Text Transformation",
+    "enterTextHere": "Enter your text here...",
+    "convertTo": "Convert to:",
+    "uppercase": "UPPERCASE",
+    "lowercase": "lowercase",
+    "titlecase": "Title Case",
+    "camelcase": "camelCase",
+    "snakecase": "snake_case",
+    "reverse": "Reverse Text",
+    "removeSpaces": "Remove Spaces",
+    "convertText": "Convert Text",
+    "copyText": "Copy Text"
+  },
+  "colorTools": {
+    "title": "Color Tools",
+    "colorGeneratorTitle": "Color Generator"
+  },
+  "passwordGenerator": {
+    "title": "Password Generator",
+    "createStrongPassword": "Create Strong Password",
+    "length": "Length",
+    "includeUppercase": "Uppercase Letters",
+    "includeNumbers": "Numbers",
+    "includeSymbols": "Symbols",
+    "generatePassword": "Generate New Password",
+    "strength": "Strength",
+    "weak": "Weak",
+    "medium": "Medium",
+    "strong": "Strong",
+    "veryStrong": "Very Strong"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "darkMode": "Dark Mode",
+    "darkModeDesc": "Enable dark theme for eye comfort",
+    "language": "Language",
+    "languageDesc": "Choose your preferred language",
+    "english": "English",
+    "indonesian": "Indonesian",
+    "about": "About",
+    "appVersion": "App Version",
+    "version": "ZapTools v1.0.0",
+    "developer": "Developer",
+    "developerDesc": "Made with ❤️ for your convenience"
+  },
+  "alerts": {
+    "pleaseSelectImage": "Please select an image first.",
+    "pleaseEnterText": "Please enter text first.",
+    "invalidImage": "Please select a valid image file.",
+    "divisionByZero": "Cannot divide by zero!",
+    "timeUp": "Time's up!",
+    "textCopied": "Text copied successfully!",
+    "passwordCopied": "Password copied to clipboard!"
+  }
+}
