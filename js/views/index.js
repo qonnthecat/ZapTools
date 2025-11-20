@@ -1,8 +1,8 @@
-// lightweight helpers for views (not required but handy)
-export function el(selector) { return document.querySelector(selector); }
-export function formatBytes(bytes) {
-  if (bytes === 0) return '0 B';
-  const k = 1024, sizes = ['B','KB','MB','GB','TB'];
-  const i = Math.floor(Math.log(bytes)/Math.log(k));
-  return parseFloat((bytes/Math.pow(k,i)).toFixed(2)) + ' ' + sizes[i];
-}
+// js/views/index.js
+// Simple export hub for view utilities (optional)
+
+import { Views } from "../views.js";
+
+export default {
+    Views
+};
