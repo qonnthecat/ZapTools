@@ -1,17 +1,32 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZapTools - Alat Bantu Online</title>
-    <link rel="icon" type="image/jpeg" href="images/logos/full.jpg">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div id="app">
-        <!-- Aplikasi akan di-render oleh JavaScript -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ZapTools (MVVM + Alpine)</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- load other css files as before -->
+  </head>
+  <body>
+    <!-- header/navigation will be loaded by router as partials -->
+    <div id="app" class="app-root">
+      <!-- initial content rendered by router on load -->
     </div>
 
+    <!-- Alpine JS (v3) -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- ViewModels (modules) -->
+    <script type="module" src="js/viewmodels/home.vm.js"></script>
+    <script type="module" src="js/viewmodels/color-tools.vm.js"></script>
+    <script type="module" src="js/viewmodels/image-converter.vm.js"></script>
+    <script type="module" src="js/viewmodels/text-converter.vm.js"></script>
+    <script type="module" src="js/viewmodels/password-generator.vm.js"></script>
+    <script type="module" src="js/viewmodels/history.vm.js"></script>
+    <script type="module" src="js/viewmodels/settings.vm.js"></script>
+
+    <!-- App bootstrap -->
     <script type="module" src="js/app.js"></script>
-</body>
+  </body>
 </html>
