@@ -128,3 +128,19 @@
 .password-options input[type="number"] {
     width: 60px;
 }
+
+.color-tools-section h2,
+.password-section h2,
+.converter-section h2 {
+    font-family: 'Georgia', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Untuk elemen yang membutuhkan border vintage */
+.color-swatch,
+.password-display input,
+.image-preview img {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+}
