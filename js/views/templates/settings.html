@@ -1,0 +1,14 @@
+<div x-data="settingsVM()">
+  <div data-include="/js/views/components/header.html"></div>
+  <main>
+    <h2>Settings</h2>
+    <label>Language:
+      <select x-model="lang" @change="save()">
+        <option value="en">English</option>
+        <option value="id">Bahasa Indonesia</option>
+      </select>
+    </label>
+    <label>Dark Mode: <input type="checkbox" x-model="dark" @change="save()" /></label>
+  </main>
+  <div data-include="/js/views/components/footer.html"></div>
+</div>
