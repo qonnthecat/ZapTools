@@ -1,13 +1,46 @@
 // js/views/templates/index.js
-// Optional template registry (not required by router)
-// Used only if you want to manually fetch templates by name.
+import { HeaderTemplate } from './header.js';
+import { FooterTemplate } from './footer.js';
+import { NavigationTemplate } from './navigation.js';
+import { HomeTemplate } from './home.js';
+import { FeaturesTemplate } from './features.js';
+import { ImageConverterTemplate } from './image-converter.js';
+import { TextConverterTemplate } from './text-converter.js';
+import { ColorToolsTemplate } from './color-tools.js';
+import { PasswordGeneratorTemplate } from './password-generator.js';
+import { HistoryTemplate } from './history.js'; // NEW
+import { SettingsTemplate } from './settings.js';
 
-export async function loadTemplate(name) {
-    try {
-        const module = await import(`./${name}.js`);
-        return module.default;
-    } catch (err) {
-        console.error(`Template '${name}' not found`, err);
-        return `<div class="error">Template '${name}' not found.</div>`;
-    }
-}
+export const MainTemplate = () => {
+    return `
+        ${HeaderTemplate()}
+        
+        <main class="main">
+            ${HomeTemplate()}
+            ${FeaturesTemplate()}
+            ${ImageConverterTemplate()}
+            ${TextConverterTemplate()}
+            ${ColorToolsTemplate()}
+            ${PasswordGeneratorTemplate()}
+            ${HistoryTemplate()} <!-- NEW -->
+            ${SettingsTemplate()}
+        </main>
+
+        ${NavigationTemplate()}
+        ${FooterTemplate()}
+    `;
+};
+
+export {
+    HeaderTemplate,
+    FooterTemplate,
+    NavigationTemplate,
+    HomeTemplate,
+    FeaturesTemplate,
+    ImageConverterTemplate,
+    TextConverterTemplate,
+    ColorToolsTemplate,
+    PasswordGeneratorTemplate,
+    HistoryTemplate, // NEW
+    SettingsTemplate
+};

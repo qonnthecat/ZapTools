@@ -1,19 +1,58 @@
-export default /*html*/ `
-<div id="page-settings" class="page" x-data="settingsVM">
-    <h1 class="title">Pengaturan</h1>
+// js/views/templates/settings.js
+import { CardComponents } from '../components/cards.js';
 
-    <label>Pilih Bahasa</label>
-    <select x-model="lang" @change="apply()" class="form-input">
-        <option value="id">Indonesia</option>
-        <option value="en">English</option>
-    </select>
+export const SettingsTemplate = () => {
+    const darkModeToggle = CardComponents.renderToggleSwitch({
+        id: 'dark-mode-toggle',
+        checked: false
+    });
 
-    <label>Tema</label>
-    <select x-model="theme" @change="apply()" class="form-input">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-    </select>
+    const languageSelector = `
+        <select id="language-selector" class="form-control">
+            <option value="en" data-i18n="settings.english">English</option>
+            <option value="id" data-i18n="settings.indonesian">Indonesian</option>
+        </select>
+    `;
 
-    <a href="#home" class="back">Kembali</a>
-</div>
-`;
+    const appearanceSettings = CardComponents.renderSettingsGroup({
+        title: 'settings.appearance',
+        content: `
+            ${CardComponents.renderSettingItem({
+                title: 'settings.darkMode',
+                description: 'settings.darkModeDesc',
+                control: darkModeToggle
+            })}
+            ${CardComponents.renderSettingItem({
+                title: 'settings.language',
+                description: 'settings.languageDesc',
+                control: languageSelector
+            })}
+        `
+    });
+
+    const aboutSettings = CardComponents.renderSettingsGroup({
+        title: 'settings.about',
+        content: `
+            ${CardComponents.renderSettingItem({
+                title: 'settings.appVersion',
+                description: 'settings.version'
+            })}
+            ${CardComponents.renderSettingItem({
+                title: 'settings.developer',
+                description: 'settings.developerDesc'
+            })}
+        `
+    });
+
+    return `
+        <section id="settings" class="section">
+            <div class="container">
+                <div class="settings-container">
+                    <h2 data-i18n="settings.title" style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">Settings</h2>
+                    ${appearanceSettings}
+                    ${aboutSettings}
+                </div>
+            </div>
+        </section>
+    `;
+};
