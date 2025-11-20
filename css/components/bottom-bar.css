@@ -5,11 +5,13 @@
     left: 0;
     right: 0;
     background-color: var(--surface-color);
-    border-top: 1px solid var(--border-color);
+    border-top: 2px double var(--border-color);
     padding: 8px 0;
     z-index: var(--z-fixed);
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 10px rgba(139, 69, 19, 0.1);
     backdrop-filter: blur(10px);
+    background-image: 
+        linear-gradient(rgba(210, 180, 140, 0.1) 0%, var(--surface-color) 100%);
 }
 
 .bottom-nav {
@@ -34,48 +36,57 @@
     text-decoration: none;
     color: var(--text-secondary);
     padding: 6px 8px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     transition: 
         color var(--transition-fast),
         background-color var(--transition-fast),
         transform var(--transition-fast);
     font-size: var(--font-size-xs);
-    min-height: 44px; /* Minimum touch target for mobile */
+    min-height: 44px;
     justify-content: center;
+    border: 1px solid transparent;
+    font-family: 'Georgia', serif;
 }
 
 .bottom-nav-link:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(139, 69, 19, 0.08);
     color: var(--primary-color);
+    border-color: var(--border-color);
 }
 
 .bottom-nav-link.active {
     color: var(--primary-color);
-    background-color: rgba(52, 152, 219, 0.08);
+    background-color: rgba(139, 69, 19, 0.12);
     transform: translateY(-1px);
+    border: 1px solid var(--primary-color);
+    font-weight: 600;
 }
 
 .bottom-nav-icon {
     font-size: 1.2rem;
     margin-bottom: 2px;
     transition: transform var(--transition-fast);
+    filter: sepia(0.3);
 }
 
 .bottom-nav-link:hover .bottom-nav-icon {
     transform: scale(1.05);
+    filter: sepia(0.5);
 }
 
 .bottom-nav-link.active .bottom-nav-icon {
     transform: scale(1.1);
+    filter: sepia(0.7);
 }
 
 .bottom-nav-text {
     font-weight: 500;
     font-size: 0.65rem;
     line-height: 1.2;
+    letter-spacing: 0.02em;
 }
 
-/* Compact mode for very small screens */
+/* Compact mode untuk very small screens */
 @media (max-width: 360px) {
     .bottom-nav {
         padding: 0 5px;
@@ -100,6 +111,7 @@
 @media (min-width: 768px) {
     .bottom-bar {
         padding: 10px 0;
+        border-top-width: 3px;
     }
     
     .bottom-nav-link {
@@ -139,23 +151,20 @@
 }
 
 /* Active state animations */
-@keyframes bounce {
+@keyframes vintageBounce {
     0%, 20%, 53%, 80%, 100% {
         transform: translate3d(0, 0, 0);
     }
     40%, 43% {
-        transform: translate3d(0, -3px, 0);
+        transform: translate3d(0, -2px, 0);
     }
     70% {
         transform: translate3d(0, -1px, 0);
     }
-    90% {
-        transform: translate3d(0, -0.5px, 0);
-    }
 }
 
 .bottom-nav-link.active .bottom-nav-icon {
-    animation: bounce 1s ease infinite;
+    animation: vintageBounce 1s ease infinite;
 }
 
 /* Dark mode adjustments */
@@ -163,6 +172,8 @@
     background-color: var(--surface-color);
     border-top-color: var(--border-color);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    background-image: 
+        linear-gradient(rgba(90, 90, 90, 0.1) 0%, var(--surface-color) 100%);
 }
 
 [data-theme="dark"] .bottom-nav-link:hover {
@@ -170,7 +181,8 @@
 }
 
 [data-theme="dark"] .bottom-nav-link.active {
-    background-color: rgba(93, 173, 226, 0.15);
+    background-color: rgba(210, 180, 140, 0.15);
+    border-color: var(--primary-light);
 }
 
 /* Accessibility improvements */
