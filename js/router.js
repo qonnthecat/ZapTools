@@ -1,27 +1,58 @@
-// router.js
+// js/router.js
 export class Router {
     constructor(routes) {
         this.routes = routes;
-        window.addEventListener("hashchange", () => this.handleRoute());
+        this.currentRoute = null;
+        this.init();
     }
 
-    async handleRoute() {
-        const path = location.hash.replace("#", "") || "home";
-        const route = this.routes[path] || this.routes["home"];
+    init() {
+        // Handle initial route
+        window.addEventListener('load', () => this.navigate(window.location.hash));
 
-        const templateModule = await import(`./views/templates/${route.template}.js`);
-        const viewHtml = templateModule.default;
+        // Handle hash changes
+        window.addEventListener('hashchange', () => this.navigate(window.location.hash));
 
-        const root = document.getElementById("app");
-        root.innerHTML = viewHtml;
+        // Handle popstate (browser back/forward)
+        window.addEventListener('popstate', () => this.navigate(window.location.hash));
+    }
 
-        if (route.viewmodel) {
-            const vmModule = await import(`./viewmodels/${route.viewmodel}.js`);
-            vmModule.default();
+    navigate(hash = '') {
+        const route = hash.replace('#', '') || 'home';
+        
+        if (this.currentRoute === route) return;
+
+        this.currentRoute = route;
+        
+        // Find matching route
+        const matchingRoute = this.routes.find(r => r.path === route) || 
+                            this.routes.find(r => r.path === 'home');
+
+        if (matchingRoute) {
+            // Update URL without triggering hashchange
+            if (window.location.hash !== `#${route}`) {
+                window.history.pushState(null, null, `#${route}`);
+            }
+
+            // Execute route handler
+            matchingRoute.handler();
         }
     }
 
-    start() {
-        this.handleRoute();
+    getCurrentRoute() {
+        return this.currentRoute;
+    }
+
+    // Navigation helper methods
+    goTo(route) {
+        this.navigate(`#${route}`);
+    }
+
+    back() {
+        window.history.back();
+    }
+
+    forward() {
+        window.history.forward();
     }
 }
