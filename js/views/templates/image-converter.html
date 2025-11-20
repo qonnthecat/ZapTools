@@ -1,0 +1,22 @@
+<div x-data="imageConverterVM()">
+  <div data-include="/js/views/components/header.html"></div>
+  <main>
+    <h2>Image Converter</h2>
+    <input type="file" @change="onFile($event)" accept="image/*" />
+    <div x-show="previewSrc">
+      <img :src="previewSrc" alt="preview" style="max-width:300px" />
+    </div>
+    <div class="controls">
+      <label>Format:
+        <select x-model="format">
+          <option value="image/png">PNG</option>
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </label>
+      <label>Quality: <input type="range" min="30" max="100" x-model.number="quality" /></label>
+      <button @click="convert()">Convert & Download</button>
+    </div>
+  </main>
+  <div data-include="/js/views/components/footer.html"></div>
+</div>
