@@ -1,49 +1,12 @@
-// js/views/templates/home.js
-import { CardComponents } from '../components/cards.js';
+export default /*html*/ `
+<div id="page-home" class="page">
+    <h1 class="title">ZapTools</h1>
+    <p class="subtitle">Kumpulan tools cepat dalam satu tempat</p>
 
-export const HomeTemplate = () => {
-    const featureCards = [
-        {
-            icon: '📋',
-            title: 'home.allFeatures',
-            description: 'home.welcomeSubtitle',
-            route: 'features'
-        },
-        {
-            icon: '🖼️',
-            title: 'home.imageConversion',
-            description: 'home.imageConversionDesc',
-            route: 'image-converter'
-        },
-        {
-            icon: '📝',
-            title: 'home.textConversion',
-            description: 'home.textConversionDesc',
-            route: 'text-converter'
-        },
-        {
-            icon: '🎨',
-            title: 'home.colorTools',
-            description: 'home.colorToolsDesc',
-            route: 'color-tools'
-        }
-    ];
-
-    const featureCardsHTML = featureCards.map(card => 
-        CardComponents.renderFeatureCard(card)
-    ).join('');
-
-    return `
-        <section id="home" class="section active">
-            <div class="container">
-                <div class="hero">
-                    <h2 data-i18n="home.welcomeTitle">Welcome to ZapTools</h2>
-                    <p data-i18n="home.welcomeSubtitle">A collection of practical online tools for everyday needs</p>
-                    <div class="feature-grid">
-                        ${featureCardsHTML}
-                    </div>
-                </div>
-            </div>
-        </section>
-    `;
-};
+    <div class="menu">
+        <a href="#tools" class="menu-item">Lihat Semua Tools</a>
+        <a href="#features" class="menu-item">Fitur</a>
+        <a href="#settings" class="menu-item">Pengaturan</a>
+    </div>
+</div>
+`;
