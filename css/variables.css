@@ -1,45 +1,45 @@
 /* css/variables.css */
 :root {
-    /* Colors - Primary */
-    --primary-color: #3498db;
-    --primary-dark: #2980b9;
-    --primary-light: #5dade2;
+    /* Colors - Vintage Newspaper */
+    --primary-color: #8b4513; /* Saddle brown */
+    --primary-dark: #654321; /* Dark brown */
+    --primary-light: #a0522d; /* Sienna */
     
     /* Colors - Secondary */
-    --secondary-color: #2ecc71;
-    --secondary-dark: #27ae60;
-    --secondary-light: #58d68d;
+    --secondary-color: #2f4f4f; /* Dark slate gray */
+    --secondary-dark: #2c2c2c; /* Almost black */
+    --secondary-light: #708090; /* Slate gray */
     
     /* Colors - Accent */
-    --accent-color: #e74c3c;
-    --accent-dark: #c0392b;
-    --accent-light: #ec7063;
+    --accent-color: #8b0000; /* Dark red */
+    --accent-dark: #660000; /* Deeper red */
+    --accent-light: #b22222; /* Firebrick */
     
     /* Colors - Warning */
-    --warning-color: #f39c12;
-    --warning-dark: #e67e22;
-    --warning-light: #f7dc6f;
+    --warning-color: #daa520; /* Goldenrod */
+    --warning-dark: #b8860b; /* Dark goldenrod */
+    --warning-light: #f4a460; /* Sandy brown */
     
-    /* Colors - Neutral */
-    --background-color: #f8f9fa;
-    --surface-color: #ffffff;
-    --text-color: #333333;
-    --text-secondary: #666666;
-    --text-muted: #999999;
-    --border-color: #e0e0e0;
-    --divider-color: #f0f0f0;
+    /* Colors - Newspaper Neutral */
+    --background-color: #fefefe;
+    --surface-color: #fffff0; /* Ivory */
+    --text-color: #2c2c2c;
+    --text-secondary: #5a5a5a;
+    --text-muted: #8c8c8c;
+    --border-color: #d2b48c; /* Tan */
+    --divider-color: #e8e8e8;
     
-    /* Shadows */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    /* Vintage Shadows */
+    --shadow-sm: 0 1px 3px rgba(139, 69, 19, 0.1);
+    --shadow-md: 0 4px 6px rgba(139, 69, 19, 0.15);
+    --shadow-lg: 0 8px 15px -3px rgba(139, 69, 19, 0.2);
+    --shadow-xl: 0 15px 25px -5px rgba(139, 69, 19, 0.25);
     
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    /* Border Radius - Less rounded for vintage feel */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 6px;
+    --radius-xl: 8px;
     --radius-full: 50%;
     
     /* Spacing */
@@ -50,8 +50,8 @@
     --space-xl: 32px;
     --space-2xl: 48px;
     
-    /* Typography */
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Typography - Serif fonts for newspaper feel */
+    --font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-md: 1rem;
@@ -62,9 +62,9 @@
     --font-size-4xl: 2.25rem;
     
     /* Line Height */
-    --line-height-tight: 1.25;
+    --line-height-tight: 1.3;
     --line-height-normal: 1.5;
-    --line-height-relaxed: 1.75;
+    --line-height-relaxed: 1.7;
     
     /* Transitions */
     --transition-fast: 0.15s ease;
@@ -85,34 +85,34 @@
     --header-height: 80px;
 }
 
-/* Dark Theme */
+/* Dark Theme - Aged Paper */
 [data-theme="dark"] {
-    --primary-color: #5dade2;
-    --primary-dark: #3498db;
-    --primary-light: #85c1e9;
+    --primary-color: #d2b48c; /* Tan */
+    --primary-dark: #b8860b; /* Dark goldenrod */
+    --primary-light: #f5deb3; /* Wheat */
     
-    --secondary-color: #58d68d;
-    --secondary-dark: #2ecc71;
-    --secondary-light: #7dcea0;
+    --secondary-color: #a9a9a9; /* Dark gray */
+    --secondary-dark: #808080; /* Gray */
+    --secondary-light: #c0c0c0; /* Silver */
     
-    --accent-color: #ec7063;
-    --accent-dark: #e74c3c;
-    --accent-light: #f1948a;
+    --accent-color: #cd5c5c; /* Indian red */
+    --accent-dark: #b22222; /* Firebrick */
+    --accent-light: #f08080; /* Light coral */
     
-    --warning-color: #f7dc6f;
-    --warning-dark: #f39c12;
-    --warning-light: #f9e79f;
+    --warning-color: #ffd700; /* Gold */
+    --warning-dark: #daa520; /* Goldenrod */
+    --warning-light: #fff8dc; /* Cornsilk */
     
-    --background-color: #121212;
-    --surface-color: #1e1e1e;
-    --text-color: #e0e0e0;
-    --text-secondary: #a0a0a0;
-    --text-muted: #808080;
-    --border-color: #333333;
-    --divider-color: #2a2a2a;
+    --background-color: #1a1a1a;
+    --surface-color: #2a2a2a;
+    --text-color: #e8e8e8;
+    --text-secondary: #b8b8b8;
+    --text-muted: #888888;
+    --border-color: #5d4037; /* Brown gray */
+    --divider-color: #3a3a3a;
     
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 15px 25px -5px rgba(0, 0, 0, 0.6);
 }
