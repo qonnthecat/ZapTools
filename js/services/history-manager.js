@@ -6,67 +6,175 @@ export class HistoryManager {
     constructor() {
         this.initialized = false;
         this.currentLanguage = translationService.getCurrentLanguage();
+        this.isLoading = false;
+        this._eventListeners = [];
     }
 
-    init() {
+    async init() {
         if (this.initialized) return;
         
         console.log('Initializing History Manager...');
         
-        // Set up language change listener
-        window.addEventListener('languageChanged', (e) => {
-            this.currentLanguage = e.detail;
-            this.loadHistory(); // Reload history to update translations
-        });
-        
-        this.setupEventListeners();
-        this.loadHistory();
-        this.initialized = true;
+        try {
+            // Set up language change listener
+            this._addEventListener(window, 'languageChanged', (e) => {
+                this.currentLanguage = e.detail;
+                this.loadHistory(); // Reload history to update translations
+            });
+            
+            // Listen for history changes from other components
+            this._addEventListener(window, 'historyItemDeleted', () => {
+                this.loadHistory();
+            });
+            
+            this._addEventListener(window, 'historyCleared', () => {
+                this.loadHistory();
+            });
+            
+            this._addEventListener(window, 'historyImported', (e) => {
+                this.showNotification(`Imported ${e.detail.count} history items`, 'success');
+                this.loadHistory();
+            });
+            
+            await this.setupEventListeners();
+            await this.loadHistory();
+            this.initialized = true;
+            
+            console.log('History Manager initialized successfully');
+        } catch (error) {
+            console.error('Failed to initialize History Manager:', error);
+        }
     }
 
-    setupEventListeners() {
+    _addEventListener(element, event, handler) {
+        element.addEventListener(event, handler);
+        this._eventListeners.push({ element, event, handler });
+    }
+
+    _removeAllEventListeners() {
+        this._eventListeners.forEach(({ element, event, handler }) => {
+            element.removeEventListener(event, handler);
+        });
+        this._eventListeners = [];
+    }
+
+    destroy() {
+        this._removeAllEventListeners();
+        this.initialized = false;
+    }
+
+    async setupEventListeners() {
         // Clear history button
         const clearHistoryBtn = document.getElementById('clear-history');
         if (clearHistoryBtn) {
-            clearHistoryBtn.addEventListener('click', () => this.clearHistory());
+            this._addEventListener(clearHistoryBtn, 'click', () => this.clearHistory());
+        }
+
+        // Export history button
+        const exportHistoryBtn = document.getElementById('export-history');
+        if (exportHistoryBtn) {
+            this._addEventListener(exportHistoryBtn, 'click', () => this.exportHistory());
+        }
+
+        // Import history button
+        const importHistoryBtn = document.getElementById('import-history');
+        const importHistoryFile = document.getElementById('import-history-file');
+        if (importHistoryBtn && importHistoryFile) {
+            this._addEventListener(importHistoryBtn, 'click', () => importHistoryFile.click());
+            this._addEventListener(importHistoryFile, 'change', (e) => this.importHistory(e.target.files[0]));
         }
 
         // Listen for new conversions
-        window.addEventListener('conversionCompleted', (e) => {
+        this._addEventListener(window, 'conversionCompleted', (e) => {
             this.addConversionToHistory(e.detail);
         });
 
-        // Search functionality (optional enhancement)
-        this.setupSearchFunctionality();
+        // Search functionality
+        await this.setupSearchFunctionality();
     }
 
-    setupSearchFunctionality() {
+    async setupSearchFunctionality() {
         const searchInput = document.getElementById('history-search');
         if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                this.filterHistory(e.target.value);
+            let searchTimeout;
+            this._addEventListener(searchInput, 'input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.filterHistory(e.target.value);
+                }, 300); // Debounce search
             });
+            
+            // Clear search button
+            const clearSearchBtn = document.getElementById('clear-search');
+            if (clearSearchBtn) {
+                this._addEventListener(clearSearchBtn, 'click', () => {
+                    searchInput.value = '';
+                    this.filterHistory('');
+                });
+            }
         }
     }
 
-    loadHistory() {
-        const historyList = document.getElementById('history-list');
-        const emptyState = document.getElementById('empty-history');
+    async loadHistory() {
+        if (this.isLoading) return;
         
-        if (!historyList) return;
+        this.isLoading = true;
+        
+        try {
+            const historyList = document.getElementById('history-list');
+            const emptyState = document.getElementById('empty-history');
+            
+            if (!historyList) {
+                console.warn('History list element not found');
+                return;
+            }
 
-        const history = historyService.getRecentActivities(20);
-        const stats = historyService.getStatistics();
+            // Show loading state
+            historyList.innerHTML = this.createLoadingState();
+            
+            const history = await Promise.resolve(historyService.getRecentActivities(20));
+            const stats = historyService.getStatistics();
 
-        // Update statistics
-        this.updateStatistics(stats);
+            // Update statistics
+            this.updateStatistics(stats);
 
-        if (history.length === 0) {
-            this.showEmptyState(historyList, emptyState);
-            return;
+            // Small delay for smooth transition
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            if (history.length === 0) {
+                this.showEmptyState(historyList, emptyState);
+            } else {
+                this.showHistoryList(historyList, emptyState, history);
+            }
+        } catch (error) {
+            console.error('Error loading history:', error);
+            this.showErrorState();
+        } finally {
+            this.isLoading = false;
         }
+    }
 
-        this.showHistoryList(historyList, emptyState, history);
+    createLoadingState() {
+        return `
+            <div class="history-loading">
+                <div class="loading-spinner"></div>
+                <p>Loading history...</p>
+            </div>
+        `;
+    }
+
+    showErrorState() {
+        const historyList = document.getElementById('history-list');
+        if (historyList) {
+            historyList.innerHTML = `
+                <div class="empty-state error-state">
+                    <div class="empty-icon">⚠️</div>
+                    <h3>Failed to load history</h3>
+                    <p>Please try refreshing the page</p>
+                    <button class="btn primary" onclick="window.location.reload()">Reload Page</button>
+                </div>
+            `;
+        }
     }
 
     showEmptyState(historyList, emptyState) {
@@ -90,68 +198,96 @@ export class HistoryManager {
             emptyState.style.display = 'none';
         }
         
-        historyList.innerHTML = history.map((item, index) => 
-            this.createHistoryItem(item, index)
-        ).join('');
-        
-        // Add delete event listeners
-        this.addDeleteEventListeners();
-        
-        // Add click event listeners for potential re-use
-        this.addItemClickListeners();
+        try {
+            historyList.innerHTML = history.map((item, index) => 
+                this.createHistoryItem(item, index)
+            ).join('');
+            
+            // Add event listeners
+            this.addDeleteEventListeners();
+            this.addItemClickListeners();
+        } catch (error) {
+            console.error('Error showing history list:', error);
+            this.showErrorState();
+        }
     }
 
     createHistoryItem(item, index) {
-        const timeAgo = historyService.formatTimeAgo(item.timestamp);
-        const typeName = historyService.getTypeDisplayName(item.type);
-        const icon = historyService.getTypeIcon(item.type);
-        
-        let content = '';
-        let detailsClass = `history-item-${item.type}`;
-        
-        switch (item.type) {
-            case 'image':
-                content = this.createImageHistoryContent(item);
-                break;
-                
-            case 'text':
-                content = this.createTextHistoryContent(item);
-                break;
-                
-            case 'color':
-                content = this.createColorHistoryContent(item);
-                break;
-                
-            case 'password':
-                content = this.createPasswordHistoryContent(item);
-                break;
-                
-            default:
-                content = 'Conversion completed';
-        }
+        try {
+            const timeAgo = historyService.formatTimeAgo(item.timestamp);
+            const typeName = historyService.getTypeDisplayName(item.type);
+            const icon = historyService.getTypeIcon(item.type);
+            
+            let content = '';
+            let detailsClass = `history-item-${item.type}`;
+            
+            switch (item.type) {
+                case 'image':
+                    content = this.createImageHistoryContent(item);
+                    break;
+                    
+                case 'text':
+                    content = this.createTextHistoryContent(item);
+                    break;
+                    
+                case 'color':
+                    content = this.createColorHistoryContent(item);
+                    break;
+                    
+                case 'password':
+                    content = this.createPasswordHistoryContent(item);
+                    break;
+                    
+                default:
+                    content = this.createDefaultHistoryContent(item);
+            }
 
-        return `
-            <div class="history-item ${index === 0 ? 'new-item' : ''}" 
-                 data-id="${item.id}" 
-                 data-type="${item.type}"
-                 data-timestamp="${item.timestamp}">
-                <div class="history-item-icon" title="${typeName}">${icon}</div>
-                <div class="history-item-content">
-                    <div class="history-item-header">
-                        <span class="history-item-type">${typeName}</span>
-                        <span class="history-item-time">${timeAgo}</span>
+            return `
+                <div class="history-item ${index === 0 ? 'new-item' : ''}" 
+                     data-id="${item.id}" 
+                     data-type="${item.type}"
+                     data-timestamp="${item.timestamp}">
+                    <div class="history-item-icon" title="${this.escapeHtml(typeName)}">${icon}</div>
+                    <div class="history-item-content">
+                        <div class="history-item-header">
+                            <span class="history-item-type">${this.escapeHtml(typeName)}</span>
+                            <span class="history-item-time">${this.escapeHtml(timeAgo)}</span>
+                        </div>
+                        <div class="history-item-details ${detailsClass}">${content}</div>
+                        ${this.createAdditionalInfo(item)}
                     </div>
-                    <div class="history-item-details ${detailsClass}">${content}</div>
-                    ${this.createAdditionalInfo(item)}
+                    <button class="history-item-delete" 
+                            data-id="${item.id}" 
+                            title="${translationService.get('history.delete', 'Delete')}"
+                            aria-label="${translationService.get('history.delete', 'Delete')}">
+                        ×
+                    </button>
                 </div>
-                <button class="history-item-delete" 
-                        data-id="${item.id}" 
-                        title="${translationService.get('history.delete', 'Delete')}"
-                        aria-label="${translationService.get('history.delete', 'Delete')}">
-                    ×
-                </button>
-            </div>
-        `;
+            `;
+        } catch (error) {
+            console.error('Error creating history item:', error, item);
+            return `
+                <div class="history-item error">
+                    <div class="history-item-icon">⚠️</div>
+                    <div class="history-item-content">
+                        <div class="history-item-header">
+                            <span class="history-item-type">Invalid History Item</span>
+                        </div>
+                        <div class="history-item-details">This item could not be displayed</div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    escapeHtml(unsafe) {
+        if (typeof unsafe !== 'string') return unsafe;
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
     createImageHistoryContent(item) {
@@ -166,7 +302,8 @@ export class HistoryManager {
         }
         
         if (item.compressionRatio) {
-            content += `<br><small class="compression-info">${item.compressionRatio}% smaller</small>`;
+            const ratio = Math.max(0, Math.min(100, item.compressionRatio));
+            content += `<br><small class="compression-info">${ratio}% smaller</small>`;
         }
         
         return content;
@@ -179,10 +316,10 @@ export class HistoryManager {
             content += `Operation: ${this.formatTextOperation(item.operation)}`;
         }
         
-        if (item.input) {
+        if (item.input && typeof item.input === 'string') {
             const preview = item.input.length > 50 ? 
                 item.input.substring(0, 50) + '...' : item.input;
-            content += `<br><small>"${preview}"</small>`;
+            content += `<br><small>"${this.escapeHtml(preview)}"</small>`;
         }
         
         if (item.inputLength && item.outputLength) {
@@ -195,8 +332,8 @@ export class HistoryManager {
     createColorHistoryContent(item) {
         if (item.color) {
             return `
-                Color: ${item.color}
-                <div class="color-preview" style="background-color: ${item.color};"></div>
+                Color: ${this.escapeHtml(item.color)}
+                <div class="color-preview" style="background-color: ${this.escapeHtml(item.color)};"></div>
             `;
         }
         return 'Color tool used';
@@ -221,12 +358,22 @@ export class HistoryManager {
         return content;
     }
 
+    createDefaultHistoryContent(item) {
+        let content = 'Activity completed';
+        
+        if (item.operation) {
+            content = `Operation: ${this.formatTextOperation(item.operation)}`;
+        }
+        
+        return content;
+    }
+
     createAdditionalInfo(item) {
         const info = [];
         
         if (item.timestamp) {
-            const date = new Date(item.timestamp).toLocaleString();
-            info.push(`<small class="history-timestamp">${date}</small>`);
+            const date = new Date(parseInt(item.timestamp)).toLocaleString();
+            info.push(`<small class="history-timestamp">${this.escapeHtml(date)}</small>`);
         }
         
         return info.length > 0 ? 
@@ -238,14 +385,18 @@ export class HistoryManager {
             'image-count': stats.image,
             'text-count': stats.text,
             'color-count': stats.color,
-            'password-count': stats.password
+            'password-count': stats.password,
+            'other-count': stats.other
         };
 
         Object.entries(elements).forEach(([id, count]) => {
             const element = document.getElementById(id);
             if (element) {
                 element.textContent = count;
-                element.parentElement.style.display = count > 0 ? 'flex' : 'none';
+                const parent = element.closest('.stat-card');
+                if (parent) {
+                    parent.style.display = count > 0 ? 'flex' : 'none';
+                }
             }
         });
 
@@ -258,17 +409,19 @@ export class HistoryManager {
 
     addDeleteEventListeners() {
         document.querySelectorAll('.history-item-delete').forEach(button => {
-            button.addEventListener('click', (e) => {
+            this._addEventListener(button, 'click', (e) => {
                 e.stopPropagation();
                 const id = button.getAttribute('data-id');
-                this.deleteHistoryItem(id);
+                if (id) {
+                    this.deleteHistoryItem(id);
+                }
             });
         });
     }
 
     addItemClickListeners() {
         document.querySelectorAll('.history-item').forEach(item => {
-            item.addEventListener('click', (e) => {
+            this._addEventListener(item, 'click', (e) => {
                 if (!e.target.classList.contains('history-item-delete')) {
                     this.handleHistoryItemClick(item);
                 }
@@ -282,100 +435,131 @@ export class HistoryManager {
         
         console.log('History item clicked:', { id, type });
         
-        // Could implement re-use functionality here
-        // For example, navigate to the corresponding tool with pre-filled data
+        // Optional: Implement re-use functionality
         this.showItemDetails(id);
     }
 
     showItemDetails(id) {
-        // Optional: Show detailed view of history item
-        // This could be a modal or expanded view
+        // Could show modal or expand item details
         console.log('Show details for history item:', id);
     }
 
-    deleteHistoryItem(id) {
-        if (historyService.deleteHistoryItem(id)) {
-            // Show confirmation
-            this.showNotification('History item deleted', 'success');
-            // Reload the history display
-            this.loadHistory();
-        } else {
-            this.showNotification('Failed to delete history item', 'error');
+    async deleteHistoryItem(id) {
+        if (!id) {
+            this.showNotification('Invalid history item', 'error');
+            return;
+        }
+
+        try {
+            if (await Promise.resolve(historyService.deleteHistoryItem(id))) {
+                this.showNotification('History item deleted', 'success');
+            } else {
+                this.showNotification('Failed to delete history item', 'error');
+            }
+        } catch (error) {
+            console.error('Error deleting history item:', error);
+            this.showNotification('Error deleting history item', 'error');
         }
     }
 
-    clearHistory() {
-        const confirmMessage = translationService.get('history.confirmClear', 'Are you sure you want to clear all history?');
+    async clearHistory() {
+        const confirmMessage = translationService.get('history.confirmClear', 'Are you sure you want to clear all history? This action cannot be undone.');
         
         if (confirm(confirmMessage)) {
-            if (historyService.clearHistory()) {
-                this.showNotification('All history cleared', 'success');
-                this.loadHistory(); // Reload to show empty state
-            } else {
-                this.showNotification('Failed to clear history', 'error');
+            try {
+                if (await Promise.resolve(historyService.clearHistory())) {
+                    this.showNotification('All history cleared', 'success');
+                } else {
+                    this.showNotification('Failed to clear history', 'error');
+                }
+            } catch (error) {
+                console.error('Error clearing history:', error);
+                this.showNotification('Error clearing history', 'error');
             }
         }
     }
 
-    addConversionToHistory(conversionData) {
-        if (historyService.addHistory(conversionData)) {
-            // If we're currently on the history page, update the display
-            if (window.location.hash === '#history') {
-                // Add slight delay to show animation
-                setTimeout(() => {
-                    this.loadHistory();
-                }, 100);
-            }
+    async addConversionToHistory(conversionData) {
+        if (!conversionData || typeof conversionData !== 'object') {
+            console.error('Invalid conversion data:', conversionData);
+            return false;
+        }
+
+        try {
+            const success = await historyService.addHistory(conversionData);
             
-            this.showNotification('Activity recorded in history', 'success');
-            return true;
-        } else {
-            this.showNotification('Failed to record activity', 'error');
+            if (success) {
+                // If we're currently on the history page, update the display
+                if (window.location.hash === '#history') {
+                    setTimeout(() => {
+                        this.loadHistory();
+                    }, 100);
+                }
+                return true;
+            } else {
+                this.showNotification('Failed to record activity', 'error');
+                return false;
+            }
+        } catch (error) {
+            console.error('Error adding conversion to history:', error);
             return false;
         }
     }
 
-    filterHistory(query) {
-        if (!query.trim()) {
-            this.loadHistory();
+    async filterHistory(query) {
+        if (this.isLoading) return;
+
+        if (!query || !query.trim()) {
+            await this.loadHistory();
             return;
         }
 
-        const filteredHistory = historyService.searchHistory(query);
-        const historyList = document.getElementById('history-list');
-        const emptyState = document.getElementById('empty-history');
+        this.isLoading = true;
+        
+        try {
+            const filteredHistory = historyService.searchHistory(query);
+            const historyList = document.getElementById('history-list');
+            const emptyState = document.getElementById('empty-history');
 
-        if (filteredHistory.length === 0) {
-            historyList.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">🔍</div>
-                    <h3>No results found</h3>
-                    <p>No history items match your search</p>
-                </div>
-            `;
-        } else {
-            this.showHistoryList(historyList, emptyState, filteredHistory);
+            if (!historyList) return;
+
+            if (filteredHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <h3>No results found</h3>
+                        <p>No history items match "${this.escapeHtml(query)}"</p>
+                    </div>
+                `;
+            } else {
+                this.showHistoryList(historyList, emptyState, filteredHistory);
+            }
+        } catch (error) {
+            console.error('Error filtering history:', error);
+        } finally {
+            this.isLoading = false;
         }
     }
 
     // Helper methods
     truncateFileName(filename, maxLength = 25) {
-        if (filename.length <= maxLength) return filename;
+        if (!filename || typeof filename !== 'string') return 'Unknown file';
+        
+        if (filename.length <= maxLength) return this.escapeHtml(filename);
         
         const extension = filename.split('.').pop();
         const nameWithoutExt = filename.substring(0, filename.length - extension.length - 1);
         const truncateLength = maxLength - extension.length - 3; // Account for "..."
         
-        return nameWithoutExt.substring(0, truncateLength) + '...' + extension;
+        if (truncateLength <= 0) {
+            return '...' + extension;
+        }
+        
+        return this.escapeHtml(nameWithoutExt.substring(0, truncateLength) + '...' + extension);
     }
 
     formatFileSize(bytes) {
-        if (!bytes) return 'Unknown';
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        return historyService.formatFileSize(bytes);
     }
 
     formatTextOperation(operation) {
@@ -387,7 +571,11 @@ export class HistoryManager {
             'snakecase': 'Snake Case',
             'reverse': 'Reverse',
             'remove-spaces': 'Remove Spaces',
-            'copy': 'Copy to Clipboard'
+            'copy': 'Copy to Clipboard',
+            'encode': 'Encode',
+            'decode': 'Decode',
+            'compress': 'Compress',
+            'format': 'Format'
         };
         
         return operationMap[operation] || operation;
@@ -397,9 +585,66 @@ export class HistoryManager {
         // Simple notification system - could be enhanced with toast notifications
         console.log(`[${type.toUpperCase()}] ${message}`);
         
-        // For now, using alert for important notifications
-        if (type === 'error') {
-            alert(message);
+        // Create toast notification if toast system exists
+        if (window.showToast) {
+            window.showToast(message, type);
+        } else if (type === 'error') {
+            // Fallback to alert for important errors
+            alert(`Error: ${message}`);
+        }
+    }
+
+    // Export history functionality
+    exportHistory() {
+        try {
+            const data = historyService.exportHistory();
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `zaptools-history-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            this.showNotification('History exported successfully', 'success');
+        } catch (error) {
+            console.error('Error exporting history:', error);
+            this.showNotification('Failed to export history', 'error');
+        }
+    }
+
+    // Import history functionality
+    async importHistory(file) {
+        if (!file) {
+            this.showNotification('No file selected', 'error');
+            return;
+        }
+
+        if (file.type !== 'application/json') {
+            this.showNotification('Please select a JSON file', 'error');
+            return;
+        }
+
+        try {
+            const success = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    resolve(historyService.importHistory(e.target.result));
+                };
+                reader.onerror = () => resolve(false);
+                reader.readAsText(file);
+            });
+
+            if (success) {
+                // Notification will be shown via event listener
+            } else {
+                this.showNotification('Failed to import history - invalid file format', 'error');
+            }
+        } catch (error) {
+            console.error('Error importing history:', error);
+            this.showNotification('Error importing history file', 'error');
         }
     }
 
@@ -416,33 +661,12 @@ export class HistoryManager {
         }));
     }
 
-    // Export history functionality
-    exportHistory() {
-        const data = historyService.exportHistory();
-        const blob = new Blob([data], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `zaptools-history-${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        this.showNotification('History exported successfully', 'success');
-    }
-
-    // Import history functionality
-    importHistory(file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            if (historyService.importHistory(e.target.result)) {
-                this.showNotification('History imported successfully', 'success');
-                this.loadHistory();
-            } else {
-                this.showNotification('Failed to import history', 'error');
-            }
-        };
-        reader.readAsText(file);
+    // Get storage information
+    getStorageInfo() {
+        return historyService.getStorageInfo();
     }
 }
+
+// Export singleton instance
+export const historyManager = new HistoryManager();
+export default historyManager;
