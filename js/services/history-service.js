@@ -4,12 +4,12 @@ import translationService from './translation-service.js';
 class HistoryService {
     constructor() {
         this.storageKey = 'zaptools_history';
-        this.maxItems = 50; // Maximum history items to keep
-        this._isAdding = false; // Prevent concurrent additions
+        this.maxItems = 50;
+        this._isAdding = false;
     }
 
     /**
-     * Add new history item
+     * Add new history item - FIXED VERSION
      */
     async addHistory(item) {
         // Prevent concurrent additions
@@ -21,12 +21,18 @@ class HistoryService {
         this._isAdding = true;
         
         try {
-            const history = this.getHistory();
-            
-            // Validate item
+            // Validate item more strictly
             if (!item || typeof item !== 'object') {
-                throw new Error('Invalid history item');
+                throw new Error('Invalid history item: item is null or not an object');
             }
+            
+            if (!item.type) {
+                throw new Error('Invalid history item: missing type property');
+            }
+
+            console.log('Adding history item:', item.type, item);
+
+            const history = this.getHistory();
             
             // Add timestamp if not provided
             if (!item.timestamp) {
@@ -38,13 +44,11 @@ class HistoryService {
                 item.id = this.generateId();
             }
             
-            // Validate required fields
-            if (!item.type) {
-                console.warn('History item missing type:', item);
-                this._isAdding = false;
-                return false;
+            // Validate timestamp
+            if (typeof item.timestamp !== 'number' || item.timestamp <= 0) {
+                item.timestamp = Date.now();
             }
-            
+
             // Remove any existing item with same ID to prevent duplicates
             const existingIndex = history.findIndex(h => h.id === item.id);
             if (existingIndex !== -1) {
@@ -59,13 +63,29 @@ class HistoryService {
                 history.splice(this.maxItems);
             }
             
-            // Save to localStorage with error handling
-            await this.saveToStorage(history);
+            // Save to localStorage with better error handling
+            const success = await this.saveToStorage(history);
             
-            console.log('History item added:', item.type, item.id);
-            return true;
+            if (success) {
+                console.log('History item added successfully:', item.type, item.id);
+                
+                // Dispatch success event
+                window.dispatchEvent(new CustomEvent('historyItemAdded', {
+                    detail: { item, historyLength: history.length }
+                }));
+                
+                return true;
+            } else {
+                throw new Error('Failed to save to storage');
+            }
         } catch (error) {
             console.error('Error adding history item:', error);
+            
+            // Dispatch error event
+            window.dispatchEvent(new CustomEvent('historyAddError', {
+                detail: { error: error.message, item }
+            }));
+            
             return false;
         } finally {
             this._isAdding = false;
@@ -73,27 +93,76 @@ class HistoryService {
     }
 
     /**
-     * Save history to storage with retry logic
+     * Save history to storage with better error handling
      */
     async saveToStorage(history) {
-        const maxRetries = 3;
-        let retries = 0;
+        const maxRetries = 2;
         
-        while (retries < maxRetries) {
+        for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
-                localStorage.setItem(this.storageKey, JSON.stringify(history));
-                return;
-            } catch (error) {
-                retries++;
-                if (retries === maxRetries) {
-                    throw new Error(`Failed to save history after ${maxRetries} attempts: ${error.message}`);
+                // Check if localStorage is available
+                if (!this.isLocalStorageAvailable()) {
+                    throw new Error('localStorage is not available');
                 }
-                // Wait before retry (exponential backoff)
-                await new Promise(resolve => setTimeout(resolve, 100 * retries));
+
+                // Check quota
+                const dataString = JSON.stringify(history);
+                if (dataString.length > this.getLocalStorageRemainingSpace()) {
+                    throw new Error('localStorage quota exceeded');
+                }
+
+                localStorage.setItem(this.storageKey, dataString);
+                return true;
+                
+            } catch (error) {
+                console.warn(`Storage attempt ${attempt} failed:`, error);
+                
+                if (attempt === maxRetries) {
+                    console.error('All storage attempts failed');
+                    return false;
+                }
+                
+                // Wait before retry
+                await new Promise(resolve => setTimeout(resolve, 100 * attempt));
             }
         }
     }
 
+    /**
+     * Check if localStorage is available
+     */
+    isLocalStorageAvailable() {
+        try {
+            const test = 'test';
+            localStorage.setItem(test, test);
+            localStorage.removeItem(test);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    /**
+     * Estimate remaining localStorage space
+     */
+    getLocalStorageRemainingSpace() {
+        try {
+            const testKey = 'test_' + Math.random().toString(36);
+            let data = 'a';
+            // Try to exceed quota to find limit
+            try {
+                while (true) {
+                    localStorage.setItem(testKey, data);
+                    data += data;
+                }
+            } catch (e) {
+                localStorage.removeItem(testKey);
+                return data.length;
+            }
+        } catch (e) {
+            return 5000000; // 5MB fallback
+        }
+    }
     /**
      * Get all history items
      */
