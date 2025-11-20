@@ -1,27 +1,32 @@
 // js/views/templates/navigation.js
-import { toolsRegistry } from '../../tools-registry.js';
-import translationService from '../../services/translation-service.js';
-
 export const NavigationTemplate = () => {
-    // Build navigation items from toolsRegistry where showInNav === true
-    const items = toolsRegistry
-        .filter(t => t.showInNav)
-        .map(t => {
-            const name = translationService.get(t.i18nKey) || t.id;
-            return `
-                <li class="bottom-nav-item">
-                    <a href="#${t.path}" class="bottom-nav-link" data-tool="${t.id}">
-                        <span class="bottom-nav-icon">${t.icon}</span>
-                        <span class="bottom-nav-text" data-i18n="${t.i18nKey}">${name}</span>
-                    </a>
-                </li>
-            `;
-        }).join('\n');
-
     return `
         <nav class="bottom-bar">
             <ul class="bottom-nav">
-                ${items}
+                <li class="bottom-nav-item">
+                    <a href="#home" class="bottom-nav-link active">
+                        <span class="bottom-nav-icon">🏠</span>
+                        <span class="bottom-nav-text" data-i18n="navigation.home">Home</span>
+                    </a>
+                </li>
+                <li class="bottom-nav-item">
+                    <a href="#features" class="bottom-nav-link">
+                        <span class="bottom-nav-icon">📋</span>
+                        <span class="bottom-nav-text" data-i18n="navigation.features">Features</span>
+                    </a>
+                </li>
+                <li class="bottom-nav-item">
+                    <a href="#history" class="bottom-nav-link">
+                        <span class="bottom-nav-icon">🕒</span>
+                        <span class="bottom-nav-text" data-i18n="navigation.history">History</span>
+                    </a>
+                </li>
+                <li class="bottom-nav-item">
+                    <a href="#settings" class="bottom-nav-link">
+                        <span class="bottom-nav-icon">⚙️</span>
+                        <span class="bottom-nav-text" data-i18n="navigation.settings">Settings</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     `;
