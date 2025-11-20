@@ -7,6 +7,9 @@
     z-index: var(--z-sticky);
     height: var(--header-height);
     backdrop-filter: blur(10px);
+    border-bottom: 3px double var(--primary-color);
+    background-image: 
+        linear-gradient(var(--surface-color) 0%, rgba(210, 180, 140, 0.1) 100%);
 }
 
 .header .container {
@@ -15,4 +18,37 @@
     align-items: center;
     height: 100%;
     padding: var(--space-sm) var(--space-lg);
+}
+
+/* Newspaper-style header dengan date */
+.header-date {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-style: italic;
+    border-left: 1px solid var(--border-color);
+    padding-left: var(--space-md);
+    margin-left: var(--space-md);
+}
+
+/* Header dengan headline effect */
+.header-headline {
+    position: relative;
+    padding: var(--space-sm) 0;
+}
+
+.header-headline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .header {
+    background-image: 
+        linear-gradient(var(--surface-color) 0%, rgba(90, 90, 90, 0.1) 100%);
+    border-bottom-color: var(--primary-light);
 }
