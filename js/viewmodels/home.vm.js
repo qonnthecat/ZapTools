@@ -1,0 +1,3 @@
+window.homeVM = function() {
+  return { };
+}
