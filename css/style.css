@@ -1,3 +1,51 @@
+/* css/style.css */
+/* Import semua file CSS */
+@import url('variables.css');
+@import url('base.css');
+@import url('layout.css');
+
+/* Components */
+@import url('components/logo.css');
+@import url('components/header.css');
+@import url('components/bottom-bar.css');
+@import url('components/cards.css');
+@import url('components/buttons.css');
+@import url('components/forms.css');
+
+/* Pages */
+@import url('pages/home.css');
+@import url('pages/features.css');
+@import url('pages/converter.css');
+@import url('pages/tools.css');
+@import url('pages/history.css'); /* NEW */
+@import url('pages/settings.css');
+
+/* Utilities */
+@import url('utilities/animations.css');
+@import url('utilities/responsive.css');
+
+/* Footer Styles */
+.footer {
+    background-color: var(--surface-color);
+    padding: var(--space-xl) 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-2xl);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.footer p {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
+}
+
 /* =============================== NEWSPAPER THEME - FULL CSS Single-file stylesheet for entire website Includes: layout, navigation, buttons, forms, search, typography, dark mode Style: Vintage newspaper (black/white/sepia) =============================== */
 
 /* ------------------------------- / /        FONT & BASE RESET        / / ------------------------------- */ @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
