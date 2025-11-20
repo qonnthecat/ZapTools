@@ -1,89 +1,66 @@
-// router.js - simple router that fetches HTML partials and mounts them into #app
+// -------------------------
+// Router untuk ZapTools MVVM + Alpine.js
+// -------------------------
 
-const routes = {
-  '/': '/js/views/templates/home.html',
-  '/home': '/js/views/templates/home.html',
-  '/tools/color': '/js/views/templates/color-tools.html',
-  '/tools/image': '/js/views/templates/image-converter.html',
-  '/tools/text': '/js/views/templates/text-converter.html',
-  '/tools/password': '/js/views/templates/password-generator.html',
-  '/history': '/js/views/templates/history.html',
-  '/settings': '/js/views/templates/settings.html',
-  '/features': '/js/views/templates/home.html'
+import { views } from "./views.js";
+
+export const Router = {
+    routes: {},
+
+    init() {
+        // Gabungkan semua views ke dalam routes
+        this.routes = views;
+
+        // Dengarkan perubahan URL
+        window.addEventListener("hashchange", () => this.handleRoute());
+        window.addEventListener("DOMContentLoaded", () => this.handleRoute());
+    },
+
+    handleRoute() {
+        let hash = window.location.hash || "#/home";
+        let path = hash.replace("#", "");
+
+        // Jika route tidak ada, fallback ke home
+        if (!this.routes[path]) {
+            path = "/home";
+        }
+
+        // Ambil template & viewmodel
+        const { template, viewmodel } = this.routes[path];
+
+        // Ambil root container
+        const app = document.getElementById("app");
+        if (!app) {
+            console.error("ERROR: Elemen #app tidak ditemukan!");
+            return;
+        }
+
+        // Kosongkan container
+        app.innerHTML = "";
+
+        // Inject template
+        app.innerHTML = template;
+
+        // IMPORTANT: re-init Alpine untuk halaman baru
+        this.mountAlpine(viewmodel);
+    },
+
+    mountAlpine(viewmodel) {
+        // Bersihkan instance Alpine sebelumnya
+        if (window.Alpine) {
+            window.Alpine.flushAndStopDeferringMutations?.();
+        }
+
+        // Jika halaman punya ViewModel
+        if (typeof viewmodel === "function") {
+            window.currentViewModel = viewmodel;
+        } else {
+            window.currentViewModel = () => ({});
+        }
+
+        // Re-start Alpine
+        if (window.Alpine) {
+            window.Alpine.start();
+        }
+    }
 };
-
-let appRoot = null;
-let currentPath = null;
-
-async function fetchHtml(path) {
-  const res = await fetch(path, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Failed to load ' + path);
-  return await res.text();
-}
-
-async function navigateTo(path, replace = false) {
-  try {
-    const route = routes[path] || routes['/'];
-    const html = await fetchHtml(route);
-
-    // optional cleanup hook if the mounted component set window.__zaptools_unmount
-    if (window.__zaptools_unmount && typeof window.__zaptools_unmount === 'function') {
-      try { window.__zaptools_unmount(); } catch(e){ console.warn(e); }
-      window.__zaptools_unmount = null;
-    }
-
-    appRoot.innerHTML = html;
-
-    // initialize Alpine for this subtree
-    if (window.Alpine && window.Alpine.initTree) {
-      window.Alpine.initTree(appRoot);
-    } else if (window.Alpine && window.Alpine.start) {
-      // fallback: start (won't re-init trees if already started), try discover
-      try { window.Alpine.initTree(appRoot); } catch(e) {}
-    }
-
-    // update history
-    if (replace) history.replaceState({}, '', path);
-    else history.pushState({}, '', path);
-
-    currentPath = path;
-  } catch (err) {
-    console.error(err);
-    appRoot.innerHTML = `<div class="error">Gagal memuat halaman. ${err.message}</div>`;
-  }
-}
-
-export async function initRouter({ rootId = 'app' } = {}) {
-  appRoot = document.getElementById(rootId);
-  if (!appRoot) throw new Error('Root element not found: ' + rootId);
-
-  // initial navigation based on location.pathname
-  const initial = normalizePath(location.pathname);
-  await navigateTo(initial, true);
-
-  // handle link clicks (delegate) for internal navigation
-  document.body.addEventListener('click', (e) => {
-    const a = e.target.closest('a[data-spa]');
-    if (!a) return;
-    e.preventDefault();
-    const href = a.getAttribute('href');
-    navigateTo(normalizePath(href));
-  });
-
-  // popstate
-  window.addEventListener('popstate', () => {
-    const p = normalizePath(location.pathname);
-    if (p === currentPath) return;
-    navigateTo(p, true);
-  });
-}
-
-function normalizePath(p) {
-  if (!p) return '/';
-  // strip trailing slash
-  try { const u = new URL(p, location.origin); return u.pathname || '/'; } catch(e) {}
-  if (p.endsWith('/') && p.length > 1) return p.slice(0, -1);
-  return p;
-}
-
-export { navigateTo };
