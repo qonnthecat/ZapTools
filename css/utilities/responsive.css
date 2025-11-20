@@ -1,153 +1,379 @@
-/* css/utilities/responsive.css */
-/* Mobile First Approach */
-
-/* Base body padding for bottom bar */
-body {
-    padding-bottom: 60px; /* Reduced from 70px */
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-    body {
-        padding-bottom: 65px;
+/* css/utilities/animations.css */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
     }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    body {
-        padding-bottom: 70px;
+@keyframes slideIn {
+    from { 
+        transform: translateX(-100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
     }
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    body {
-        padding-bottom: 75px;
+@keyframes typewriter {
+    from { 
+        width: 0; 
+    }
+    to { 
+        width: 100%; 
     }
 }
 
-/* Mobile specific adjustments */
-@media (max-width: 767px) {
-    .header .container {
-        padding: var(--space-sm) var(--space-md);
+@keyframes blinkCaret {
+    from, to { 
+        border-color: transparent; 
     }
-    
-    .logo-image {
-        width: 32px;
-        height: 32px;
-        padding: 6px;
-    }
-    
-    .logo-text h1 {
-        font-size: var(--font-size-xl);
-    }
-    
-    .logo-text p {
-        font-size: var(--font-size-xs);
-    }
-    
-    .bottom-nav-text {
-        font-size: var(--font-size-xs);
-    }
-    
-    .bottom-nav-icon {
-        font-size: 1.2rem;
-    }
-    
-    /* History page mobile optimizations */
-    .history-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-    
-    .stat-card {
-        padding: 12px;
-    }
-    
-    .history-item {
-        padding: 12px;
+    50% { 
+        border-color: var(--primary-color); 
     }
 }
 
-/* Very small devices (phones, 480px and down) */
-@media (max-width: 480px) {
-    body {
-        padding-bottom: 55px;
+@keyframes paperRustle {
+    0% {
+        transform: rotate(0deg) scale(1);
+        box-shadow: var(--shadow-sm);
     }
-    
-    .container {
-        padding: 0 var(--space-md);
+    25% {
+        transform: rotate(0.5deg) scale(1.01);
+        box-shadow: var(--shadow-md);
     }
-    
-    .logo-container {
-        gap: var(--space-sm);
+    50% {
+        transform: rotate(-0.5deg) scale(1.02);
     }
-    
-    .logo-image {
-        width: 28px;
-        height: 28px;
-        padding: 5px;
+    75% {
+        transform: rotate(0.3deg) scale(1.01);
     }
-    
-    .logo-text h1 {
-        font-size: var(--font-size-lg);
-    }
-    
-    .logo-text p {
-        display: none;
-    }
-    
-    .footer-logo {
-        font-size: var(--font-size-md);
-    }
-    
-    .footer-logo-image {
-        width: 20px;
-        height: 20px;
-        padding: 2px;
-    }
-    
-    /* History page very small screens */
-    .history-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .history-actions {
-        justify-content: center;
-    }
-    
-    .history-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .history-item-delete {
-        align-self: flex-end;
-        margin-top: -35px;
+    100% {
+        transform: rotate(0deg) scale(1);
+        box-shadow: var(--shadow-sm);
     }
 }
 
-/* Tablet adjustments */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .logo-image {
-        width: 38px;
-        height: 38px;
+@keyframes inkSpread {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
     }
-    
-    .logo-text h1 {
-        font-size: var(--font-size-2xl);
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
-/* Print styles */
+@keyframes vintagePulse {
+    0% {
+        transform: scale(1);
+        filter: sepia(0);
+    }
+    50% {
+        transform: scale(1.02);
+        filter: sepia(0.3);
+    }
+    100% {
+        transform: scale(1);
+        filter: sepia(0);
+    }
+}
+
+@keyframes stampAppear {
+    0% {
+        transform: scale(3) rotate(10deg);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(0.9) rotate(-2deg);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(1.05) rotate(1deg);
+    }
+    90% {
+        transform: scale(0.95) rotate(-1deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes newspaperFold {
+    0% {
+        transform: perspective(1000px) rotateX(90deg) rotateY(-10deg);
+        opacity: 0;
+    }
+    100% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUpVintage {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes slideInLeftVintage {
+    from {
+        transform: translate3d(-100px, 0, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRightVintage {
+    from {
+        transform: translate3d(100px, 0, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-out;
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--primary-color);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: 
+        typewriter 3.5s steps(40, end),
+        blinkCaret 0.75s step-end infinite;
+}
+
+.paper-rustle {
+    animation: paperRustle 0.8s ease-in-out;
+}
+
+.ink-spread {
+    animation: inkSpread 0.6s ease-out;
+}
+
+.vintage-pulse {
+    animation: vintagePulse 2s ease-in-out infinite;
+}
+
+.stamp-appear {
+    animation: stampAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.newspaper-fold {
+    animation: newspaperFold 1s ease-out;
+}
+
+.fade-in-up-vintage {
+    animation: fadeInUpVintage 0.8s ease-out;
+}
+
+.slide-in-left-vintage {
+    animation: slideInLeftVintage 0.6s ease-out;
+}
+
+.slide-in-right-vintage {
+    animation: slideInRightVintage 0.6s ease-out;
+}
+
+/* Transition Classes */
+.transition-fast {
+    transition: var(--transition-fast);
+}
+
+.transition-normal {
+    transition: var(--transition-normal);
+}
+
+.transition-slow {
+    transition: var(--transition-slow);
+}
+
+/* Hover Effects dengan gaya vintage */
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+    filter: sepia(0.2);
+}
+
+.hover-rotate:hover {
+    transform: rotate(2deg) scale(1.01);
+}
+
+.hover-ink:hover {
+    position: relative;
+}
+
+.hover-ink:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
+    animation: inkSpread 0.4s ease-out;
+}
+
+/* Loading States dengan gaya vintage */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+    animation: spin 1s linear infinite;
+}
+
+.loading-vintage::after {
+    content: "⌛";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    animation: vintagePulse 1.5s ease-in-out infinite;
+    filter: sepia(0.5);
+}
+
+/* Page transition effects */
+.page-enter {
+    opacity: 0;
+    transform: translateX(30px) scale(0.98);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.98);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Text emphasis animations */
+.text-highlight {
+    background: linear-gradient(120deg, transparent 0%, transparent 50%, rgba(139, 69, 19, 0.1) 50%, rgba(139, 69, 19, 0.1) 100%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    transition: background-position 0.5s ease;
+}
+
+.text-highlight:hover {
+    background-position: 0 0;
+}
+
+/* Vintage shake effect */
+@keyframes vintageShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.vintage-shake {
+    animation: vintageShake 0.5s ease-in-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .slide-in,
+    .typewriter,
+    .paper-rustle,
+    .ink-spread,
+    .vintage-pulse,
+    .stamp-appear,
+    .newspaper-fold,
+    .fade-in-up-vintage,
+    .slide-in-left-vintage,
+    .slide-in-right-vintage,
+    .loading::after,
+    .loading-vintage::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .hover-lift:hover,
+    .hover-scale:hover,
+    .hover-rotate:hover {
+        transform: none;
+    }
+}
+
+/* Print styles untuk animasi */
 @media print {
-    .bottom-bar {
-        display: none;
+    .fade-in,
+    .slide-in,
+    .typewriter,
+    .paper-rustle,
+    .ink-spread,
+    .vintage-pulse,
+    .stamp-appear,
+    .newspaper-fold,
+    .fade-in-up-vintage,
+    .slide-in-left-vintage,
+    .slide-in-right-vintage {
+        animation: none !important;
     }
     
-    body {
-        padding-bottom: 0;
+    .hover-lift,
+    .hover-scale,
+    .hover-rotate,
+    .hover-ink {
+        transform: none !important;
     }
 }
