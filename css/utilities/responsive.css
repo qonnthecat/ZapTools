@@ -1,10 +1,9 @@
 /* css/utilities/responsive.css */
-/* Mobile First Approach dengan sentuhan vintage */
+/* Mobile First Approach */
 
-/* Base body padding untuk bottom bar dengan texture */
+/* Base body padding for bottom bar */
 body {
     padding-bottom: 60px; /* Reduced from 70px */
-    background-attachment: fixed;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -12,51 +11,12 @@ body {
     body {
         padding-bottom: 65px;
     }
-    
-    /* Improve readability on larger mobile screens */
-    .container {
-        padding: 0 var(--space-xl);
-    }
-    
-    /* Better typography scaling */
-    h1 {
-        font-size: calc(var(--font-size-4xl) * 1.1);
-    }
-    
-    .hero h2 {
-        font-size: calc(var(--font-size-4xl) * 1.05);
-    }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     body {
         padding-bottom: 70px;
-        background-size: 500px 500px;
-    }
-    
-    /* Newspaper column layout untuk tablet */
-    .newspaper-layout {
-        column-count: 2;
-        column-gap: var(--space-2xl);
-        column-rule: 1px solid var(--border-color);
-    }
-    
-    /* Improve feature grid pada tablet */
-    .feature-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: var(--space-xl);
-    }
-    
-    /* Better card layouts */
-    .card {
-        margin-bottom: var(--space-xl);
-    }
-    
-    /* Enhanced typography */
-    .hero p {
-        font-size: calc(var(--font-size-xl) * 1.1);
-        max-width: 700px;
     }
 }
 
@@ -64,68 +24,10 @@ body {
 @media (min-width: 992px) {
     body {
         padding-bottom: 75px;
-        background-size: 600px 600px;
-    }
-    
-    /* Three column newspaper layout */
-    .newspaper-layout {
-        column-count: 3;
-    }
-    
-    /* Enhanced feature grid */
-    .feature-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: var(--space-2xl);
-    }
-    
-    /* Larger containers */
-    .container {
-        max-width: var(--container-max-width);
-        padding: 0 var(--space-2xl);
-    }
-    
-    /* Improved hero section */
-    .hero {
-        padding: var(--space-2xl) 0;
-    }
-    
-    .hero h2 {
-        font-size: calc(var(--font-size-4xl) * 1.2);
-    }
-    
-    /* Better spacing untuk desktop */
-    .main {
-        padding: var(--space-2xl) 0;
     }
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    body {
-        background-size: 800px 800px;
-    }
-    
-    /* Maximum container width */
-    .container {
-        max-width: 1400px;
-    }
-    
-    /* Enhanced typography untuk large screens */
-    h1 {
-        font-size: calc(var(--font-size-4xl) * 1.3);
-    }
-    
-    .hero h2 {
-        font-size: calc(var(--font-size-4xl) * 1.3);
-    }
-    
-    /* More spacious layouts */
-    .feature-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-}
-
-/* Mobile specific adjustments dengan sentuhan vintage */
+/* Mobile specific adjustments */
 @media (max-width: 767px) {
     .header .container {
         padding: var(--space-sm) var(--space-md);
@@ -166,45 +68,12 @@ body {
     .history-item {
         padding: 12px;
     }
-    
-    /* Single column layout untuk mobile */
-    .newspaper-layout {
-        column-count: 1;
-    }
-    
-    /* Compact hero section */
-    .hero {
-        padding: var(--space-xl) 0;
-    }
-    
-    .hero h2 {
-        font-size: var(--font-size-3xl);
-    }
-    
-    .hero p {
-        font-size: var(--font-size-lg);
-    }
-    
-    /* Adjust card padding untuk mobile */
-    .card,
-    .feature-card,
-    .tool-card,
-    .converter-card {
-        padding: var(--space-lg);
-    }
-    
-    /* Better button sizing */
-    .btn {
-        padding: var(--space-md) var(--space-lg);
-        font-size: var(--font-size-sm);
-    }
 }
 
 /* Very small devices (phones, 480px and down) */
 @media (max-width: 480px) {
     body {
         padding-bottom: 55px;
-        background-size: 300px 300px;
     }
     
     .container {
@@ -258,38 +127,9 @@ body {
         align-self: flex-end;
         margin-top: -35px;
     }
-    
-    /* Compact forms pada very small screens */
-    .form-group {
-        margin-bottom: var(--space-md);
-    }
-    
-    .form-control {
-        padding: var(--space-sm);
-        font-size: var(--font-size-sm);
-    }
-    
-    /* Adjust feature grid untuk very small screens */
-    .feature-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-    }
-    
-    /* Smaller hero section */
-    .hero {
-        padding: var(--space-lg) 0;
-    }
-    
-    .hero h2 {
-        font-size: var(--font-size-2xl);
-    }
-    
-    .hero p {
-        font-size: var(--font-size-md);
-    }
 }
 
-/* Tablet adjustments dengan sentuhan vintage */
+/* Tablet adjustments */
 @media (min-width: 768px) and (max-width: 1024px) {
     .logo-image {
         width: 38px;
@@ -299,80 +139,9 @@ body {
     .logo-text h1 {
         font-size: var(--font-size-2xl);
     }
-    
-    /* Optimize feature cards untuk tablet */
-    .feature-card {
-        padding: var(--space-lg);
-    }
-    
-    .feature-icon {
-        font-size: 2rem;
-    }
-    
-    /* Better spacing untuk tablet */
-    .main {
-        padding: var(--space-xl) 0;
-    }
-    
-    /* Adjust bottom navigation */
-    .bottom-nav-link {
-        min-height: 52px;
-    }
-    
-    .bottom-nav-icon {
-        font-size: 1.4rem;
-    }
 }
 
-/* High-resolution displays */
-@media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
-       (min-width: 768px) and (min-resolution: 192dpi) {
-    /* Enhanced background textures untuk retina */
-    body {
-        background-image: 
-            radial-gradient(circle at 25% 25%, rgba(210, 180, 140, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, rgba(210, 180, 140, 0.08) 0%, transparent 50%);
-    }
-}
-
-/* Landscape orientation adjustments */
-@media (max-height: 500px) and (orientation: landscape) {
-    .hero {
-        padding: var(--space-lg) 0;
-    }
-    
-    .hero h2 {
-        font-size: var(--font-size-2xl);
-        margin-bottom: var(--space-md);
-    }
-    
-    .hero p {
-        margin-bottom: var(--space-lg);
-    }
-    
-    /* Compact header untuk landscape */
-    .header {
-        height: 60px;
-    }
-    
-    /* Adjust bottom bar height */
-    .bottom-bar {
-        padding: 6px 0;
-    }
-    
-    body {
-        padding-bottom: 50px;
-    }
-}
-
-/* Dark mode responsive adjustments */
-@media (max-width: 767px) {
-    [data-theme="dark"] .logo-image {
-        filter: brightness(1.2) contrast(1.1) sepia(0.3);
-    }
-}
-
-/* Print styles dengan optimisasi untuk tema vintage */
+/* Print styles */
 @media print {
     .bottom-bar {
         display: none;
@@ -380,98 +149,5 @@ body {
     
     body {
         padding-bottom: 0;
-        background: white !important;
-        background-image: none !important;
-    }
-    
-    .header {
-        position: static;
-        box-shadow: none;
-        border-bottom: 2px solid #000;
-    }
-    
-    .card {
-        box-shadow: none;
-        border: 1px solid #000;
-        break-inside: avoid;
-    }
-    
-    .btn {
-        background: white !important;
-        color: black !important;
-        border: 1px solid #000 !important;
-    }
-    
-    /* Hide interactive elements */
-    .bottom-nav,
-    .history-item-delete,
-    .settings-group .toggle-switch {
-        display: none;
-    }
-    
-    /* Optimize typography untuk print */
-    body {
-        font-size: 12pt;
-        line-height: 1.4;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-        color: black !important;
-    }
-    
-    /* Ensure good contrast */
-    .text-secondary {
-        color: #333 !important;
-    }
-    
-    /* Page breaks */
-    .section {
-        break-before: page;
-    }
-    
-    .feature-grid {
-        display: block;
-    }
-    
-    .feature-card {
-        margin-bottom: 20pt;
-        break-inside: avoid;
-    }
-}
-
-/* Reduced motion untuk semua perangkat */
-@media (prefers-reduced-motion: reduce) {
-    .hero,
-    .feature-card,
-    .history-item,
-    .stat-card {
-        transition: none;
-    }
-    
-    .logo:hover .logo-image {
-        transform: none;
-    }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-    .hover-lift:hover,
-    .hover-scale:hover,
-    .hover-rotate:hover {
-        transform: none;
-    }
-    
-    /* Larger touch targets */
-    .btn {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    .bottom-nav-link {
-        min-height: 48px;
-    }
-    
-    .form-check {
-        min-height: 44px;
     }
 }

@@ -2,7 +2,7 @@
 @keyframes fadeIn {
     from { 
         opacity: 0; 
-        transform: translateY(10px); 
+        transform: translateY(20px); 
     }
     to { 
         opacity: 1; 
@@ -21,189 +21,61 @@
     }
 }
 
-@keyframes typewriter {
-    from { 
-        width: 0; 
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
     }
-    to { 
-        width: 100%; 
+    40%, 43% {
+        transform: translate3d(0, -8px, 0);
     }
-}
-
-@keyframes blinkCaret {
-    from, to { 
-        border-color: transparent; 
+    70% {
+        transform: translate3d(0, -4px, 0);
     }
-    50% { 
-        border-color: var(--primary-color); 
+    90% {
+        transform: translate3d(0, -2px, 0);
     }
 }
 
-@keyframes paperRustle {
+@keyframes pulse {
     0% {
-        transform: rotate(0deg) scale(1);
-        box-shadow: var(--shadow-sm);
-    }
-    25% {
-        transform: rotate(0.5deg) scale(1.01);
-        box-shadow: var(--shadow-md);
-    }
-    50% {
-        transform: rotate(-0.5deg) scale(1.02);
-    }
-    75% {
-        transform: rotate(0.3deg) scale(1.01);
-    }
-    100% {
-        transform: rotate(0deg) scale(1);
-        box-shadow: var(--shadow-sm);
-    }
-}
-
-@keyframes inkSpread {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
+        transform: scale(1);
     }
     50% {
         transform: scale(1.05);
-        opacity: 0.8;
     }
     100% {
         transform: scale(1);
-        opacity: 1;
     }
 }
 
-@keyframes vintagePulse {
-    0% {
-        transform: scale(1);
-        filter: sepia(0);
-    }
-    50% {
-        transform: scale(1.02);
-        filter: sepia(0.3);
-    }
-    100% {
-        transform: scale(1);
-        filter: sepia(0);
-    }
-}
-
-@keyframes stampAppear {
-    0% {
-        transform: scale(3) rotate(10deg);
-        opacity: 0;
-    }
-    60% {
-        transform: scale(0.9) rotate(-2deg);
-        opacity: 1;
-    }
-    75% {
-        transform: scale(1.05) rotate(1deg);
-    }
-    90% {
-        transform: scale(0.95) rotate(-1deg);
-    }
-    100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
-}
-
-@keyframes newspaperFold {
-    0% {
-        transform: perspective(1000px) rotateX(90deg) rotateY(-10deg);
-        opacity: 0;
-    }
-    100% {
-        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUpVintage {
+@keyframes spin {
     from {
-        opacity: 0;
-        transform: translate3d(0, 30px, 0) scale(0.95);
+        transform: rotate(0deg);
     }
     to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-}
-
-@keyframes slideInLeftVintage {
-    from {
-        transform: translate3d(-100px, 0, 0);
-        opacity: 0;
-    }
-    to {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInRightVintage {
-    from {
-        transform: translate3d(100px, 0, 0);
-        opacity: 0;
-    }
-    to {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
+        transform: rotate(360deg);
     }
 }
 
 /* Animation Classes */
 .fade-in {
-    animation: fadeIn 0.6s ease-in;
+    animation: fadeIn 0.5s ease-in;
 }
 
 .slide-in {
-    animation: slideIn 0.4s ease-out;
+    animation: slideIn 0.3s ease-out;
 }
 
-.typewriter {
-    overflow: hidden;
-    border-right: 2px solid var(--primary-color);
-    white-space: nowrap;
-    margin: 0 auto;
-    animation: 
-        typewriter 3.5s steps(40, end),
-        blinkCaret 0.75s step-end infinite;
+.bounce {
+    animation: bounce 1s ease infinite;
 }
 
-.paper-rustle {
-    animation: paperRustle 0.8s ease-in-out;
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
 }
 
-.ink-spread {
-    animation: inkSpread 0.6s ease-out;
-}
-
-.vintage-pulse {
-    animation: vintagePulse 2s ease-in-out infinite;
-}
-
-.stamp-appear {
-    animation: stampAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.newspaper-fold {
-    animation: newspaperFold 1s ease-out;
-}
-
-.fade-in-up-vintage {
-    animation: fadeInUpVintage 0.8s ease-out;
-}
-
-.slide-in-left-vintage {
-    animation: slideInLeftVintage 0.6s ease-out;
-}
-
-.slide-in-right-vintage {
-    animation: slideInRightVintage 0.6s ease-out;
+.spin {
+    animation: spin 1s linear infinite;
 }
 
 /* Transition Classes */
@@ -219,41 +91,23 @@
     transition: var(--transition-slow);
 }
 
-/* Hover Effects dengan gaya vintage */
+/* Hover Effects */
 .hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .hover-scale:hover {
-    transform: scale(1.02);
-    filter: sepia(0.2);
+    transform: scale(1.05);
 }
 
 .hover-rotate:hover {
-    transform: rotate(2deg) scale(1.01);
+    transform: rotate(5deg);
 }
 
-.hover-ink:hover {
-    position: relative;
-}
-
-.hover-ink:hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
-    animation: inkSpread 0.4s ease-out;
-}
-
-/* Loading States dengan gaya vintage */
+/* Loading States */
 .loading {
-    opacity: 0.7;
+    opacity: 0.6;
     pointer-events: none;
-    position: relative;
 }
 
 .loading::after {
@@ -261,119 +115,11 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 24px;
-    height: 24px;
-    margin: -12px 0 0 -12px;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
     border: 2px solid var(--border-color);
     border-top: 2px solid var(--primary-color);
-    border-radius: var(--radius-sm);
+    border-radius: 50%;
     animation: spin 1s linear infinite;
-}
-
-.loading-vintage::after {
-    content: "⌛";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.5rem;
-    animation: vintagePulse 1.5s ease-in-out infinite;
-    filter: sepia(0.5);
-}
-
-/* Page transition effects */
-.page-enter {
-    opacity: 0;
-    transform: translateX(30px) scale(0.98);
-}
-
-.page-enter-active {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.page-exit {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
-
-.page-exit-active {
-    opacity: 0;
-    transform: translateX(-30px) scale(0.98);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Text emphasis animations */
-.text-highlight {
-    background: linear-gradient(120deg, transparent 0%, transparent 50%, rgba(139, 69, 19, 0.1) 50%, rgba(139, 69, 19, 0.1) 100%);
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    transition: background-position 0.5s ease;
-}
-
-.text-highlight:hover {
-    background-position: 0 0;
-}
-
-/* Vintage shake effect */
-@keyframes vintageShake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-    20%, 40%, 60%, 80% { transform: translateX(2px); }
-}
-
-.vintage-shake {
-    animation: vintageShake 0.5s ease-in-out;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .fade-in,
-    .slide-in,
-    .typewriter,
-    .paper-rustle,
-    .ink-spread,
-    .vintage-pulse,
-    .stamp-appear,
-    .newspaper-fold,
-    .fade-in-up-vintage,
-    .slide-in-left-vintage,
-    .slide-in-right-vintage,
-    .loading::after,
-    .loading-vintage::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    .hover-lift:hover,
-    .hover-scale:hover,
-    .hover-rotate:hover {
-        transform: none;
-    }
-}
-
-/* Print styles untuk animasi */
-@media print {
-    .fade-in,
-    .slide-in,
-    .typewriter,
-    .paper-rustle,
-    .ink-spread,
-    .vintage-pulse,
-    .stamp-appear,
-    .newspaper-fold,
-    .fade-in-up-vintage,
-    .slide-in-left-vintage,
-    .slide-in-right-vintage {
-        animation: none !important;
-    }
-    
-    .hover-lift,
-    .hover-scale,
-    .hover-rotate,
-    .hover-ink {
-        transform: none !important;
-    }
 }
