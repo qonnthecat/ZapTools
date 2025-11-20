@@ -1,24 +1,16 @@
-// js/views/templates/color-tools.js
-export const ColorToolsTemplate = () => {
-    return `
-        <section id="color-tools" class="section">
-            <div class="container">
-                <div class="color-tools-section">
-                    <h2 data-i18n="colorTools.title">Color Tools</h2>
-                    <div class="tool-card">
-                        <h3 data-i18n="colorTools.colorGeneratorTitle">Color Generator</h3>
-                        <div class="color-picker-container">
-                            <input type="color" class="color-picker" id="color-picker" value="#3498db">
-                            <div class="color-info">
-                                <p>HEX: <span id="hex-value">#3498db</span></p>
-                                <p>RGB: <span id="rgb-value">rgb(52, 152, 219)</span></p>
-                                <p>HSL: <span id="hsl-value">hsl(204, 70%, 53%)</span></p>
-                            </div>
-                            <div class="color-palette" id="color-palette"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    `;
-};
+export default /*html*/ `
+<div id="page-color-tools" class="page" x-data="colorToolsVM">
+    <h1 class="title">Color Tools</h1>
+
+    <input type="text" x-model="inputColor" placeholder="Masukkan warna (hex/rgb)" class="form-input">
+
+    <button @click="convert()" class="btn">Convert</button>
+
+    <div class="result-box" x-show="output">
+        <p><strong>Hasil:</strong></p>
+        <p x-text="output"></p>
+    </div>
+
+    <a href="#tools" class="back">Kembali</a>
+</div>
+`;
