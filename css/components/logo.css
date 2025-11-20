@@ -22,7 +22,7 @@
     gap: var(--space-md);
 }
 
-/* Logo Image dengan background vintage */
+/* Logo Image dengan background gradient untuk transparansi */
 .logo-image {
     width: 45px;
     height: 45px;
@@ -30,28 +30,40 @@
     transition: 
         transform var(--transition-normal),
         filter var(--transition-normal);
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--radius-md);
     padding: var(--space-xs);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--primary-dark);
 }
 
 .logo:hover .logo-image {
-    transform: rotate(5deg) scale(1.1);
+    transform: rotate(10deg) scale(1.1);
     box-shadow: var(--shadow-md);
-    filter: sepia(0.3);
 }
 
-/* Logo Text dengan efek stamp/print vintage */
+/* Logo Text dengan gradient effect */
 .logo-text h1 {
     font-size: var(--font-size-2xl);
     margin-bottom: var(--space-xs);
     font-weight: 700;
-    color: var(--primary-dark);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    font-family: 'Georgia', serif;
-    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .logo-text p {
@@ -59,7 +71,6 @@
     color: var(--text-secondary);
     margin-bottom: 0;
     transition: color var(--transition-fast);
-    font-style: italic;
 }
 
 .logo:hover .logo-text p {
@@ -115,11 +126,10 @@
     color: var(--primary-color);
     font-size: var(--font-size-lg);
     transition: color var(--transition-fast);
-    font-family: 'Georgia', serif;
 }
 
 .footer-logo:hover {
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 .footer-logo-image {
@@ -129,58 +139,85 @@
     transition: 
         transform var(--transition-fast),
         filter var(--transition-fast);
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-radius: var(--radius-sm);
     padding: 4px;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--primary-dark);
 }
 
 .footer-logo:hover .footer-logo-image {
     transform: scale(1.1) rotate(-5deg);
     box-shadow: var(--shadow-md);
-    filter: sepia(0.3);
 }
 
-/* Logo dengan efek stamp */
-.logo-stamp .logo-image {
-    background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
-    border-radius: var(--radius-sm);
-    border: 2px solid var(--primary-dark);
+/* Logo dengan glow effect */
+.logo-glow .logo-image {
     box-shadow: 
-        inset 0 0 10px rgba(0,0,0,0.2),
-        var(--shadow-md);
+        0 0 0 2px rgba(52, 152, 219, 0.1),
+        0 0 20px rgba(52, 152, 219, 0.3);
 }
 
-/* Logo dengan efek distressed */
-.logo-distressed {
+.logo-glow:hover .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(52, 152, 219, 0.2),
+        0 0 30px rgba(52, 152, 219, 0.5);
+}
+
+/* Logo dengan border animation */
+.logo-border-animate .logo-image {
     position: relative;
+    overflow: hidden;
 }
 
-.logo-distressed::before {
+.logo-border-animate .logo-image::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1"><path d="M0,0 L100,100 M100,0 L0,100" stroke="black" stroke-width="1"/></svg>');
-    pointer-events: none;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--accent-color), 
+        var(--primary-color));
+    background-size: 400% 400%;
+    border-radius: var(--radius-md);
+    z-index: -1;
+    animation: borderRotate 3s linear infinite;
+}
+
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+        transform: rotate(0deg);
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+        transform: rotate(360deg);
+    }
 }
 
 /* Dark mode adjustments */
 [data-theme="dark"] .logo-image,
 [data-theme="dark"] .footer-logo-image {
-    filter: brightness(1.1) contrast(1.1) sepia(0.2);
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-dark) 100%);
+    filter: brightness(1.1) contrast(1.1);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
 }
 
-[data-theme="dark"] .logo-text h1 {
-    color: var(--primary-light);
+[data-theme="dark"] .logo-glow .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(93, 173, 226, 0.2),
+        0 0 20px rgba(93, 173, 226, 0.4);
 }
 
-[data-theme="dark"] .logo-stamp .logo-image {
-    background: linear-gradient(135deg, var(--accent-dark) 0%, var(--primary-dark) 100%);
+[data-theme="dark"] .logo-glow:hover .logo-image {
+    box-shadow: 
+        0 0 0 2px rgba(93, 173, 226, 0.3),
+        0 0 30px rgba(93, 173, 226, 0.6);
 }
 
 /* Loading state untuk logo */
@@ -192,11 +229,9 @@
     0%, 100% {
         transform: scale(1);
         opacity: 1;
-        filter: sepia(0);
     }
     50% {
         transform: scale(1.05);
         opacity: 0.8;
-        filter: sepia(0.3);
     }
 }

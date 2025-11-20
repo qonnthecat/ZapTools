@@ -5,9 +5,9 @@
     justify-content: center;
     padding: var(--space-md) var(--space-lg);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     font-size: var(--font-size-md);
     font-family: inherit;
     text-decoration: none;
@@ -17,9 +17,6 @@
         transform var(--transition-fast),
         box-shadow var(--transition-fast);
     gap: var(--space-sm);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    border: 1px solid transparent;
 }
 
 .btn:disabled {
@@ -29,7 +26,7 @@
 }
 
 .btn:not(:disabled):hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .btn:not(:disabled):active {
@@ -41,7 +38,6 @@
     background-color: var(--primary-color);
     color: white;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--primary-dark);
 }
 
 .btn.primary:hover:not(:disabled) {
@@ -55,15 +51,13 @@
 
 /* Secondary Button */
 .btn.secondary {
-    background-color: transparent;
-    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    color: white;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--primary-color);
 }
 
 .btn.secondary:hover:not(:disabled) {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--secondary-dark);
     box-shadow: var(--shadow-md);
 }
 
@@ -71,31 +65,16 @@
     box-shadow: var(--shadow-sm);
 }
 
-/* Accent Button */
-.btn.accent {
-    background-color: var(--accent-color);
-    color: white;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--accent-dark);
-}
-
-.btn.accent:hover:not(:disabled) {
-    background-color: var(--accent-dark);
-    box-shadow: var(--shadow-md);
-}
-
 /* Icon Button */
 .btn.icon {
     padding: var(--space-md);
-    background-color: transparent;
-    color: var(--primary-color);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: var(--radius-md);
 }
 
 .btn.icon:hover:not(:disabled) {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--secondary-dark);
     transform: scale(1.05);
 }
 
@@ -103,52 +82,48 @@
     transform: scale(1);
 }
 
-/* Calculator Buttons - Vintage Style */
+/* Calculator Buttons */
 .calc-btn {
     padding: var(--space-lg);
     font-size: var(--font-size-xl);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
+    border: none;
+    border-radius: var(--radius-md);
     cursor: pointer;
     transition: 
         background-color var(--transition-fast),
         color var(--transition-fast),
         transform var(--transition-fast);
-    background-color: var(--surface-color);
+    background-color: var(--background-color);
     color: var(--text-color);
-    font-weight: 600;
-    font-family: 'Courier New', monospace;
+    font-weight: 500;
 }
 
 .calc-btn:hover {
     background-color: var(--primary-color);
     color: white;
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 .calc-btn.operator {
     background-color: var(--secondary-color);
     color: white;
-    border-color: var(--secondary-dark);
 }
 
 .calc-btn.equals {
     background-color: var(--accent-color);
     color: white;
-    border-color: var(--accent-dark);
 }
 
 .calc-btn.clear {
     background-color: var(--warning-color);
-    color: var(--text-color);
-    border-color: var(--warning-dark);
+    color: white;
 }
 
 .calc-btn.zero {
     grid-column: span 2;
 }
 
-/* Toggle Switch - Vintage Style */
+/* Toggle Switch */
 .toggle-switch {
     position: relative;
     display: inline-block;
@@ -171,8 +146,7 @@
     bottom: 0;
     background-color: var(--border-color);
     transition: var(--transition-normal);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--primary-dark);
+    border-radius: 34px;
 }
 
 .toggle-slider:before {
@@ -180,11 +154,11 @@
     content: "";
     height: 22px;
     width: 22px;
-    left: 3px;
-    bottom: 3px;
+    left: 4px;
+    bottom: 4px;
     background-color: white;
     transition: var(--transition-normal);
-    border-radius: var(--radius-sm);
+    border-radius: 50%;
     box-shadow: var(--shadow-sm);
 }
 
@@ -198,28 +172,4 @@ input:checked + .toggle-slider:before {
 
 input:focus + .toggle-slider {
     box-shadow: 0 0 0 2px var(--primary-light);
-}
-
-/* Vintage Button with aged effect */
-.btn.vintage {
-    background: linear-gradient(135deg, var(--surface-color) 0%, rgba(210, 180, 140, 0.3) 100%);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn.vintage::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.btn.vintage:hover::before {
-    left: 100%;
 }
