@@ -2,45 +2,21 @@
 import { HeaderTemplate } from './header.js';
 import { FooterTemplate } from './footer.js';
 import { NavigationTemplate } from './navigation.js';
-import { HomeTemplate } from './home.js';
-import { FeaturesTemplate } from './features.js';
-import { ImageConverterTemplate } from './image-converter.js';
-import { TextConverterTemplate } from './text-converter.js';
-import { ColorToolsTemplate } from './color-tools.js';
-import { PasswordGeneratorTemplate } from './password-generator.js';
-import { HistoryTemplate } from './history.js'; // NEW
-import { SettingsTemplate } from './settings.js';
 
+// MainTemplate now renders header, navigation, footer and a content placeholder (#content).
+// Individual tool templates will be injected into #content by the router dynamically.
 export const MainTemplate = () => {
     return `
         ${HeaderTemplate()}
-        
-        <main class="main">
-            ${HomeTemplate()}
-            ${FeaturesTemplate()}
-            ${ImageConverterTemplate()}
-            ${TextConverterTemplate()}
-            ${ColorToolsTemplate()}
-            ${PasswordGeneratorTemplate()}
-            ${HistoryTemplate()} <!-- NEW -->
-            ${SettingsTemplate()}
+        <main id="content" class="content-area">
+            <!-- Tool content will be injected here -->
+            <section class="container">
+                <div class="loading-message" data-i18n="app.loading">Loading...</div>
+            </section>
         </main>
-
         ${NavigationTemplate()}
         ${FooterTemplate()}
     `;
 };
 
-export {
-    HeaderTemplate,
-    FooterTemplate,
-    NavigationTemplate,
-    HomeTemplate,
-    FeaturesTemplate,
-    ImageConverterTemplate,
-    TextConverterTemplate,
-    ColorToolsTemplate,
-    PasswordGeneratorTemplate,
-    HistoryTemplate, // NEW
-    SettingsTemplate
-};
+export { HeaderTemplate, FooterTemplate, NavigationTemplate };
