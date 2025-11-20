@@ -1,224 +1,84 @@
-// js/app.js
+// js/app.js (refactored to plugin-based routing)
 import { Router } from './router.js';
 import { ViewManager } from './views/index.js';
 import translationService from './services/translation-service.js';
+import { toolsRegistry, findToolByPath } from './tools-registry.js';
 
 class ZapToolsApp {
     constructor() {
         this.viewManager = new ViewManager();
-        this.router = new Router([
-            { path: 'home', handler: () => this.showHome() },
-            { path: 'features', handler: () => this.showFeatures() },
-            { path: 'image-converter', handler: () => this.showImageConverter() },
-            { path: 'text-converter', handler: () => this.showTextConverter() },
-            { path: 'color-tools', handler: () => this.showColorTools() },
-            { path: 'password-generator', handler: () => this.showPasswordGenerator() },
-            { path: 'history', handler: () => this.showHistory() },
-            { path: 'settings', handler: () => this.showSettings() }
-        ]);
-
-        this.init();
+        // create routes from toolsRegistry
+        const routes = toolsRegistry.map(tool => ({
+            path: tool.path,
+            handler: async () => this.showTool(tool.path)
+        }));
+        this.router = new Router(routes);
     }
 
     async init() {
-        try {
-            // Initialize translation service first
-            await translationService.init();
-            
-            // Render the main template
-            await this.viewManager.render();
-
-            // Set up navigation event listener
-            window.addEventListener('navigate', (e) => {
-                this.router.goTo(e.detail);
-            });
-
-            // Set up language change listener
-            window.addEventListener('languageChanged', () => {
-                this.initializeLanguageSelector();
-            });
-
-            // Initialize components
-            this.initializeLanguageSelector();
-            await this.initializeServices();
-
-            console.log('ZapTools app initialized successfully');
-        } catch (error) {
-            console.error('Failed to initialize ZapTools app:', error);
-        }
+        await this.viewManager.render();
+        // initial navigation to current hash or default 'home'
+        const initial = location.hash.replace('#','') || 'home';
+        this.router.navigate(initial);
+        // listen for hash changes
+        window.addEventListener('hashchange', () => {
+            const route = location.hash.replace('#','') || 'home';
+            this.router.navigate(route);
+        });
     }
 
-    initializeLanguageSelector() {
-        const languageSelector = document.getElementById('language-selector');
-        if (languageSelector) {
-            // Set current language
-            const currentLang = translationService.getCurrentLanguage();
-            languageSelector.value = currentLang;
-
-            // Add change event listener
-            languageSelector.addEventListener('change', async (e) => {
-                const newLang = e.target.value;
-                try {
-                    await this.viewManager.setLanguage(newLang);
-                    
-                    // Re-initialize services to update their language
-                    await this.initializeServices();
-                    
-                    console.log(`Language changed to: ${newLang}`);
-                } catch (error) {
-                    console.error('Failed to change language:', error);
+    async showTool(path) {
+        const tool = findToolByPath(path);
+        const contentEl = document.getElementById('content');
+        if (!tool) {
+            contentEl.innerHTML = '<section class="container"><h2>Not found</h2></section>';
+            return;
+        }
+        // show loader
+        contentEl.innerHTML = '<section class="container"><div class="loading-message">Loading...</div></section>';
+        // load template
+        try {
+            const templateFactory = await tool.template();
+            const html = typeof templateFactory === 'function' ? templateFactory() : (templateFactory.default ? templateFactory.default() : '');
+            contentEl.innerHTML = html;
+            // initialize controller/service if provided
+            if (tool.controller) {
+                const module = await tool.controller();
+                // common export names: init, default, or a named class with init()
+                if (module && typeof module.init === 'function') {
+                    module.init();
+                } else if (module && typeof module.default === 'function') {
+                    // default export as function or class
+                    const exported = module.default;
+                    if (exported.prototype && typeof exported.prototype.init === 'function') {
+                        new exported().init();
+                    } else if (typeof exported === 'function') {
+                        exported();
+                    }
+                } else {
+                    // try named class based on id (PascalCase)
+                    const className = tool.id.split('-').map(p => p.charAt(0).toUpperCase()+p.slice(1)).join('');
+                    if (module && typeof module[className] === 'function') {
+                        try { new module[className]().init(); } catch(e) {}
+                    }
                 }
-            });
-        }
-    }
-
-    async initializeServices() {
-        const currentRoute = this.router.getCurrentRoute() || 'home';
-        await this.loadRouteServices(currentRoute);
-    }
-
-    async loadRouteServices(route) {
-        try {
-            switch(route) {
-                case 'image-converter':
-                    const { ImageConverter } = await import('./services/image-converter.js');
-                    new ImageConverter().init();
-                    console.log('Image Converter service loaded');
-                    break;
-                    
-                case 'text-converter':
-                    const { TextConverter } = await import('./services/text-converter.js');
-                    new TextConverter().init();
-                    console.log('Text Converter service loaded');
-                    break;
-                    
-                case 'color-tools':
-                    const { ColorTools } = await import('./services/color-tools.js');
-                    new ColorTools().init();
-                    console.log('Color Tools service loaded');
-                    break;
-                    
-                case 'password-generator':
-                    const { PasswordGenerator } = await import('./services/password-generator.js');
-                    new PasswordGenerator().init();
-                    console.log('Password Generator service loaded');
-                    break;
-                    
-                case 'history':
-                    const { HistoryManager } = await import('./services/history-manager.js');
-                    new HistoryManager().init();
-                    console.log('History Manager service loaded');
-                    break;
-                    
-                case 'settings':
-                    const { SettingsManager } = await import('./services/settings-manager.js');
-                    new SettingsManager().init();
-                    console.log('Settings Manager service loaded');
-                    break;
-                    
-                default:
-                    // No services needed for home and features pages
-                    break;
             }
-        } catch (error) {
-            console.error(`Error loading ${route} services:`, error);
+            // update i18n texts
+            this.viewManager.updateTextContent();
+            // update active nav links
+            this.viewManager.updateActiveNav(path);
+        } catch (err) {
+            console.error('Error loading tool', path, err);
+            contentEl.innerHTML = '<section class="container"><h2>Error loading tool</h2></section>';
         }
-    }
-
-    showHome() {
-        this.viewManager.initializeCurrentSection();
-        console.log('Navigated to Home');
-    }
-
-    showFeatures() {
-        this.viewManager.initializeCurrentSection();
-        console.log('Navigated to Features');
-    }
-
-    async showImageConverter() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('image-converter');
-        console.log('Navigated to Image Converter');
-    }
-
-    async showTextConverter() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('text-converter');
-        console.log('Navigated to Text Converter');
-    }
-
-    async showColorTools() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('color-tools');
-        console.log('Navigated to Color Tools');
-    }
-
-    async showPasswordGenerator() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('password-generator');
-        console.log('Navigated to Password Generator');
-    }
-
-    async showHistory() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('history');
-        console.log('Navigated to History');
-    }
-
-    async showSettings() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('settings');
-        
-        // Re-initialize language selector for settings page
-        this.initializeLanguageSelector();
-        console.log('Navigated to Settings');
-    }
-
-    // Utility method for error handling
-    handleError(error, context) {
-        console.error(`Error in ${context}:`, error);
-    }
-
-    // Method to show loading state
-    showLoading() {
-        this.viewManager.showLoading();
-    }
-
-    // Method to hide loading state
-    hideLoading() {
-        this.viewManager.hideLoading();
-    }
-
-    // Method to get current route
-    getCurrentRoute() {
-        return this.router.getCurrentRoute();
-    }
-
-    // Method to navigate programmatically
-    navigateTo(route) {
-        this.router.goTo(route);
-    }
-
-    // Method to get current language
-    getCurrentLanguage() {
-        return this.viewManager.getCurrentLanguage();
     }
 }
 
-// Initialize the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Create global app instance for debugging
-    window.zapToolsApp = new ZapToolsApp();
-    
-    // Add error handling for uncaught errors
-    window.addEventListener('error', (event) => {
-        console.error('Uncaught error:', event.error);
-    });
-    
-    // Handle promise rejections
-    window.addEventListener('unhandledrejection', (event) => {
-        console.error('Unhandled promise rejection:', event.reason);
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+    const app = new ZapToolsApp();
+    await app.init();
+    // expose for debugging
+    window.zapToolsApp = app;
 });
 
 export default ZapToolsApp;
