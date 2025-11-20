@@ -113,3 +113,27 @@
     white-space: nowrap;
     border: 0;
 }
+
+/* Newspaper Text Utilities */
+.text-justify { text-align: justify; }
+.text-uppercase { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
+.text-italic { font-style: italic; }
+
+/* Border Utilities */
+.border-vintage { 
+    border: 1px solid var(--border-color); 
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Background Utilities */
+.bg-aged { 
+    background-color: var(--surface-color);
+    background-image: 
+        radial-gradient(circle at 100% 150%, var(--surface-color) 24%, white 25%, white 28%, var(--surface-color) 29%, var(--surface-color) 36%, white 36%, white 40%, transparent 40%, transparent),
+        radial-gradient(circle at 0% 150%, var(--surface-color) 24%, white 25%, white 28%, var(--surface-color) 29%, var(--surface-color) 36%, white 36%, white 40%, transparent 40%, transparent),
+        radial-gradient(circle at 50% 100%, white 10%, var(--surface-color) 11%, var(--surface-color) 23%, white 24%, white 30%, var(--surface-color) 31%, var(--surface-color) 43%, white 44%, white 50%, var(--surface-color) 51%, var(--surface-color) 63%, white 64%, white 71%, transparent 71%, transparent),
+        radial-gradient(circle at 100% 50%, white 5%, var(--surface-color) 6%, var(--surface-color) 15%, white 16%, white 20%, var(--surface-color) 21%, var(--surface-color) 30%, white 31%, white 35%, var(--surface-color) 36%, var(--surface-color) 45%, white 46%, white 49%, transparent 50%, transparent),
+        radial-gradient(circle at 0% 50%, white 5%, var(--surface-color) 6%, var(--surface-color) 15%, white 16%, white 20%, var(--surface-color) 21%, var(--surface-color) 30%, white 31%, white 35%, var(--surface-color) 36%, var(--surface-color) 45%, white 46%, white 49%, transparent 50%, transparent);
+    background-size: 100px 50px;
+}
