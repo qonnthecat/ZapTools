@@ -15,12 +15,7 @@ export const NavigationTemplate = () => {
                         <span class="bottom-nav-text" data-i18n="navigation.features">Features</span>
                     </a>
                 </li>
-                <li class="bottom-nav-item">
-                    <a href="#history" class="bottom-nav-link">
-                        <span class="bottom-nav-icon">🕒</span>
-                        <span class="bottom-nav-text" data-i18n="navigation.history">History</span>
-                    </a>
-                </li>
+                <!-- HAPUS ITEM HISTORY -->
                 <li class="bottom-nav-item">
                     <a href="#settings" class="bottom-nav-link">
                         <span class="bottom-nav-icon">⚙️</span>
