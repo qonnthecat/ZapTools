@@ -1,7 +1,7 @@
 // js/app.js
 import { Router } from './router.js';
 import { ViewManager } from './views/index.js';
-import translationService from './services/translation-service.js';
+import { translationService } from './services/translation-service.js';
 import { toolsLoader } from './tools/index.js';
 
 class ZapToolsApp {
