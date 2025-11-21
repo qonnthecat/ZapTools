@@ -7,15 +7,12 @@ import { FeaturesTemplate } from './features.js';
 import { SettingsTemplate } from './settings.js';
 import { toolsLoader } from '../../tools/index.js';
 
-export const MainTemplate = async () => {
-    // Load semua tool templates
-    const toolTemplates = await Promise.all(
-        toolsLoader.getAllTools().map(tool => 
-            toolsLoader.getToolTemplate(tool.id)
-        )
-    );
-
-    const toolsHTML = toolTemplates.join('');
+// Template utama tidak bisa async, jadi kita buat sync
+export const MainTemplate = () => {
+    // Tools templates akan di-load nanti oleh ViewManager
+    const toolsHTML = `
+        <!-- Tools sections will be loaded dynamically -->
+    `;
 
     return `
         ${HeaderTemplate()}
