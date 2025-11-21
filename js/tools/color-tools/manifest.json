@@ -1,0 +1,13 @@
+{
+    "name": "colorTools.title",
+    "description": "colorTools.colorGeneratorTitle", 
+    "category": "designers",
+    "categoryName": "Design Tools",
+    "categoryIcon": "🎨",
+    "categoryDescription": "Tools untuk desain dan manipulasi warna",
+    "icon": "🎨",
+    "route": "color-tools",
+    "version": "1.0.0",
+    "author": "ZapTools",
+    "tags": ["color", "design", "palette"]
+}
