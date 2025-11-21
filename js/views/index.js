@@ -1,6 +1,7 @@
 // js/views/index.js
 import translationService from '../services/translation-service.js';
-import { MainTemplate } from './templates/template.js';
+import { MainTemplate } from './templates/index.js';
+import { toolsLoader } from '../tools/index.js';
 
 export class ViewManager {
     constructor() {
@@ -9,12 +10,59 @@ export class ViewManager {
     }
 
     async render() {
-        // Initialize translation service first
-        await translationService.init();
-        
-        this.app.innerHTML = MainTemplate();
-        this.initializeComponents();
-        this.updateTextContent();
+        try {
+            // Initialize translation service first
+            await translationService.init();
+            
+            // Initialize tools loader
+            await toolsLoader.init();
+            
+            // Render main template
+            this.app.innerHTML = MainTemplate();
+            
+            // Load dan inject tools templates
+            await this.loadToolsTemplates();
+            
+            this.initializeComponents();
+            this.updateTextContent();
+            
+        } catch (error) {
+            console.error('Error rendering app:', error);
+            this.showErrorState();
+        }
+    }
+
+    async loadToolsTemplates() {
+        try {
+            const tools = toolsLoader.getAllTools();
+            const mainElement = document.querySelector('main');
+            
+            if (mainElement && tools.length > 0) {
+                // Inject tools templates sebelum settings section
+                const settingsSection = mainElement.querySelector('#settings');
+                
+                for (const tool of tools) {
+                    const template = await toolsLoader.getToolTemplate(tool.id);
+                    if (template && settingsSection) {
+                        settingsSection.insertAdjacentHTML('beforebegin', template);
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error loading tools templates:', error);
+        }
+    }
+
+    showErrorState() {
+        this.app.innerHTML = `
+            <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+                <h2 style="color: #e74c3c;">Error Loading Application</h2>
+                <p>Please check the console for details and refresh the page.</p>
+                <button onclick="window.location.reload()" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Reload Page
+                </button>
+            </div>
+        `;
     }
 
     initializeComponents() {
