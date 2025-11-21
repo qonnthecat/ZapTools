@@ -1,6 +1,6 @@
 // js/views/index.js
 import translationService from '../services/translation-service.js';
-import { MainTemplate } from './templates/index.js';
+import { MainTemplate } from './templates/template.js';
 
 export class ViewManager {
     constructor() {
