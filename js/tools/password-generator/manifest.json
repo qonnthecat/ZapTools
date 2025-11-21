@@ -1,0 +1,13 @@
+{
+    "name": "passwordGenerator.title",
+    "description": "passwordGenerator.createStrongPassword",
+    "category": "generators",
+    "categoryName": "Generators",
+    "categoryIcon": "🚀",
+    "categoryDescription": "Tools untuk generate konten secara otomatis",
+    "icon": "🔐",
+    "route": "password-generator",
+    "version": "1.0.0",
+    "author": "ZapTools",
+    "tags": ["password", "security", "generator"]
+}
