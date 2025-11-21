@@ -1,6 +1,5 @@
 // js/services/text-converter.js
 import translationService from './translation-service.js';
-import { HistoryManager } from './history-manager.js';
 
 export class TextConverter {
     constructor() {
@@ -62,15 +61,6 @@ export class TextConverter {
             if (copyTextBtn) {
                 copyTextBtn.style.display = 'block';
             }
-
-            // Record in history
-            HistoryManager.recordConversion('text', {
-                operation: textFormat.value,
-                input: text,
-                output: convertedText,
-                inputLength: text.length,
-                outputLength: convertedText.length
-            });
 
         } catch (error) {
             console.error('Text conversion error:', error);
@@ -138,14 +128,6 @@ export class TextConverter {
                 copyTextBtn.disabled = false;
             }, 2000);
         }
-        
-        // Record copy action in history
-        HistoryManager.recordConversion('text', {
-            operation: 'copy',
-            input: 'Text copied to clipboard',
-            output: 'Clipboard'
-        });
-    }
 
     updateCharacterCount() {
         const textInput = document.getElementById('text-input');
