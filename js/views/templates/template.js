@@ -1,26 +1,29 @@
-// js/views/templates/index.js
+// js/views/templates/template.js
 import { HeaderTemplate } from './header.js';
 import { FooterTemplate } from './footer.js';
 import { NavigationTemplate } from './navigation.js';
 import { HomeTemplate } from './home.js';
 import { FeaturesTemplate } from './features.js';
-import { ImageConverterTemplate } from './image-converter.js';
-import { TextConverterTemplate } from './text-converter.js';
-import { ColorToolsTemplate } from './color-tools.js';
-import { PasswordGeneratorTemplate } from './password-generator.js';
 import { SettingsTemplate } from './settings.js';
+import { toolsLoader } from '../../tools/index.js';
 
-export const MainTemplate = () => {
+export const MainTemplate = async () => {
+    // Load semua tool templates
+    const toolTemplates = await Promise.all(
+        toolsLoader.getAllTools().map(tool => 
+            toolsLoader.getToolTemplate(tool.id)
+        )
+    );
+
+    const toolsHTML = toolTemplates.join('');
+
     return `
         ${HeaderTemplate()}
         
         <main class="main">
             ${HomeTemplate()}
             ${FeaturesTemplate()}
-            ${ImageConverterTemplate()}
-            ${TextConverterTemplate()}
-            ${ColorToolsTemplate()}
-            ${PasswordGeneratorTemplate()}
+            ${toolsHTML}
             ${SettingsTemplate()}
         </main>
 
@@ -35,9 +38,5 @@ export {
     NavigationTemplate,
     HomeTemplate,
     FeaturesTemplate,
-    ImageConverterTemplate,
-    TextConverterTemplate,
-    ColorToolsTemplate,
-    PasswordGeneratorTemplate,
     SettingsTemplate
 };
