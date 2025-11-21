@@ -10,7 +10,7 @@ class ToolsAutoLoader {
         if (this.initialized) return;
 
         try {
-            // Daftar tools yang tersedia (bisa di-generate otomatis nanti)
+            // Daftar tools yang tersedia
             const toolFolders = [
                 'password-generator',
                 'color-tools'
@@ -29,12 +29,12 @@ class ToolsAutoLoader {
 
     async loadTool(folderName) {
         try {
-            // Load manifest
-            const manifest = await import(`./${folderName}/manifest.json`, {
-                assert: { type: 'json' }
-            });
-            
-            const toolConfig = manifest.default;
+            // Load manifest dengan fetch (lebih kompatibel)
+            const manifestResponse = await fetch(`./js/tools/${folderName}/manifest.json`);
+            if (!manifestResponse.ok) {
+                throw new Error(`Manifest not found for ${folderName}`);
+            }
+            const toolConfig = await manifestResponse.json();
 
             // Load template
             const templateModule = await import(`./${folderName}/template.js`);
@@ -54,7 +54,7 @@ class ToolsAutoLoader {
             // Update categories
             if (!this.categories.has(tool.category)) {
                 this.categories.set(tool.category, {
-                    name: tool.category,
+                    name: tool.categoryName || tool.category,
                     icon: tool.categoryIcon,
                     description: tool.categoryDescription,
                     tools: []
