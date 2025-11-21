@@ -1,38 +1,39 @@
 // js/views/templates/features.js
+import { toolsLoader } from '../../../tools/index.js';
+
 export const FeaturesTemplate = () => {
+    const categories = toolsLoader.getCategories();
+    
+    const categoriesHTML = categories.map(category => {
+        const tools = toolsLoader.getToolsByCategory(category.name);
+        
+        const toolsHTML = tools.map(tool => `
+            <div class="category-item" data-route="${tool.route}">
+                <div class="category-item-icon">${tool.icon}</div>
+                <div class="category-item-content">
+                    <h4 data-i18n="${tool.name}">${tool.name}</h4>
+                    <p data-i18n="${tool.description}">${tool.description}</p>
+                </div>
+            </div>
+        `).join('');
+
+        return `
+            <div class="feature-category">
+                <h3>${category.icon} <span>${category.name}</span></h3>
+                <p class="category-description">${category.description}</p>
+                <div class="category-grid">
+                    ${toolsHTML}
+                </div>
+            </div>
+        `;
+    }).join('');
+
     return `
         <section id="features" class="section">
             <div class="container">
                 <div class="features-list">
-                    <h2 data-i18n="features.allFeaturesTitle" style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">All Features</h2>
-                    
-                    <div class="feature-category">
-                        <h3>🖼️ <span data-i18n="features.fileConversion">File Conversion</span></h3>
-                        <div class="category-grid">
-                            <div class="category-item" data-route="image-converter">
-                                <h4 data-i18n="features.imageConverter">Image Converter</h4>
-                                <p data-i18n="features.imageConverterDesc">Convert image formats (JPG, PNG, WebP) with adjustable quality</p>
-                            </div>
-                            <div class="category-item" data-route="text-converter">
-                                <h4 data-i18n="features.textConverter">Text Converter</h4>
-                                <p data-i18n="features.textConverterDesc">Transform text to various formats like uppercase, lowercase, camel case, etc</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-category">
-                        <h3>🎨 <span data-i18n="features.colorToolsCategory">Color Tools</span></h3>
-                        <div class="category-grid">
-                            <div class="category-item" data-route="color-tools">
-                                <h4 data-i18n="features.colorGenerator">Color Generator</h4>
-                                <p data-i18n="features.colorGeneratorDesc">Color picker with HEX, RGB, HSL information and palette generator</p>
-                            </div>
-                            <div class="category-item" data-route="password-generator">
-                                <h4 data-i18n="features.passwordGenerator">Password Generator</h4>
-                                <p data-i18n="features.passwordGeneratorDesc">Create strong passwords with customization options</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 data-i18n="features.allFeaturesTitle">All Features</h2>
+                    ${categoriesHTML || '<p class="no-tools">No tools available</p>'}
                 </div>
             </div>
         </section>
