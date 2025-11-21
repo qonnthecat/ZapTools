@@ -13,7 +13,6 @@ class ZapToolsApp {
             { path: 'text-converter', handler: () => this.showTextConverter() },
             { path: 'color-tools', handler: () => this.showColorTools() },
             { path: 'password-generator', handler: () => this.showPasswordGenerator() },
-            { path: 'history', handler: () => this.showHistory() },
             { path: 'settings', handler: () => this.showSettings() }
         ]);
 
@@ -104,12 +103,6 @@ class ZapToolsApp {
                     console.log('Password Generator service loaded');
                     break;
                     
-                case 'history':
-                    const { HistoryManager } = await import('./services/history-manager.js');
-                    new HistoryManager().init();
-                    console.log('History Manager service loaded');
-                    break;
-                    
                 case 'settings':
                     const { SettingsManager } = await import('./services/settings-manager.js');
                     new SettingsManager().init();
@@ -157,12 +150,6 @@ class ZapToolsApp {
         this.viewManager.initializeCurrentSection();
         await this.loadRouteServices('password-generator');
         console.log('Navigated to Password Generator');
-    }
-
-    async showHistory() {
-        this.viewManager.initializeCurrentSection();
-        await this.loadRouteServices('history');
-        console.log('Navigated to History');
     }
 
     async showSettings() {
