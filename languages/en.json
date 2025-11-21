@@ -10,20 +10,6 @@
     "history": "History",
     "settings": "Settings"
   },
-  "history": {
-    "title": "Conversion History",
-    "clearHistory": "Clear History",
-    "noHistory": "No conversion history yet",
-    "imageConversion": "Image Conversion",
-    "textConversion": "Text Conversion",
-    "colorTool": "Color Tool",
-    "passwordGeneration": "Password Generation",
-    "timeAgo": "ago",
-    "delete": "Delete",
-    "deleteAll": "Delete All",
-    "confirmClear": "Are you sure you want to clear all history?",
-    "recentActivities": "Recent Activities"
-  },
   "home": {
     "welcomeTitle": "Welcome to ZapTools",
     "welcomeSubtitle": "A collection of practical online tools for everyday needs",
